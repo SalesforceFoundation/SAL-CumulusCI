@@ -1,0 +1,132 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+SobjectType+=+'Account' AND DeveloperName = 'Educational_Institution'",
+      "referenceId": "schoolRt"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/Account",
+      "referenceId": "uni",
+      "body": {
+        "Name": "Connected Campus University",
+        "RecordTypeId": "@{schoolRt.records[0].Id}"
+      }
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+SobjectType+=+'Account' AND DeveloperName = 'University_Department'",
+      "referenceId": "deptRt"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/Account",
+      "referenceId": "econDept",
+      "body": {
+        "Name": "Economics Department",
+        "RecordTypeId": "@{deptRt.records[0].Id}",
+        "ParentId": "@{uni.id}"
+      }
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+SobjectType+=+'Account' AND DeveloperName = 'Academic_Program'",
+      "referenceId": "progRt"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/Account",
+      "referenceId": "econBs",
+      "body": {
+        "Name": "BS Economics",
+        "RecordTypeId": "@{progRt.records[0].Id}",
+        "ParentId": "@{econDept.id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/Contact",
+      "referenceId": "sophia",
+      "body": {
+        "Salutation": "Ms.",
+        "FirstName": "Sophia",
+        "LastName": "Student",
+        "MailingStreet": "1 Market Street",
+        "MailingCity": "San Francisco",
+        "MailingState": "CA",
+        "MailingPostalCode": "94105",
+        "MailingCountry": "USA",
+        "Phone": "(650) 555-1212",
+        "MobilePhone": "(650) 555-1212",
+        "Email": "sofia@connected.edu",
+        "Birthdate": "1999-05-15",
+        "AccountId": "@{uni.id}",
+        "hed__PreferredPhone__c": "Mobile Phone",
+        "hed__Race__c": "Hispanic or Latino",
+        "hed__UniversityEmail__c": "sofia@connected.edu",
+        "hed__Ferpa__c": true
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/hed__Program_Plan__c",
+      "referenceId": "plan",
+      "body": {
+        "hed__Account__c": "@{econBs.id}",
+        "hed__Is_Primary__c": true,
+        "hed__Start_Date__c": "2018-09-01",
+        "hed__Status__c": "Current",
+        "hed__Total_Required_Credits__c": 120,
+        "Name": "BS Economics, Catalog Year 2018"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/hed__Program_Enrollment__c",
+      "referenceId": "enroll",
+      "body": {
+        "hed__Account__c": "@{econBs.id}",
+        "hed__Eligible_To_Enroll__c": true,
+        "hed__Contact__c": "@{sophia.id}"
+      }
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Affiliation__c+WHERE+hed__Contact__c+=+'@{sophia.id}'",
+      "referenceId": "affls"
+    },
+    {
+      "method": "PATCH",
+      "url": "/services/data/v46.0/sobjects/hed__Affiliation__c/@{affls.records[0].Id}",
+      "referenceId": "progAffl",
+      "body": {
+        "hed__Primary__c": true,
+        "hed__Status__c": "Current"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/hed__Affiliation__c",
+      "referenceId": "deptAffl",
+      "body": {
+        "hed__Account__c": "@{econDept.id}",
+        "hed__Primary__c": true,
+        "hed__Role__c": "Student",
+        "hed__Status__c": "Current",
+        "hed__StartDate__c": "2019-09-04",
+        "hed__Contact__c": "@{sophia.id}"
+      }
+    },
+    {
+      "method": "PATCH",
+      "url": "/services/data/v46.0/sobjects/Contact/@{sophia.id}",
+      "referenceId": "updSophia",
+      "body": {
+        "Primary_Department__c": "@{econDept.id}",
+        "Primary_Academic_Program__c": "@{econBs.id}"
+      }
+    }
+  ]
+}

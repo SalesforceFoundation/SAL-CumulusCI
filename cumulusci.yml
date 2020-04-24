@@ -1,0 +1,1150 @@
+minimum_cumulusci_version: 2.5.9
+project:
+    name: SAL
+    package:
+        name: SAL
+        namespace: sfal
+        api_version: 46.0
+        install_class: InstallScript
+
+    git:
+        repo_url: https://github.com/SalesforceFoundation/sal
+        release_notes:
+            parsers:
+                3:
+                    class_path: cumulusci.tasks.release_notes.parser.GithubLinesParser
+                    title: Work Items Closed
+
+    dependencies:
+        - github: https://github.com/SalesforceFoundation/EDA
+
+flows:
+    uninstall_managed:
+        steps:
+            0.1:
+                task: delete_dev_config1
+                ignore_failure: True
+            0.2:
+                task: delete_dev_config2
+                ignore_failure: True
+
+    config_dev:
+        steps:
+           3:
+               task: deploy_dev_config
+           4:
+               task: install_tdtm_config
+
+    config_dev_managed:
+        steps:
+            1:
+                flow: config_managed
+            2:
+                task: deploy_dev_config
+                options:
+                    unmanaged: False
+
+    config_packaging:
+        steps:
+            1:
+                task: None
+
+    ci_feature_beta_deps:
+        description: When run, npm is installed, and all Jest tests are run against SAL.
+        steps:
+            0.1:
+                task: npm_install
+            0.2:
+                task: run_jest_tests
+
+    dev_data_apex:
+        steps:
+            1:
+                task: dev_data_setup_1
+            2:
+                task: dev_data_setup_2
+            3:
+                task: dev_data_setup_3
+            4:
+                task: dev_data_setup_4
+            5:
+                task: custom_settings_insert
+            6:
+                task: dev_data_queue_setup
+            7:
+                task: dev_data_setup_5
+            8:
+                task: dev_data_setup_6
+            9:
+                task: dev_data_setup_7
+            10:
+                task: dev_data_setup_launchpad
+            11:
+                task: dev_data_setup_waiting_room
+            12:
+                task: dev_data_migrate_topics
+
+    dev_data_apex_managed:
+        steps:
+            1:
+                flow: dev_data_apex
+                options:
+                    dev_data_setup_1:
+                        managed: True
+                    dev_data_setup_2:
+                        managed: True
+                    dev_data_setup_3:
+                        managed: True
+                    dev_data_setup_4:
+                        managed: True
+                    custom_settings_insert:
+                        managed: True
+                    dev_data_queue_setup:
+                        managed: True
+                    dev_data_setup_5:
+                        managed: True
+                    dev_data_setup_6:
+                        managed: True
+                    dev_data_setup_7:
+                        managed: True
+                    dev_data_setup_launchpad:
+                        managed: True
+                    dev_data_setup_waiting_room:
+                        managed: True
+                    dev_data_migrate_topics:
+                        managed: True
+
+    dev_data_apex_namespaced:
+        steps:
+            1:
+                flow: dev_data_apex
+                options:
+                    dev_data_setup_1:
+                        namespaced: True
+                    dev_data_setup_2:
+                        namespaced: True
+                    dev_data_setup_3:
+                        namespaced: True
+                    dev_data_setup_4:
+                        namespaced: True
+                    custom_settings_insert:
+                        namespaced: True
+                    dev_data_queue_setup:
+                        namespaced: True
+                    dev_data_setup_5:
+                        namespaced: True
+                    dev_data_setup_6:
+                        namespaced: True
+                    dev_data_setup_7:
+                        namespaced: True
+                    dev_data_setup_launchpad:
+                        namespaced: True
+                    dev_data_setup_waiting_room:
+                        namespaced: True
+                    dev_data_migrate_topics:
+                        namespaced: True
+
+    dev_data_sqlite:
+        steps:
+            1:
+                task: dev_data_setup_1
+            2:
+                task: custom_settings_insert
+            3:
+                task: test_data_delete
+            4:
+                task: test_data_dev_org
+            5:
+                task: dev_data_post
+
+    dev_data_sqlite_managed:
+        steps:
+            1:
+                flow: dev_data_sqlite
+                options:
+                    dev_data_setup_1:
+                        managed: True
+                    custom_settings_insert:
+                        managed: True
+                    test_data_dev_org:
+                        mapping: datasets/demo/mapping_managed.yml
+                    dev_data_post:
+                        managed: True
+
+    dev_data_sqlite_namespaced:
+        steps:
+            1:
+                flow: dev_data_sqlite
+                options:
+                    dev_data_setup_1:
+                        managed: True
+                    custom_settings_insert:
+                        namespaced: True
+                    test_data_dev_org:
+                        mapping: datasets/demo/mapping_namespaced.yml
+
+    dev_org_namespaced:
+        steps:
+           3:
+                options:
+                    deploy_dev_config:
+                        unmanaged: False
+
+    config_qa:
+        steps:
+            1:
+                task: deploy_post
+            2:
+                task: update_admin_profile
+            3:
+                task: deploy_dev_config
+            4:
+                task: install_tdtm_config
+
+    qa_org:
+        steps:
+            1:
+                flow: beta_dependencies
+            2:
+                flow: deploy_unmanaged
+            3:
+                flow: config_qa
+            4:
+                task: None
+            5:
+                flow: dev_data_apex
+            6:
+                task: snapshot_changes
+
+    regression_org:
+        description: Prepare a scratch org for release regression testing.
+        steps:
+            1:
+                flow: install_regression
+            2:
+                flow: config_regression
+
+    config_regression:
+        description: Post-installation configuration for a regression test org.
+        steps:
+            2:
+                task: deploy_dev_config
+                options:
+                    unmanaged: False
+            3:
+                flow: dev_data_apex_managed
+            4:
+                flow: community_setup_managed
+            5:
+                task: generate_advisor_users
+            6:
+                task: generate_student_users
+
+    community_setup:
+        description: Create, deploy, and publish a community in an unmanaged org.
+        steps:
+            1:
+                task: create_advisee_community
+            2:
+                task: deploy_community_config
+            3:
+                task: publish_advisee_community
+
+    community_setup_managed:
+        description: Create, deploy, and publish a community in an managed org.
+        steps:
+            1:
+                task: create_advisee_community
+            2:
+                task: deploy_community_config
+            3:
+                task: deploy_community_config_managed
+            4:
+                task: publish_advisee_community
+
+    robot:
+        steps:
+            0.1:
+                flow: community_setup
+                
+    robot_unstable:
+        steps:
+            0.1:
+                flow: community_setup
+
+    qa_translations:
+        steps:
+            1:
+                task: generate_qa_translation
+            2:
+                task: deploy_qa_translation
+            3:
+                task: reset_qa_translation
+
+    universal_community_managed:
+        description: Deploy the universal config to a managed environment.
+        steps:
+            1:
+                task: create_community
+                options:
+                    name: "Advisor Link"
+                    template: "Customer Service"
+                    timeout: 480
+            2:
+                task: deploy_universal_community_managed
+                options:
+                    unmanaged: False
+            3:
+                task: publish_community
+                options:
+                    name: "Advisor Link"
+
+    config_universal_managed:
+        description: Deploy the universal config to a managed environment.
+        steps:
+            0:
+                task: deploy_universal_config
+                options:
+                    unmanaged: False
+            0.1:
+                task: deploy_universal_plus_advisee_profile
+                options:
+                    unmanaged: False
+                checks:
+                    - when: "'Customer Community Plus' not in tasks.query_licenses()"
+                      action: skip
+            0.2:
+                task: deploy_universal_login_advisee_profile
+                options:
+                    unmanaged: False
+                checks:
+                    - when: "'Customer Community Plus Login' not in tasks.query_licenses()"
+                      action: skip
+            1:
+                task: universal_core_data_managed
+            2:
+                task: wait_for_contactshare
+                options:
+                    timeout: 480
+            3:
+                task: deploy_universal_account_owd
+                options:
+                    unmanaged: False
+            4:
+                task: wait_for_accountshare
+                options:
+                    timeout: 480
+            5:
+                task: deploy_universal_owd
+                options:
+                    unmanaged: False
+            6:
+                flow: universal_community_managed
+            7:
+                task: check_sharing_deployment
+                options:
+                    unmanaged: False
+            8:
+                task: deploy_universal_sharing
+                options:
+                    unmanaged: False
+            9:
+                task: custom_settings_insert
+                options:
+                    managed: True
+            10:
+                task: universal_dataset
+            11:
+                task: deploy_universal_sharing
+                options:
+                    unmanaged: False
+
+
+tasks:
+    query_licenses:
+        description: Query an org for installed licenses
+        group: "SAL: Utilities"
+        class_path: tasks.find_installed_licenses.QueryLicenses
+
+    generate_student_users:
+        description: Generates additional student community users
+        class_path: tasks.user_data.SalUserGenerator
+        options:
+            path: 'datasets/users/student_user_data.csv'
+            user_photo_dir: 'datasets/users/user_photos'
+            create_advisee_records: True
+
+    generate_advisor_users:
+        description: Generates additional advisor users
+        class_path: tasks.user_data.SalUserGenerator
+        options:
+            path: 'datasets/users/advisor_user_data.csv'
+            user_photo_dir: 'datasets/users/user_photos'
+            create_advisee_records: False
+
+    generate_qa_translation:
+        description: Generates a fake translation for use in QA
+        class_path: tasks.labelTranslation.LabelTranslationGenerator
+        options:
+            path: 'unpackaged/config/qa_translations/translations/es.translation'
+
+    reset_qa_translation:
+        description: Resets the template translation file back to being empty
+        class_path: tasks.labelTranslationReset.LabelTranslationDestructor
+        options:
+            path: 'unpackaged/config/qa_translations/translations/es.translation'
+
+    deploy_cao_config:
+        description: Deploys CAO metadata from /unpackaged/config/cao
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/cao
+            unmanaged: True
+
+    deploy_cao_config_managed:
+        description: Deploys CAO metadata from /unpackaged/config/cao to a managed scratch org.
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/cao
+            unmanaged: False
+
+    deploy_qa_translation:
+        description: Deploys qa translation for Testing from /unpackaged/config/qa_translations
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/qa_translations
+
+    check_sharing_deployment:
+        description: Check-only deployment of sharing rules to verify deployability.
+        group: "SAL: Universal Config"
+        class_path: tasks.check_deploy.CheckDeploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/universal_config_sharing
+            unmanaged: True
+            timeout: 480
+
+    deploy_org_settings:
+        description: Deploys organization settings required by SAL.
+        group: "SAL: Universal Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/org_settings
+            unmanaged: False
+
+    deploy_universal_owd:
+        description: Deploys organization-wide defaults for SAL's sObject dependencies.
+        group: "SAL: Universal Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/universal_config_owd
+            unmanaged: False
+
+    deploy_universal_account_owd:
+        description: Deploys organization-wide defaults for Accounts.
+        group: "SAL: Universal Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/universal_config_account_owd
+            unmanaged: False
+
+    deploy_universal_community_managed:
+        description: Deploys Universal community metadata.
+        group: "SAL: Universal Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/universal_config_community
+            unmanaged: False
+
+    custom_settings_insert:
+        description: Inserts the basic record type custom settings
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/custom_settings.cls
+            apex: insertSettings();
+
+    delete_dev_config1:
+        description: Removes Development configuration. Sets default page layouts, compact layouts to system defaults. Removes record type visibilites.
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/delete/first
+
+    delete_dev_config2:
+        description: Removes remaining development configuration, mostly Custom Metadata Types.
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/delete/second
+
+    deploy_community_config:
+        description: Deploys AdviseeCommunity for Development and Testing from /unpackaged/config/community
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/community
+
+    deploy_community_config_managed:
+        description: Deploys Namespaced AdviseeCommunity for Development and Testing from /unpackaged/config/community
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/community_managed
+
+    deploy_dev_config:
+        description: Deploys configuration for Development from /unpackaged/config/dev
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/dev
+            unmanaged: True
+
+    deploy_universal_config:
+        description: Deploys universal configuration from /unpackaged/config/universal_config
+        group: "SAL: Universal Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/universal_config
+            unmanaged: True
+
+    deploy_universal_login_advisee_profile:
+        description: Deploys Advisee profile for Customer Community Plus Login licenses
+        group: "SAL: Universal Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/universal_config_login_profile
+            unmanaged: True
+
+    deploy_universal_plus_advisee_profile:
+        description: Deploys Advisee profile for Customer Community Plus licenses
+        group: "SAL: Universal Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/universal_config_plus_profile
+            unmanaged: True
+
+    deploy_universal_sharing:
+        description: Deploys sharing rules for the universal config from /unpackaged/config/universal_config_sharing
+        group: "SAL: Universal Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/universal_config_sharing
+            unmanaged: True
+
+    deploy_heda_config:
+        description: Deploys configuration for Development from /unpackaged/config/heda
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/heda
+            unmanaged: True
+
+    dev_data_post:
+        description: Does Admin User modifications after dev data is loaded
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/post_process.cls
+            apex: postData(adminEmail);
+
+    dev_data_setup_1:
+        description: Does the basic SAL data setup
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup.cls
+            apex: Step1(adminEmail);
+
+    dev_data_setup_2:
+        description: Does the basic SAL data setup
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup.cls
+            apex: Step2(adminEmail,namespace);
+
+    dev_data_setup_3:
+        description: Does the basic SAL data setup
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup.cls
+            apex: Step3(adminEmail);
+
+    dev_data_setup_4:
+        description: Does the basic SAL data setup
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup.cls
+            apex: Step4();
+
+    dev_data_queue_setup:
+        description: Does the basic SAL data setup
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup_2.cls
+            apex: queueStep();
+
+    dev_data_setup_5:
+        description: Does the basic SAL data setup
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup_2.cls
+            apex: Step5();
+
+    dev_data_setup_6:
+        description: Does the basic SAL data events insert
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup_2.cls
+            apex: Step6();
+
+    dev_data_setup_7:
+        description: Assigns permission sets to users
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup_2.cls
+            apex: Step7();
+
+    dev_data_setup_launchpad:
+        description: Creates term and facilities for Launchpad regression testing
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup_launchpad.cls
+            apex: CreateLaunchpadData();
+
+    dev_data_setup_waiting_room:
+        description: Sets up data for queue waiting room functionality
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup_waiting_room.cls
+            apex: CreateWaitingRoomData();
+
+    dev_data_migrate_topics:
+        description: Migrates topics data from CMT to Topic Custom Object
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/topics.cls
+            apex: migrateTopics();
+
+    retrieve_config_cao:
+        description: Retrieves the currently tracked changes into unpackaged/config/cao
+        class_path: cumulusci.tasks.salesforce.sourcetracking.RetrieveChanges
+        options:
+            path: unpackaged/config/cao
+            namespace_tokenize: $project_config.project__package__namespace
+
+    retrieve_config_community:
+        description: Retrieves the currently tracked changes into unpackaged/config/community
+        class_path: cumulusci.tasks.salesforce.sourcetracking.RetrieveChanges
+        options:
+            path: unpackaged/config/community
+            namespace_tokenize: $project_config.project__package__namespace
+
+    retrieve_config_dev:
+        description: Retrieves the currently tracked changes into unpackaged/config/dev
+        class_path: cumulusci.tasks.salesforce.sourcetracking.RetrieveChanges
+        options:
+            path: unpackaged/config/dev
+            namespace_tokenize: $project_config.project__package__namespace
+
+    retrieve_config_heda:
+        description: Retrieves the currently tracked changes into unpackaged/config/heda
+        class_path: cumulusci.tasks.salesforce.sourcetracking.RetrieveChanges
+        options:
+            path: unpackaged/config/heda
+            namespace_tokenize: $project_config.project__package__namespace
+
+    retrieve_config_qa_translations:
+        description: Retrieves the currently tracked changes into unpackaged/config/qa_translations
+        class_path: cumulusci.tasks.salesforce.sourcetracking.RetrieveChanges
+        options:
+            path: unpackaged/config/qa_translations
+            namespace_tokenize: $project_config.project__package__namespace
+
+    retrieve_universal_data:
+        description: Pulls down the dev (universal) Data
+        group: "SAL: Universal Config"
+        class_path: cumulusci.tasks.bulkdata.QueryData
+        options:
+            sql_path: datasets/universal/sal_data.sql
+            mapping: datasets/universal/mapping_managed.yml
+
+    retrieve_demo_data:
+        description: Pulls down the demo dataset.
+        class_path: cumulusci.tasks.bulkdata.QueryData
+        options:
+            sql_path: datasets/demo/sal_data.sql
+            mapping: datasets/demo/mapping.yml
+
+    test_data_dev_org:
+        description: Loads a basic data set for most SAL objects
+        class_path: cumulusci.tasks.bulkdata.LoadData
+        options:
+            sql_path: datasets/demo/sal_data.sql
+            mapping: datasets/demo/mapping.yml
+
+    universal_dataset:
+        description: Loads a basic data set for most SAL objects
+        group: "SAL: Universal Config"
+        class_path: cumulusci.tasks.bulkdata.LoadData
+        options:
+            sql_path: datasets/universal/sal_data.sql
+            database_url: null
+            mapping: datasets/universal/mapping_managed.yml
+
+    test_data_delete:
+        description: 'WARNING: Deletes all data in the objects specified in the objects option.'
+        class_path: cumulusci.tasks.bulkdata.DeleteData
+        options:
+            objects:
+                - Case
+                - hed__Affiliation__c
+                - hed__Plan_Requirement__c
+                - hed__Program_Plan__c
+                - hed__Course__c
+                - hed__Program_Enrollment__c
+                - CaseTeamTemplate
+                - CaseTeamTemplateMember
+                - CaseTeamMember
+                - CaseTeamTemplateRecord
+                - Account
+                - Contact
+
+    update_admin_profile:
+        options:
+            record_types:
+                - record_type: "Account.{namespaced_org}Administrative"
+                  default: true
+                - record_type: "Account.{namespaced_org}Academic_Program"
+                - record_type: "Account.{namespaced_org}Business_Organization"
+                - record_type: "Account.{namespaced_org}Educational_Institution"
+                - record_type: "Account.{namespaced_org}HH_Account"
+                - record_type: "Account.{namespaced_org}Sports_Organization"
+                - record_type: "Account.{namespaced_org}University_Department"
+                - record_type: "{managed}SuccessPlan__c.{namespaced_org}Academic"
+                  default: true
+
+    install_tdtm_config:
+        description: Runs anonymous apex to install Trigger Handlers for development
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            apex: >
+                hed.TDTM_Global_API.setTdtmConfig(TDTM_DefaultConfig.getDefaultTokens(), 'sal');
+
+    pmd:
+        description: Run Apex code analysis with PMD. This task assumes that PMD is available in PATH. On MacOS PMD is available to install in brew.
+        class_path: tasks.pmd.pmd
+
+    universal_core_data_managed:
+        description: POST a json file to the Composite REST API endpoint.
+        group: 'SAL: Custom Tasks'
+        class_path: tasks.composite.CompositeApi
+        options:
+            managed: True
+            data_files:
+                - "datasets/core/accounts_contacts_eda.json"
+                - "datasets/core/topics.json"
+                - "datasets/core/users_and_setup_objects.json"
+                - "datasets/core/advisee_case.json"
+                - "datasets/core/queueing.json"
+
+    robot:
+        options:
+            suites: robot/SAL/tests
+            options:
+                outputdir: robot/SAL/results
+                tagstatlink: w-*:https://foundation.my.salesforce.com/search/SearchResults?asPhrase=1&searchType=1&sen=a2x&str=%1&search=Search:work item
+
+    robot_libdoc:
+        options:
+            output: robot/SAL/doc/Keywords.html
+            path:
+                - robot/SAL/resources/*PageObject.py
+                - robot/SAL/resources/SAL.py
+                - robot/SAL/resources/SAL.robot
+
+    npm_install:
+        description: Intsalls npm dependencies with npm install
+        class_path: cumulusci.tasks.command.Command
+        options:
+            command: npm install --dev
+
+    run_jest_tests:
+        desciprion: Runs jest tests
+        class_path: cumulusci.tasks.command.Command
+        options:
+            command: npm run test:unit
+
+    create_advisee_community:
+        group: 'SAL: Community Config'
+        description: Creates the advisee community
+        class_path: cumulusci.tasks.salesforce.CreateCommunity
+        options:
+            template: "Customer Service"
+            name: "AdviseeCommunity"
+            timeout: 480
+
+    publish_advisee_community:
+        group: 'SAL: Community Config'
+        description: Publishes the advisee community
+        class_path: cumulusci.tasks.salesforce.PublishCommunity
+        options:
+            name: "AdviseeCommunity"
+
+    wait_for_accountshare:
+        class_path: tasks.sharing_wait.WaitForSharing
+        options:
+            object: AccountShare
+            field: AccountId
+            timeout: 300
+
+    wait_for_contactshare:
+        class_path: tasks.sharing_wait.WaitForSharing
+        options:
+            object: ContactShare
+            field: ContactId
+            timeout: 300
+
+    # Reason for override: Intermittent row lock errors that must always be manually retried
+    run_tests:
+        options:
+            retry_always: True
+            retry_failures:
+                - "unable to obtain exclusive access to this record"
+                - "UNABLE_TO_LOCK_ROW"
+
+    uninstall_packaged_incremental:
+      description: Deletes any metadata from the package in the target org not in the local workspace
+      class_path: cumulusci.tasks.salesforce.UninstallPackagedIncremental
+      options:
+        ignore:
+          CustomObjectTranslation:
+            - AdvisingPool__c-ca
+            - AdvisingPool__c-en_GB
+            - AdvisingPool__c-en_US
+            - AdvisingPool__c-es
+            - AdvisingPool__c-es_MX
+            - AdvisingPool__c-fr
+            - Advisor_Appt_Type_Mapping__mdt-ca
+            - Advisor_Appt_Type_Mapping__mdt-en_GB
+            - Advisor_Appt_Type_Mapping__mdt-en_US
+            - Advisor_Appt_Type_Mapping__mdt-es
+            - Advisor_Appt_Type_Mapping__mdt-es_MX
+            - Advisor_Appt_Type_Mapping__mdt-fr
+            - Alert__c-ca
+            - Alert__c-en_GB
+            - Alert__c-en_US
+            - Alert__c-es
+            - Alert__c-es_MX
+            - Alert__c-fr
+            - AlertAssignmentRule__mdt-ca
+            - AlertAssignmentRule__mdt-en_GB
+            - AlertAssignmentRule__mdt-en_US
+            - AlertAssignmentRule__mdt-es
+            - AlertAssignmentRule__mdt-es_MX
+            - AlertAssignmentRule__mdt-fr
+            - AlertRelationship__mdt-ca
+            - AlertRelationship__mdt-en_GB
+            - AlertRelationship__mdt-en_US
+            - AlertRelationship__mdt-es
+            - AlertRelationship__mdt-es_MX
+            - AlertRelationship__mdt-fr
+            - Appointment__c-ca
+            - Appointment__c-en_GB
+            - Appointment__c-en_US
+            - Appointment__c-es
+            - Appointment__c-es_MX
+            - Appointment__c-fr
+            - AppointmentAttendee__c-ca
+            - AppointmentAttendee__c-en_GB
+            - AppointmentAttendee__c-en_US
+            - AppointmentAttendee__c-es
+            - AppointmentAttendee__c-es_MX
+            - AppointmentAttendee__c-fr
+            - Appt_Topic__mdt-ca
+            - Appt_Topic__mdt-en_GB
+            - Appt_Topic__mdt-en_US
+            - Appt_Topic__mdt-es
+            - Appt_Topic__mdt-es_MX
+            - Appt_Topic__mdt-fr
+            - Appt_Type__mdt-ca
+            - Appt_Type__mdt-en_GB
+            - Appt_Type__mdt-en_US
+            - Appt_Type__mdt-es
+            - Appt_Type__mdt-es_MX
+            - Appt_Type__mdt-fr
+            - Appt_Type_Topic_Mapping__mdt-ca
+            - Appt_Type_Topic_Mapping__mdt-en_GB
+            - Appt_Type_Topic_Mapping__mdt-en_US
+            - Appt_Type_Topic_Mapping__mdt-es
+            - Appt_Type_Topic_Mapping__mdt-es_MX
+            - Appt_Type_Topic_Mapping__mdt-fr
+            - Event-ca
+            - Event-en_GB
+            - Event-en_US
+            - Event-es
+            - Event-es_MX
+            - Event-fr
+            - RoleTopicSetting__c-ca
+            - RoleTopicSetting__c-en_GB
+            - RoleTopicSetting__c-en_US
+            - RoleTopicSetting__c-es
+            - RoleTopicSetting__c-es_MX
+            - RoleTopicSetting__c-fr
+            - SAL_Settings__c-ca
+            - SAL_Settings__c-en_GB
+            - SAL_Settings__c-en_US
+            - SAL_Settings__c-es
+            - SAL_Settings__c-es_MX
+            - SAL_Settings__c-fr
+            - SalProtectedSettings__c-ca
+            - SalProtectedSettings__c-en_GB
+            - SalProtectedSettings__c-en_US
+            - SalProtectedSettings__c-es
+            - SalProtectedSettings__c-es_MX
+            - SalProtectedSettings__c-fr
+            - SALQueuingSettings__c-ca
+            - SALQueuingSettings__c-en_GB
+            - SALQueuingSettings__c-en_US
+            - SALQueuingSettings__c-es
+            - SALQueuingSettings__c-es_MX
+            - SALQueuingSettings__c-fr
+            - SuccessPlan__c-ca
+            - SuccessPlan__c-en_GB
+            - SuccessPlan__c-en_US
+            - SuccessPlan__c-es
+            - SuccessPlan__c-es_MX
+            - SuccessPlan__c-fr
+            - SuccessPlanTemplate__c-ca
+            - SuccessPlanTemplate__c-en_GB
+            - SuccessPlanTemplate__c-en_US
+            - SuccessPlanTemplate__c-es
+            - SuccessPlanTemplate__c-es_MX
+            - SuccessPlanTemplate__c-fr
+            - SuccessPlanTemplateTask__c-ca
+            - SuccessPlanTemplateTask__c-en_GB
+            - SuccessPlanTemplateTask__c-en_US
+            - SuccessPlanTemplateTask__c-es
+            - SuccessPlanTemplateTask__c-es_MX
+            - SuccessPlanTemplateTask__c-fr
+            - Topic__c-ca
+            - Topic__c-en_GB
+            - Topic__c-en_US
+            - Topic__c-es
+            - Topic__c-es_MX
+            - Topic__c-fr
+            - UserTopicSetting__c-ca
+            - UserTopicSetting__c-en_GB
+            - UserTopicSetting__c-en_US
+            - UserTopicSetting__c-es
+            - UserTopicSetting__c-es_MX
+            - UserTopicSetting__c-fr
+            - QueueTopicSetting__c-en_US
+            - QueueTopicSetting__c-en_GB
+            - QueueTopicSetting__c-ca
+            - QueueTopicSetting__c-es
+            - QueueTopicSetting__c-es_MX
+            - QueueTopicSetting__c-fr
+            - QueueWaitingRoomResource__c-en_US
+            - QueueWaitingRoomResource__c-en_GB
+            - QueueWaitingRoomResource__c-ca
+            - QueueWaitingRoomResource__c-es
+            - QueueWaitingRoomResource__c-es_MX
+            - QueueWaitingRoomResource__c-fr
+
+orgs:
+    scratch:
+        dev_namespaced:
+            config_file: orgs/dev.json
+            namespaced: True
+
+        prerelease:
+            config_file: orgs/prerelease.json
+
+        partner_release:
+            config_file: orgs/partner_release.json
+
+        partner_dev:
+            config_file: orgs/partner_dev.json
+
+        pe_dev_namespaced:
+            config_file: orgs/partner_dev.json
+            namespaced: True
+
+        trial:
+            config_file: orgs/trial.json
+
+plans:
+    install:
+        slug: install
+        title: Install
+        tier: primary
+        steps:
+            1:
+                task: update_dependencies
+                options:
+                    dependencies:
+                        - github: https://github.com/SalesforceFoundation/EDA
+                        - github: https://github.com/SalesforceFoundation/Pathways
+                ui_options:
+                    1:
+                        name: EDA - Account Record Types
+                    2:
+                        name: EDA - Contact Key Affiliation Fields
+                    4:
+                        name: EDA - Case Behavior Record Types
+                    5:
+                        name: EDA - Course Connection Record Types
+                    6:
+                        name: EDA - Facility Display Name Formula Field
+            2:
+                task: deploy_pre
+                ui_options:
+                    src:
+                        name: Salesforce Advisor Link - Pre-Install
+                options:
+                    unmanaged: False
+            3:
+                task: install_managed
+            4:
+                task: deploy_post
+                ui_options:
+                    src:
+                        name: Salesforce Advisor Link - Post-Install
+                    src_reports_and_dashboards:
+                        name: SAL - Sample Reports and Dashboards
+                options:
+                    unmanaged: False
+
+    enablement:
+        slug: enablement
+        title: Install SAL Partner Enablement Scripts
+        tier: additional
+        is_listed: False
+        steps:
+            0:
+                task: deploy_org_settings
+                options:
+                    unmanaged: False
+                ui_options:
+                    name: Set required organization settings.
+                    is_required: False
+            1:
+                task: update_dependencies
+                options:
+                    dependencies:
+                        - github: https://github.com/SalesforceFoundation/EDA
+                        - github: https://github.com/SalesforceFoundation/Pathways
+                ui_options:
+                    1:
+                        name: EDA - Account Record Types
+                        is_required: False
+                    2:
+                        name: EDA - Contact Key Affiliation Fields
+                        is_required: False
+                    3:  # EDA
+                        is_required: False
+                    4:
+                        name: EDA - Case Behavior Record Types
+                        is_required: False
+                    5:
+                        name: EDA - Course Connection Record Types
+                        is_required: False
+                    6:
+                        name: EDA - Facility Display Name Formula Field
+                        is_required: False
+                    7:  # Pathways
+                        is_required: False
+            2:
+                task: deploy_pre
+                ui_options:
+                    src:
+                        name: Salesforce Advisor Link - Pre-Install
+                        is_required: False
+                options:
+                    unmanaged: False
+            3:
+                task: install_managed
+                ui_options:
+                    is_required: False
+            4:
+                task: deploy_post
+                ui_options:
+                    src:
+                        name: Salesforce Advisor Link - Post-Install
+                        is_required: False
+                    src_reports_and_dashboards:
+                        name: SAL - Sample Reports and Dashboards
+                        is_required: False
+                options:
+                    unmanaged: False
+            5:
+                flow: config_universal_managed
+                ui_options:
+                    src:
+                        name: Salesforce Advisor Link - Post-Install
+                        is_required: False
+                    universal_core_data_managed:
+                        name: Create Core Data
+                        is_required: False
+                    deploy_universal_config:
+                        name: Deploy Universal Config
+                        is_required: False
+                    deploy_universal_plus_advisee_profile:
+                        name: Deploy Advisee Profile (Customer Community Plus)
+                        is_required: False
+                    deploy_universal_login_advisee_profile:
+                        name: Deploy Advisee Profile (Customer Community Plus Login)
+                        is_required: False
+                    wait_for_contactshare:
+                        name: Wait for Sharing Calculation
+                        is_required: False
+                    deploy_universal_account_owd:
+                        name: Deploy Account Organization-Wide Default Sharing
+                        is_required: False
+                    wait_for_accountshare:
+                        name: Wait for Sharing Calculation
+                        is_required: False
+                    deploy_universal_owd:
+                        name: Deploy Organization-Wide Default Sharing
+                        is_required: False
+                    universal_community_managed:
+                        1:
+                            name: Create Advisee Community
+                            is_required: False
+                        2:
+                            name: Deploy Advisee Community Metadata
+                            is_required: False
+                        3:
+                            name: Publish Advisee Community Metadata
+                            is_required: False
+                    check_sharing_deployment:
+                        name: Prepare Sharing Rules for Deployment
+                        is_required: False
+                    deploy_universal_sharing:
+                        name: Deploy Sharing Rules
+                        is_required: False
+                    custom_settings_insert:
+                        name: Insert SAL Custom Setttings
+                        is_required: False
+                    universal_dataset:
+                        name: Create Demo Data
+                        is_required: False
+
+    reports:
+        slug: reports
+        title: Install Sample Reports & Dashboards
+        tier: additional
+        is_listed: True
+        steps:
+            1:
+                task: deploy
+                options:
+                    path: unpackaged/post/src_reports_and_dashboards
+                    unmanaged: False
+                    namespace_inject: $project_config.project__package__namespace
+                ui_options:
+                    name: SAL - Sample Reports and Dashboards

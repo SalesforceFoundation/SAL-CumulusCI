@@ -1,0 +1,112 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/composite/sobjects",
+      "referenceId": "parentTopics",
+      "body": {
+        "allOrNone": true,
+        "records": [
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Academic"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Career"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Financial Aid"
+          }
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/composite/sobjects",
+      "referenceId": "childTopics",
+      "body": {
+        "allOrNone": true,
+        "records": [
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Degree Planning",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[0].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Grade Concerns",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[0].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Graduation Audit",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[0].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Scheduling",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[0].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Study Abroad",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[0].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Other",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[0].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Full-Time Job",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[1].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Internships",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[1].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Mentorships",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[1].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Other",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[1].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Disbursement",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[2].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Financial Hardship",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[2].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Loan Questions",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[2].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Loan Repayment",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[2].id}"
+          },
+          {
+            "attributes": { "type": "%%%NAMESPACE%%%Topic__c" },
+            "Name": "Other",
+            "%%%NAMESPACE%%%ParentTopic__c": "@{parentTopics[2].id}"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+### HEDA STUFF
+
+# ACCOUNTS
+Insert Admin Accounts:
+    sf_object: Account
+    table: admin_accounts
+    fields:
+        Id: sf_id
+        BillingCountry: country
+        BillingStreet: street
+        BillingState: state
+        BillingCity: city
+        BillingPostalCode: zip
+        Name: name
+    record_type: Administrative
+
+Insert University Department Accounts:
+    sf_object: Account
+    table: university_departments
+    fields:
+        Id: sf_id
+        Name: name
+    record_type: University_Department
+
+Insert Academic Programs Accounts:
+    sf_object: Account
+    table: academic_programs
+    fields:
+        Id: sf_id
+        Name: name
+    lookups:
+        ParentId:
+            key_field: department_id
+            table: university_departments
+            join_field: id
+            value_field: sf_id
+    record_type: Academic_Program
+
+# Blank tables cause error
+#Insert Business Organization Accounts:
+#    sf_object: Account
+#    table: business_organizations
+#    fields:
+#        Id: sf_id
+#        Name: name
+#    record_type: Business_Organization
+#
+
+Insert Educational Institution Accounts:
+   sf_object: Account
+   table: educational_institutions
+   fields:
+       Id: sf_id
+       Name: name
+   record_type: Educational_Institution
+
+#Insert Sports Organization Accounts:
+#    sf_object: Account
+#    table: sports_organizations
+#    fields:
+#        Id: sf_id
+#        Name: name
+#    record_type: Sports_Organization
+
+# CONTACTS
+Insert Contacts:
+    sf_object: Contact
+    table: contacts
+    fields:
+        Id: sf_id
+        Salutation: salutation
+        FirstName: first_name
+        LastName: last_name
+        Email: email
+        hed__AlternateEmail__c: alternate_email
+        hed__Preferred_Email__c: preferred_email
+        Phone: phone
+        Title: job_title
+        hed__UniversityEmail__c: hed__universityemail__c
+        hed__WorkEmail__c: hed__workemail__c
+    lookups:
+        AccountId:
+            key_field: account_id
+            table: admin_accounts
+            join_field: id
+            value_field: sf_id
+        Primary_Academic_Program__c:
+            key_field: primary_program_id
+            table: academic_programs
+            join_field: id
+            value_field: sf_id
+
+# Program Enrollments
+Insert Program Enrollments:
+    sf_object: hed__Program_Enrollment__c
+    table: program_enrollments
+    fields:
+        Id: sf_id
+        hed__Admission_Date__c: admin_date
+        hed__Graduation_Year__c: grad_year
+    lookups:
+        hed__Contact__c:
+            key_field: contact_id
+            table: contacts
+            join_field: id
+            value_field: sf_id
+        hed__Account__c:
+            key_field: program_id
+            table: academic_programs
+            join_field: id
+            value_field: sf_id
+
+Insert Affiliations:
+    sf_object: hed__Affiliation__c
+    table: affiliations
+    fields:
+        Id: sf_id
+        hed__StartDate__c: hed__startdate__c
+        hed__EndDate__c: hed__enddate__c
+        hed__Primary__c: hed__primary__c
+        hed__Role__c: hed__role__c
+        hed__Status__c: hed__status__c
+    lookups:
+        hed__Contact__c:
+            key_field: contact_id
+            table: contacts
+            join_field: id
+            value_field: sf_id
+        hed__Account__c:
+            key_field: program_id
+            table: academic_programs
+            join_field: id
+            value_field: sf_id
+
+Insert Facilities:
+    sf_object: hed__Facility__c
+    table: facilities
+    fields:
+        Id: sf_id
+        Name: name
+
+### SAL STUFF
+
+# Success Team
+Insert Success Team:
+    sf_object: Account
+    table: success_teams
+    fields:
+        Id: sf_id
+        sfal__CaseTeamTemplateName__c: case_team_name
+        Name: name
+    record_type: Administrative
+
+# CASES
+Insert Advisee Records:
+    sf_object: Case
+    table: advisee_cases
+    fields:
+        Id: sf_id
+        Subject: subject
+        Status: status
+    lookups:
+        ContactId:
+            key_field: contact_id
+            table: contacts
+            join_field: id
+            value_field: sf_id
+    record_type: AdviseeRecord
+
+Insert Advising Queues:
+    sf_object: Case
+    table: queue_cases
+    fields:
+        Id: sf_id
+        Subject: subject
+        Status: status
+    lookups:
+        ContactId:
+            key_field: contact_id
+            table: contacts
+            join_field: id
+            value_field: sf_id
+    record_type: AdvisingQueue
+
+Insert Case Teams:
+    sf_object: CaseTeamTemplate
+    table: case_team_templates
+    fields:
+        Id: sf_id
+        Name: name
+
+Insert Case Team Roles:
+    sf_object: CaseTeamRole
+    table: case_team_roles
+    fields:
+        Id: sf_id
+        Name: name
+        PreferencesVisibleInCSP: public
+    static:
+        AccessLevel: 'Edit'
+
+#Insert Case Team Template Members:
+#    sf_object: CaseTeamTemplateMember
+#    table: case_team_template_members
+#    fields:
+#        Id: sf_id
+#    lookups:
+#        MemberId:
+#            key_field: member_id
+#            table: contacts
+#            join_field: id
+#            value_field: sf_id
+#        TeamTemplateId:
+#            key_field: team_id
+#            table: case_team_templates
+#            join_field: id
+#            value_field: sf_id
+#        TeamRoleId:
+#            key_field: role_id
+#            table: case_team_roles
+#            join_field: id
+#            value_field: sf_id
+
+## No Support for users yet
+#Insert Case Team Members:
+#    sf_object: CaseTeamMember
+#    table: case_team_members
+#    fields:
+#        Id: sf_id
+#    lookups:
+#        ParentId:
+#            key_field: case_id
+#            table: cases
+#            join_field: id
+#            value_field: sf_id
+#        TeamRoleId:
+#            key_field: role_id
+#            table: case_team_roles
+#            join_field: id
+#            value_field: sf_id
+#        MemberId:
+#            key_field: user_id
+#            table: NO_USER_TABLE_YET
+#            join_field: id
+#            value_field: sf_id
+
+Insert Case Team Template Records:
+    sf_object: CaseTeamTemplateRecord
+    table: case_team_template_records
+    fields:
+        Id: sf_id
+    lookups:
+        ParentId:
+            key_field: case_id
+            table: advisee_cases
+            join_field: id
+            value_field: sf_id
+        TeamTemplateId:
+            key_field: template_id
+            table: case_team_templates
+            join_field: id
+            value_field: sf_id
+
+Insert sfal__AdvisingPool__c:
+  sf_object: sfal__AdvisingPool__c
+  table: sfal__advisingpool__c
+  fields:
+    Id: sf_id
+    Name: name
+    sfal__CaseTeamName__c: sfal__caseteamname__c
+    sfal__Description__c: sfal__description__c
+  lookups:
+    sfal__Account__c:
+      table: success_teams
+
+## No Support for users yet
+#Insert Queue Waiting Room Resources:
+#    sf_object: sfal__QueueWaitingRoomResource__c
+#    table: queue_waiting_room_resources
+#    fields:
+#        Id: sf_id
+#        sfal__SortOrder__c: sortorder
+#    lookups:
+#        WaitingRoom__c:
+#            key_field: waitingroom_id
+#            table: facilities
+#            join_field: id
+#            value_field: sf_id
+#        TeamRoleId:
+#            key_field: advisingpool_id
+#            table: sfal__advisingpool__c
+#            join_field: id
+#            value_field: sf_id
+#        MemberId:
+#            key_field: user_id
+#            table: NO_USER_TABLE_YET
+#            join_field: id
+#            value_field: sf_id

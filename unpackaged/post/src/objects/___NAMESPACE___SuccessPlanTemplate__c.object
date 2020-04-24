@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override updated by Lightning App Builder during activation.</comment>
+        <content>SuccessPlanTemplate</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SalSuccessPlanTemplateCompactLayout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>SalSuccessPlanTemplateCompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>%%%NAMESPACE%%%Active__c</fields>
+        <fields>%%%NAMESPACE%%%UsageCount__c</fields>
+        <fields>%%%NAMESPACE%%%TasksActive__c</fields>
+        <label>Sal Success Plan Template Compact Layout</label>
+    </compactLayouts>
+    <label>Success Plan Template</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Success Plan Template Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Success Plan Templates</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>UsageCount__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>TasksActive__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Active__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>OWNER.ALIAS</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CREATED_DATE</customTabListAdditionalFields>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>UsageCount__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>TasksActive__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Comments__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>OWNER.ALIAS</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CREATED_DATE</lookupDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>RECORDTYPE</searchFilterFields>
+        <searchFilterFields>UsageCount__c</searchFilterFields>
+        <searchFilterFields>TasksActive__c</searchFilterFields>
+        <searchFilterFields>Active__c</searchFilterFields>
+        <searchFilterFields>OWNER.ALIAS</searchFilterFields>
+        <searchFilterFields>CREATED_DATE</searchFilterFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UsageCount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TasksActive__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OWNER.ALIAS</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+    </searchLayouts>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Academic</fullName>
+        <active>true</active>
+        <label>Academic</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Career</fullName>
+        <active>true</active>
+        <label>Career</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Financial_Aid</fullName>
+        <active>true</active>
+        <label>Financial Aid</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Health</fullName>
+        <active>true</active>
+        <label>Health</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Housing</fullName>
+        <active>true</active>
+        <label>Housing</label>
+    </recordTypes>
+</CustomObject>

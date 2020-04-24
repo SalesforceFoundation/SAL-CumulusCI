@@ -1,0 +1,161 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Profile+WHERE+Name+IN+('Advisor+Link+Advisee','Advisor+Link+Advisor','System+Administrator')+ORDER+BY+Name",
+      "referenceId": "profiles"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+UserRole+WHERE+DeveloperName+IN+('IT','Advisor')+ORDER+BY+DeveloperName",
+      "referenceId": "roles"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Contact+WHERE+Email+=+'sofia@connected.edu'",
+      "referenceId": "student"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/composite/sobjects",
+      "referenceId": "caseTeamRoles",
+      "body": {
+        "allOrNone": true,
+        "records": [
+          {
+            "attributes": { "type": "CaseTeamRole" },
+            "Name": "Academic Advisor",
+            "AccessLevel": "Edit",
+            "PreferencesVisibleInCSP": true
+          },
+
+          {
+            "attributes": { "type": "CaseTeamRole" },
+            "Name": "Career Coach",
+            "AccessLevel": "Edit",
+            "PreferencesVisibleInCSP": true
+          },
+
+          {
+            "attributes": { "type": "CaseTeamRole" },
+            "Name": "Financial Aid Counselor",
+            "AccessLevel": "Edit",
+            "PreferencesVisibleInCSP": true
+          },
+
+          {
+            "attributes": { "type": "CaseTeamRole" },
+            "Name": "Study Abroad Coordinator",
+            "AccessLevel": "Edit",
+            "PreferencesVisibleInCSP": true
+          }
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/CaseTeamTemplate",
+      "referenceId": "caseTeamTemplate",
+      "body": {
+        "Name": "Career Services Team"
+      }
+    },
+    {
+      "method": "PATCH",
+      "url": "/services/data/v46.0/sobjects/User/%%%USERID%%%",
+      "referenceId": "adrienne",
+      "body": {
+        "FirstName": "Adrienne",
+        "LastName": "Administrator",
+        "Alias": "admin",
+        "City": "San Francisco",
+        "Country": "USA",
+        "Email": "admin@connected.edu",
+        "EmailEncodingKey": "utf-8",
+        "LanguageLocaleKey": "en_US",
+        "LocaleSidKey": "en_US",
+        "MobilePhone": "(650) 555-1212",
+        "Phone": "(650) 555-1212",
+        "PostalCode": "94105",
+        "ProfileId": "@{profiles.records[2].Id}",
+        "State": "CA",
+        "Street": "1 Market Street",
+        "Title": "Primary Academic Advisor",
+        "TimeZoneSidKey": "America/Los_Angeles",
+        "UserRoleId": "@{roles.records[1].Id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/User",
+      "referenceId": "sophiaUser",
+      "body": {
+        "FirstName": "Sophia",
+        "LastName": "Student",
+        "Alias": "sophia",
+        "City": "San Francisco",
+        "ContactId": "@{student.records[0].Id}",
+        "Country": "USA",
+        "Email": "sofia@connected.edu",
+        "EmailEncodingKey": "utf-8",
+        "LanguageLocaleKey": "en_US",
+        "LocaleSidKey": "en_US",
+        "MobilePhone": "(650) 555-1212",
+        "Phone": "(650) 555-1212",
+        "PostalCode": "94105",
+        "ProfileId": "@{profiles.records[0].Id}",
+        "State": "CA",
+        "Street": "1 Market Street",
+        "TimeZoneSidKey": "America/Los_Angeles",
+        "Username": "sofia@connected.edu"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/User",
+      "referenceId": "adam",
+      "body": {
+        "FirstName": "Adam",
+        "LastName": "Advisor",
+        "Alias": "advisor",
+        "City": "San Francisco",
+        "Country": "USA",
+        "Email": "advisor@connected.edu",
+        "EmailEncodingKey": "utf-8",
+        "LanguageLocaleKey": "en_US",
+        "LocaleSidKey": "en_US",
+        "MobilePhone": "(650) 555-1212",
+        "Phone": "(650) 555-1212",
+        "PostalCode": "94105",
+        "ProfileId": "@{profiles.records[1].Id}",
+        "State": "CA",
+        "Street": "1 Market Street",
+        "Title": "Primary Academic Advisor",
+        "TimeZoneSidKey": "America/Los_Angeles",
+        "UserRoleId": "@{roles.records[0].Id}",
+        "Username": "advisor@connected.edu"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/CaseTeamTemplateMember",
+      "referenceId": "templateMemberAdam",
+      "body": {
+        "MemberId": "@{adam.id}",
+        "TeamTemplateId": "@{caseTeamTemplate.id}",
+        "TeamRoleId": "@{caseTeamRoles[1].id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/CaseTeamTemplateMember",
+      "referenceId": "templateMemberAdrienne",
+      "body": {
+        "MemberId": "%%%USERID%%%",
+        "TeamTemplateId": "@{caseTeamTemplate.id}",
+        "TeamRoleId": "@{caseTeamRoles[1].id}"
+      }
+    }
+  ]
+}

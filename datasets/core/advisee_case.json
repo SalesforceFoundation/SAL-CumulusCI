@@ -1,0 +1,70 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+User+WHERE+Alias+IN+('admin','advisor')+ORDER+BY+Alias",
+      "referenceId": "users"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+DeveloperName+=+'AdviseeRecord'",
+      "referenceId": "adviseeRt"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+CaseTeamTemplate+WHERE+Name+=+'Career+Services+Team'",
+      "referenceId": "caseTeamTemplate"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+CaseTeamRole+WHERE+Name+=+'Career+Coach'",
+      "referenceId": "caseTeamRoles"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Contact+WHERE+Email+=+'sofia@connected.edu'",
+      "referenceId": "student"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%AdvisingPool__c",
+      "referenceId": "advPool",
+      "body": {
+        "Name": "Career Services Center",
+        "%%%NAMESPACE%%%CaseTeamName__c": "Career Services Team",
+        "%%%NAMESPACE%%%Description__c": "We provide career advising expertise to students and alumni regarding the job-search process, interviewing, resume, and letter writing, and all other facets of career planning.Come meet with us today!"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/Case",
+      "referenceId": "case",
+      "body": {
+        "ContactId": "@{student.records[0].Id}",
+        "Subject": "Sophia Student Advisee Record",
+        "Status": "Active Enrolled",
+        "RecordTypeId": "@{adviseeRt.records[0].Id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/CaseTeamMember",
+      "referenceId": "caseTeamMember",
+      "body": {
+        "ParentId": "@{case.id}",
+        "MemberId": "@{users.records[1].Id}",
+        "TeamRoleId": "@{caseTeamRoles.records[0].Id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/CaseTeamTemplateRecord",
+      "referenceId": "caseTeamTemplateRecord",
+      "body": {
+        "ParentId": "@{case.id}",
+        "TeamTemplateId": "@{caseTeamTemplate.records[0].Id}"
+      }
+    }
+  ]
+}

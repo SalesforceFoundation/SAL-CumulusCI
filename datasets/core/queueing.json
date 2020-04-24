@@ -1,0 +1,49 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+DeveloperName+=+'AdvisingQueue'",
+      "referenceId": "queueRt"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id,%%%NAMESPACE%%%ParentTopic__c+FROM+%%%NAMESPACE%%%Topic__c+WHERE+Name+=+'Degree+Planning'",
+      "referenceId": "topics"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Contact+WHERE+Email+=+'sofia@connected.edu'",
+      "referenceId": "student"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Group+WHERE+DeveloperName+=+'One_Stop_Queue'",
+      "referenceId": "queue"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%AdvisingPool__c",
+      "referenceId": "advPool",
+      "body": {
+        "attributes": { "type": "%%%NAMESPACE%%%AdvisingPool__c" },
+        "Name": "Campus One-Stop",
+        "OwnerId": "@{queue.records[0].Id}",
+        "%%%NAMESPACE%%%Description__c": "The Campus One-Stop gives you the tools and information you need to register, pay your bill, or apply for financial aid allowing you to stay focused on being a student."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/Case",
+      "referenceId": "case",
+      "body": {
+        "ContactId": "@{student.records[0].Id}",
+        "Status": "Queued",
+        "%%%NAMESPACE%%%AdvisingPool__c": "@{advPool.id}",
+        "%%%NAMESPACE%%%Topic__c": "@{topics.records[0].%%%NAMESPACE%%%ParentTopic__c}",
+        "%%%NAMESPACE%%%Subtopic__c": "@{topics.records[0].Id}",
+        "RecordTypeId": "@{queueRt.records[0].Id}"
+      }
+    }
+  ]
+}
