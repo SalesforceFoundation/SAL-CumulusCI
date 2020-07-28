@@ -1,0 +1,68 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+DeveloperName+=+'Academic'+AND+SobjectType+=+'%%%NAMESPACE%%%SuccessPlanTemplate__c'",
+      "referenceId": "academicRT"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplate__c",
+      "referenceId": "testingTemplate",
+      "body": {
+        "Name": "Testing Template",
+        "%%%NAMESPACE%%%Active__c": true,
+        "RecordTypeId": "@{academicRT.records[0].Id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "testingTemplateTask1",
+      "body": {
+        "Name": "Testing Task 1",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{testingTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 30
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "testingTemplateTask2",
+      "body": {
+        "Name": "Testing Task 2",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{testingTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 60
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "testingTemplateTask3",
+      "body": {
+        "Name": "Testing Task 3",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{testingTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 120
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "testingTemplateTask4",
+      "body": {
+        "Name": "Testing Task 4",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{testingTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 180
+      }
+    }
+  ]
+}

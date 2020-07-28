@@ -1,4 +1,4 @@
-minimum_cumulusci_version: 2.5.9
+minimum_cumulusci_version: 3.12.2
 project:
     name: SAL
     package:
@@ -57,7 +57,19 @@ flows:
             0.2:
                 task: run_jest_tests
 
+    dev_data_apex_unmanaged:
+        steps:
+            1:
+              task: enable_gated_features
+
     dev_data_apex:
+        steps:
+            1:
+                flow: dev_data_apex_common
+            2:
+                flow: dev_data_apex_unmanaged
+
+    dev_data_apex_common:
         steps:
             1:
                 task: dev_data_setup_1
@@ -83,11 +95,17 @@ flows:
                 task: dev_data_setup_waiting_room
             12:
                 task: dev_data_migrate_topics
+            13:
+                task: create_success_plan_templates
+            14:
+                task: dev_data_setup_queue_topic_settings
+            15:
+                task: create_success_plan_data
 
     dev_data_apex_managed:
         steps:
             1:
-                flow: dev_data_apex
+                flow: dev_data_apex_common
                 options:
                     dev_data_setup_1:
                         managed: True
@@ -112,12 +130,18 @@ flows:
                     dev_data_setup_waiting_room:
                         managed: True
                     dev_data_migrate_topics:
+                        managed: True
+                    create_success_plan_templates:
+                        managed: True
+                    dev_data_setup_queue_topic_settings:
+                        managed: True
+                    create_success_plan_data:
                         managed: True
 
     dev_data_apex_namespaced:
         steps:
             1:
-                flow: dev_data_apex
+                flow: dev_data_apex_common
                 options:
                     dev_data_setup_1:
                         namespaced: True
@@ -142,6 +166,12 @@ flows:
                     dev_data_setup_waiting_room:
                         namespaced: True
                     dev_data_migrate_topics:
+                        namespaced: True
+                    create_success_plan_templates:
+                        namespaced: True
+                    dev_data_setup_queue_topic_settings:
+                        namespaced: True
+                    create_success_plan_data:
                         namespaced: True
 
     dev_data_sqlite:
@@ -214,6 +244,8 @@ flows:
             5:
                 flow: dev_data_apex
             6:
+                flow: community_setup
+            7:
                 task: snapshot_changes
 
     regression_org:
@@ -248,7 +280,15 @@ flows:
             2:
                 task: deploy_community_config
             3:
+                task: deploy_kiosk_sharing_rules
+            4:
+                task: util_sleep
+                options:
+                    seconds: 20
+            5:
                 task: publish_advisee_community
+            6:
+                task: post_community_guest_user_permissionset
 
     community_setup_managed:
         description: Create, deploy, and publish a community in an managed org.
@@ -258,19 +298,20 @@ flows:
             2:
                 task: deploy_community_config
             3:
-                task: deploy_community_config_managed
+                task: deploy_kiosk_sharing_rules
+                options:
+                    unmanaged: False
             4:
+                task: deploy_community_config_managed
+            5:
+                task: util_sleep
+                options:
+                    seconds: 20
+            6:
                 task: publish_advisee_community
+            7:
+                task: post_community_guest_user_permissionset
 
-    robot:
-        steps:
-            0.1:
-                flow: community_setup
-                
-    robot_unstable:
-        steps:
-            0.1:
-                flow: community_setup
 
     qa_translations:
         steps:
@@ -280,24 +321,6 @@ flows:
                 task: deploy_qa_translation
             3:
                 task: reset_qa_translation
-
-    universal_community_managed:
-        description: Deploy the universal config to a managed environment.
-        steps:
-            1:
-                task: create_community
-                options:
-                    name: "Advisor Link"
-                    template: "Customer Service"
-                    timeout: 480
-            2:
-                task: deploy_universal_community_managed
-                options:
-                    unmanaged: False
-            3:
-                task: publish_community
-                options:
-                    name: "Advisor Link"
 
     config_universal_managed:
         description: Deploy the universal config to a managed environment.
@@ -311,61 +334,145 @@ flows:
                 options:
                     unmanaged: False
                 checks:
-                    - when: "'Customer Community Plus' not in tasks.query_licenses()"
+                    - when: "PID_Customer_Community_Plus not in tasks.get_available_licenses()"
                       action: skip
             0.2:
                 task: deploy_universal_login_advisee_profile
                 options:
                     unmanaged: False
                 checks:
-                    - when: "'Customer Community Plus Login' not in tasks.query_licenses()"
+                    - when: "PID_Customer_Community_Plus_Login not in tasks.get_available_licenses()"
                       action: skip
             1:
                 task: universal_core_data_managed
             2:
-                task: wait_for_contactshare
+                task: set_organization_wide_defaults
+                ui_options:
+                    name: Set org-wide defaults for Contact, Opportunity and SAL objects
+                    is_required: False
                 options:
-                    timeout: 480
+                    managed: True
+                    org_wide_defaults:
+                        - api_name: Contact
+                          internal_sharing_model: Private
+                          external_sharing_model: Private
+                        - api_name: Opportunity
+                          internal_sharing_model: Private
+                          external_sharing_model: Private
+                        - api_name: User
+                          internal_sharing_model: Read
+                          external_sharing_model: Private
+                        - api_name: '%%%NAMESPACE%%%AdvisingPool__c'
+                          internal_sharing_model: Read
+                          external_sharing_model: Read
+                        - api_name:  "%%%NAMESPACE%%%Alert__c"
+                          internal_sharing_model: Private
+                          external_sharing_model: Private
+                        - api_name:  "%%%NAMESPACE%%%AppointmentAttendee__c"
+                          internal_sharing_model: ControlledByParent
+                          external_sharing_model: ControlledByParent
+                        - api_name:  "%%%NAMESPACE%%%Appointment__c"
+                          internal_sharing_model: Private
+                          external_sharing_model: Private
+                        - api_name:  "%%%NAMESPACE%%%QueueWaitingRoomResource__c"
+                          internal_sharing_model: Read
+                          external_sharing_model: Private
+                        - api_name:  "%%%NAMESPACE%%%RoleTopicSetting__c"
+                          internal_sharing_model: ControlledByParent
+                          external_sharing_model: ControlledByParent
+                        - api_name:  "%%%NAMESPACE%%%SuccessPlanTemplateTask__c"
+                          internal_sharing_model: ControlledByParent
+                          external_sharing_model: ControlledByParent
+                        - api_name:  "%%%NAMESPACE%%%SuccessPlanTemplate__c"
+                          internal_sharing_model: Private
+                          external_sharing_model: Private
+                        - api_name:  "%%%NAMESPACE%%%SuccessPlan__c"
+                          internal_sharing_model: Private
+                          external_sharing_model: Private
+                        - api_name:  "%%%NAMESPACE%%%Topic__c"
+                          internal_sharing_model: Read
+                          external_sharing_model: Read
+                        - api_name:  "%%%NAMESPACE%%%UserTopicSetting__c"
+                          internal_sharing_model: ControlledByParent
+                          external_sharing_model: ControlledByParent
             3:
-                task: deploy_universal_account_owd
+                task: set_organization_wide_defaults
+                ui_options:
+                    name: Set org-wide defaults for Account objects
+                    is_required: False
                 options:
-                    unmanaged: False
+                    managed: True
+                    org_wide_defaults:
+                        - api_name: Account
+                          internal_sharing_model: Read
+                          external_sharing_model: Private
             4:
-                task: wait_for_accountshare
+                task: set_organization_wide_defaults
+                ui_options:
+                    name: Set org-wide defaults for Case and EDA objects
+                    is_required: False
                 options:
-                    timeout: 480
+                    managed: True
+                    org_wide_defaults:
+                        - api_name: Case
+                          internal_sharing_model: Read
+                          external_sharing_model: Private
+                        - api_name: hed__Course_Enrollment__c
+                          internal_sharing_model: Read
+                          external_sharing_model: Private
+                        - api_name: hed__Course_Offering_Schedule__c
+                          internal_sharing_model: Read
+                          external_sharing_model: Read
+                        - api_name: hed__Facility__c
+                          internal_sharing_model: Read
+                          external_sharing_model: Read
+                        - api_name: hed__Language__c
+                          internal_sharing_model: Read
+                          external_sharing_model: Read
+                        - api_name: hed__Plan_Requirement__c
+                          internal_sharing_model: Read
+                          external_sharing_model: Read
+                        - api_name: hed__Program_Plan__c
+                          internal_sharing_model: Read
+                          external_sharing_model: Read
+                        - api_name: hed__Time_Block__c
+                          internal_sharing_model: Private
+                          external_sharing_model: Private
             5:
-                task: deploy_universal_owd
+                task: create_community
+                options:
+                    name: "Advisor Link"
+                    template: "Customer Service"
+                    timeout: 480
+            6:
+                task: deploy_universal_community_managed
                 options:
                     unmanaged: False
-            6:
-                flow: universal_community_managed
             7:
+                task: publish_community
+                options:
+                    name: "Advisor Link"
+            8:
                 task: check_sharing_deployment
                 options:
                     unmanaged: False
-            8:
+            9:
                 task: deploy_universal_sharing
                 options:
                     unmanaged: False
-            9:
+            10:
                 task: custom_settings_insert
                 options:
                     managed: True
-            10:
-                task: universal_dataset
             11:
+                task: universal_dataset
+            12:
                 task: deploy_universal_sharing
                 options:
                     unmanaged: False
 
 
 tasks:
-    query_licenses:
-        description: Query an org for installed licenses
-        group: "SAL: Utilities"
-        class_path: tasks.find_installed_licenses.QueryLicenses
-
     generate_student_users:
         description: Generates additional student community users
         class_path: tasks.user_data.SalUserGenerator
@@ -393,22 +500,6 @@ tasks:
         class_path: tasks.labelTranslationReset.LabelTranslationDestructor
         options:
             path: 'unpackaged/config/qa_translations/translations/es.translation'
-
-    deploy_cao_config:
-        description: Deploys CAO metadata from /unpackaged/config/cao
-        class_path: cumulusci.tasks.salesforce.Deploy
-        options:
-            namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/config/cao
-            unmanaged: True
-
-    deploy_cao_config_managed:
-        description: Deploys CAO metadata from /unpackaged/config/cao to a managed scratch org.
-        class_path: cumulusci.tasks.salesforce.Deploy
-        options:
-            namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/config/cao
-            unmanaged: False
 
     deploy_qa_translation:
         description: Deploys qa translation for Testing from /unpackaged/config/qa_translations
@@ -486,12 +577,21 @@ tasks:
         class_path: cumulusci.tasks.salesforce.Deploy
         options:
             path: unpackaged/config/community
+            namespace_inject: true
+
+    deploy_kiosk_sharing_rules:
+        description: Deploys kiosk sharing rules from /unpackaged/config/kiosk_sharing_rules
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            path: unpackaged/config/kiosk_sharing_rules
+            namespace_inject: $project_config.project__package__namespace
 
     deploy_community_config_managed:
         description: Deploys Namespaced AdviseeCommunity for Development and Testing from /unpackaged/config/community
         class_path: cumulusci.tasks.salesforce.Deploy
         options:
             path: unpackaged/config/community_managed
+            namespace_inject: true
 
     deploy_dev_config:
         description: Deploys configuration for Development from /unpackaged/config/dev
@@ -629,12 +729,47 @@ tasks:
             path: scripts/topics.cls
             apex: migrateTopics();
 
-    retrieve_config_cao:
-        description: Retrieves the currently tracked changes into unpackaged/config/cao
-        class_path: cumulusci.tasks.salesforce.sourcetracking.RetrieveChanges
+    dev_data_setup_queue_topic_settings:
+        description: Sets up data for advising queue topics
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
         options:
-            path: unpackaged/config/cao
-            namespace_tokenize: $project_config.project__package__namespace
+            path: scripts/sal_data_setup_queue_topic_settings.cls
+            apex: CreateQueueTopicSettings();
+
+    enable_gated_features:
+        description: Automatically enables gated features
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/feature.cls
+            apex: InstallScript.enableGatedFeatures(getFeatureCode());
+
+    enable_gated_features_managed:
+        description: enables gated features in managed org
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/feature.cls
+            apex: sfal.InstallScript.enableGatedFeatures(getFeatureCode());
+
+    disable_gated_features:
+        description: Automatically disables gated features
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/feature.cls
+            apex: InstallScript.disableGatedFeatures(getFeatureCode());
+
+    disable_gated_features_managed:
+        description: disables gated features in managed org
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/feature.cls
+            apex: sfal.InstallScript.disableGatedFeatures(getFeatureCode());
+
+    dev_data_setup_group_appointments:
+        description: Sets up data for group appointments
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup_group_appointments.cls
+            apex: CreateGroupAppointments();
 
     retrieve_config_community:
         description: Retrieves the currently tracked changes into unpackaged/config/community
@@ -751,6 +886,28 @@ tasks:
                 - "datasets/core/advisee_case.json"
                 - "datasets/core/queueing.json"
 
+    create_success_plan_templates:
+        description: POST a json file to the Composite REST API endpoint.
+        group: 'SAL: Custom Tasks'
+        class_path: tasks.composite.CompositeApi
+        options:
+            data_files:
+                - "datasets/core/success_plan_templates.json"
+
+    create_success_plan_data:
+        description: Sets up data for success plans and tasks related to them
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/sal_data_setup_success_plan_data.cls
+            apex: createSuccessPlanData();
+
+    post_community_guest_user_permissionset:
+        description: Sets up data for success plans and tasks related to them
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/post_community.cls
+            apex: guestPermissionSetAssignment();
+
     robot:
         options:
             suites: robot/SAL/tests
@@ -785,7 +942,7 @@ tasks:
         options:
             template: "Customer Service"
             name: "AdviseeCommunity"
-            timeout: 480
+            timeout: 600
 
     publish_advisee_community:
         group: 'SAL: Community Config'
@@ -820,140 +977,8 @@ tasks:
       description: Deletes any metadata from the package in the target org not in the local workspace
       class_path: cumulusci.tasks.salesforce.UninstallPackagedIncremental
       options:
-        ignore:
-          CustomObjectTranslation:
-            - AdvisingPool__c-ca
-            - AdvisingPool__c-en_GB
-            - AdvisingPool__c-en_US
-            - AdvisingPool__c-es
-            - AdvisingPool__c-es_MX
-            - AdvisingPool__c-fr
-            - Advisor_Appt_Type_Mapping__mdt-ca
-            - Advisor_Appt_Type_Mapping__mdt-en_GB
-            - Advisor_Appt_Type_Mapping__mdt-en_US
-            - Advisor_Appt_Type_Mapping__mdt-es
-            - Advisor_Appt_Type_Mapping__mdt-es_MX
-            - Advisor_Appt_Type_Mapping__mdt-fr
-            - Alert__c-ca
-            - Alert__c-en_GB
-            - Alert__c-en_US
-            - Alert__c-es
-            - Alert__c-es_MX
-            - Alert__c-fr
-            - AlertAssignmentRule__mdt-ca
-            - AlertAssignmentRule__mdt-en_GB
-            - AlertAssignmentRule__mdt-en_US
-            - AlertAssignmentRule__mdt-es
-            - AlertAssignmentRule__mdt-es_MX
-            - AlertAssignmentRule__mdt-fr
-            - AlertRelationship__mdt-ca
-            - AlertRelationship__mdt-en_GB
-            - AlertRelationship__mdt-en_US
-            - AlertRelationship__mdt-es
-            - AlertRelationship__mdt-es_MX
-            - AlertRelationship__mdt-fr
-            - Appointment__c-ca
-            - Appointment__c-en_GB
-            - Appointment__c-en_US
-            - Appointment__c-es
-            - Appointment__c-es_MX
-            - Appointment__c-fr
-            - AppointmentAttendee__c-ca
-            - AppointmentAttendee__c-en_GB
-            - AppointmentAttendee__c-en_US
-            - AppointmentAttendee__c-es
-            - AppointmentAttendee__c-es_MX
-            - AppointmentAttendee__c-fr
-            - Appt_Topic__mdt-ca
-            - Appt_Topic__mdt-en_GB
-            - Appt_Topic__mdt-en_US
-            - Appt_Topic__mdt-es
-            - Appt_Topic__mdt-es_MX
-            - Appt_Topic__mdt-fr
-            - Appt_Type__mdt-ca
-            - Appt_Type__mdt-en_GB
-            - Appt_Type__mdt-en_US
-            - Appt_Type__mdt-es
-            - Appt_Type__mdt-es_MX
-            - Appt_Type__mdt-fr
-            - Appt_Type_Topic_Mapping__mdt-ca
-            - Appt_Type_Topic_Mapping__mdt-en_GB
-            - Appt_Type_Topic_Mapping__mdt-en_US
-            - Appt_Type_Topic_Mapping__mdt-es
-            - Appt_Type_Topic_Mapping__mdt-es_MX
-            - Appt_Type_Topic_Mapping__mdt-fr
-            - Event-ca
-            - Event-en_GB
-            - Event-en_US
-            - Event-es
-            - Event-es_MX
-            - Event-fr
-            - RoleTopicSetting__c-ca
-            - RoleTopicSetting__c-en_GB
-            - RoleTopicSetting__c-en_US
-            - RoleTopicSetting__c-es
-            - RoleTopicSetting__c-es_MX
-            - RoleTopicSetting__c-fr
-            - SAL_Settings__c-ca
-            - SAL_Settings__c-en_GB
-            - SAL_Settings__c-en_US
-            - SAL_Settings__c-es
-            - SAL_Settings__c-es_MX
-            - SAL_Settings__c-fr
-            - SalProtectedSettings__c-ca
-            - SalProtectedSettings__c-en_GB
-            - SalProtectedSettings__c-en_US
-            - SalProtectedSettings__c-es
-            - SalProtectedSettings__c-es_MX
-            - SalProtectedSettings__c-fr
-            - SALQueuingSettings__c-ca
-            - SALQueuingSettings__c-en_GB
-            - SALQueuingSettings__c-en_US
-            - SALQueuingSettings__c-es
-            - SALQueuingSettings__c-es_MX
-            - SALQueuingSettings__c-fr
-            - SuccessPlan__c-ca
-            - SuccessPlan__c-en_GB
-            - SuccessPlan__c-en_US
-            - SuccessPlan__c-es
-            - SuccessPlan__c-es_MX
-            - SuccessPlan__c-fr
-            - SuccessPlanTemplate__c-ca
-            - SuccessPlanTemplate__c-en_GB
-            - SuccessPlanTemplate__c-en_US
-            - SuccessPlanTemplate__c-es
-            - SuccessPlanTemplate__c-es_MX
-            - SuccessPlanTemplate__c-fr
-            - SuccessPlanTemplateTask__c-ca
-            - SuccessPlanTemplateTask__c-en_GB
-            - SuccessPlanTemplateTask__c-en_US
-            - SuccessPlanTemplateTask__c-es
-            - SuccessPlanTemplateTask__c-es_MX
-            - SuccessPlanTemplateTask__c-fr
-            - Topic__c-ca
-            - Topic__c-en_GB
-            - Topic__c-en_US
-            - Topic__c-es
-            - Topic__c-es_MX
-            - Topic__c-fr
-            - UserTopicSetting__c-ca
-            - UserTopicSetting__c-en_GB
-            - UserTopicSetting__c-en_US
-            - UserTopicSetting__c-es
-            - UserTopicSetting__c-es_MX
-            - UserTopicSetting__c-fr
-            - QueueTopicSetting__c-en_US
-            - QueueTopicSetting__c-en_GB
-            - QueueTopicSetting__c-ca
-            - QueueTopicSetting__c-es
-            - QueueTopicSetting__c-es_MX
-            - QueueTopicSetting__c-fr
-            - QueueWaitingRoomResource__c-en_US
-            - QueueWaitingRoomResource__c-en_GB
-            - QueueWaitingRoomResource__c-ca
-            - QueueWaitingRoomResource__c-es
-            - QueueWaitingRoomResource__c-es_MX
-            - QueueWaitingRoomResource__c-fr
+        ignore_types:
+          - CustomObjectTranslation
 
 orgs:
     scratch:
@@ -1084,9 +1109,6 @@ plans:
             5:
                 flow: config_universal_managed
                 ui_options:
-                    src:
-                        name: Salesforce Advisor Link - Post-Install
-                        is_required: False
                     universal_core_data_managed:
                         name: Create Core Data
                         is_required: False
@@ -1111,21 +1133,20 @@ plans:
                     deploy_universal_owd:
                         name: Deploy Organization-Wide Default Sharing
                         is_required: False
-                    universal_community_managed:
-                        1:
-                            name: Create Advisee Community
-                            is_required: False
-                        2:
-                            name: Deploy Advisee Community Metadata
-                            is_required: False
-                        3:
-                            name: Publish Advisee Community Metadata
-                            is_required: False
+                    create_community:
+                        name: Create Advisee Community
+                        is_required: False
+                    deploy_universal_community_managed:
+                        name: Deploy Advisee Community Metadata
+                        is_required: False
+                    publish_community:
+                        name: Publish Advisee Community Metadata
+                        is_required: False
                     check_sharing_deployment:
                         name: Prepare Sharing Rules for Deployment
                         is_required: False
                     deploy_universal_sharing:
-                        name: Deploy Sharing Rules
+                        name: Deploy Advising Pool Sharing Rules
                         is_required: False
                     custom_settings_insert:
                         name: Insert SAL Custom Setttings

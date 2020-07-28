@@ -95,6 +95,8 @@
     <types>
         <members>AlertResolution-1</members>
         <members>Alert_Creation_GPA_2_0_Threshold-1</members>
+        <members>AutoApplySuccessPlanTemplate</members>
+        <members>Example_Auto_Apply_Success_Plan</members>
         <name>Flow</name>
     </types>
     <types>
@@ -140,5 +142,5 @@
         <members>PathAssistant</members>
         <name>Settings</name>
     </types>
-    <version>46.0</version>
+    <version>47.0</version>
 </Package>
