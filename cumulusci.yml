@@ -17,6 +17,7 @@ project:
 
     dependencies:
         - github: https://github.com/SalesforceFoundation/EDA
+    source_format: sfdx
 
 flows:
     uninstall_managed:
