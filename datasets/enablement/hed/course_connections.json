@@ -1,0 +1,69 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'BS Economics'+OR+Name+=+'Chemistry Department'+OR+Name+=+'Economics Department'+OR+Name+=+'English Department'+ORDER+BY+Name+ASC",
+        "referenceId": "accounts"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Contact+WHERE+Email+=+'sofia@connected.edu'+OR+Email+=+'ingrid@connected.edu'+ORDER+BY+Name+ASC",
+        "referenceId": "contacts"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Course_Offering__c+WHERE+Name+=+'CHM 1020, Section 9'+OR+Name+=+'ECO 3101, Section 1'+OR+Name+=+'ENC 2305, Section 2'+ORDER+BY+Name+ASC",
+        "referenceId": "coursesOfferings"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Program_Enrollment__c+WHERE+hed__Account__r.Name+=+'BS Economics'",
+        "referenceId": "programEnrollement"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Affiliation__c+WHERE+hed__Contact__r.Name+=+'Ingrid Instructor'+ORDER+BY+hed__Account__r.Name+ASC",
+        "referenceId": "affiliations"
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course_Enrollment__c",
+        "referenceId": "courseEnrollment1",
+        "body": {
+          "hed__Account__c": "@{accounts.records[0].Id}",
+          "hed__Affiliation__c": null,
+          "hed__Contact__c": "@{contacts.records[1].Id}",
+          "hed__Course_Offering__c": "@{coursesOfferings.records[0].Id}",
+          "hed__Program_Enrollment__c": "@{programEnrollement.records[0].Id}",
+          "hed__Status__c": "Current"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course_Enrollment__c",
+        "referenceId": "courseEnrollment2",
+        "body": {
+          "hed__Account__c": "@{accounts.records[0].Id}",
+          "hed__Affiliation__c": null,
+          "hed__Contact__c": "@{contacts.records[1].Id}",
+          "hed__Course_Offering__c": "@{coursesOfferings.records[1].Id}",
+          "hed__Program_Enrollment__c": "@{programEnrollement.records[0].Id}",
+          "hed__Status__c": "Current"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course_Enrollment__c",
+        "referenceId": "courseEnrollment3",
+        "body": {
+          "hed__Account__c": "@{accounts.records[0].Id}",
+          "hed__Affiliation__c": null,
+          "hed__Contact__c": "@{contacts.records[1].Id}",
+          "hed__Course_Offering__c": "@{coursesOfferings.records[2].Id}",
+          "hed__Program_Enrollment__c": "@{programEnrollement.records[0].Id}",
+          "hed__Status__c": "Current"
+        }
+      }
+    ] 
+}

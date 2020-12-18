@@ -1,0 +1,453 @@
+minimum_cumulusci_version: 3.25.0
+project:
+    name: SAL
+    package:
+        name: SAL
+        namespace: sfal
+        api_version: 50.0
+        install_class: InstallScript
+
+    git:
+        repo_url: https://github.com/SalesforceFoundation/SAL-CumulusCI.git
+
+    dependencies:
+        - github: https://github.com/SalesforceFoundation/EDA
+
+flows:
+
+    install_base:
+        description: Installs managed Advisor Link with Configuration and Data
+        group: 'SAL: Base'
+        steps:
+            1:
+                task: update_dependencies
+            2:
+                task: deploy_pre
+            3:
+                task: install_managed
+            4:
+                task: deploy_post
+            5:
+                task: custom_settings_base
+
+    customer_org:
+        description: Base installation plan for customer orgs
+        group: 'SAL: HED'
+        steps:
+            1:
+                flow: install_base
+                options:
+                    update_dependencies:
+                        dependencies:
+                            - github: https://github.com/SalesforceFoundation/EDA
+                            - github: https://github.com/SalesforceFoundation/Pathways
+                    custom_settings_base:
+                        apex: insertSettings('AdviseeRecord','Student_ID__c'); insertHedSettings();
+
+    hed_config:
+        description: Deploy metadata configuration for HED configuration of Advisor Link
+        group: 'SAL: HED'
+        steps:
+            1:
+                task: deploy_hed_config
+            2:
+                task: deploy_hed_reports_dashboards
+            3:
+                task: deploy_hed_app_profile
+            4:
+                task: deploy_hed_plus_advisee_profile
+                checks:
+                    - when: "'PID_Customer_Community_Plus' not in tasks.get_available_licenses()"
+                      action: skip
+            5:
+                task: deploy_hed_login_advisee_profile
+                checks:
+                    - when: "'PID_Customer_Community_Plus_Login' not in tasks.get_available_licenses()"
+                      action: skip
+            6:
+                task: deploy_hed_permission_sets
+            7:
+                task: deploy_advisor_sharing_rules
+
+    hed_portal_setup_blob:
+        description: This flow is designed to be exposed via MetaDeploy. Create and deploy an Advisee Portal to am MANAGED environment using the binary SiteDotCom Metadata.
+        group: 'SAL: HED'
+        steps:
+            1:
+                task: create_advisee_portal
+            2:
+                task: deploy_hed_portal_blob
+            3:
+                task: deploy_advisee_sharing_rules
+
+    hed_data:
+        description: Upload demo data for Advisor Link.
+        group: 'SAL: HED'
+        steps:
+            1:
+                task: deploy_hed_data_1
+            2:
+                task: insert_hed_terms
+            3:
+                task: insert_hed_course_offerings
+            4:
+                task: deploy_hed_data_2
+            5:
+                task: upload_photo_adam
+            6:
+                task: upload_photo_sophia
+            7:
+                task: insert_hed_availability
+
+tasks:
+
+    check_enhanced_notes_enabled:
+        description: Preflight check to validate that Enhanced Notes are enabled.
+        group: "SAL: Preflight Checks"
+        class_path: cumulusci.tasks.preflight.settings.CheckSettingsValue
+        options:
+            settings_type: EnhancedNotesSettings
+            settings_field: IsEnhancedNotesEnabled
+            value: true
+
+    custom_settings_base:
+        description: Inserts the base custom setting values
+        group: "SAL: Base Config"
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        ui_options:
+            name: Advisor Link - Custom Settings
+            is_required: False
+        options:
+            path: scripts/enablement/custom_settings.cls
+            apex: insertSettings('SupportRecord', '');
+
+    deploy_hed_config:
+        description: Deploys HED configuration metadata
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        ui_options:
+            name: Express Setup - Additional Unpackaged Metadata
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/enablement/hed
+
+    deploy_hed_reports_dashboards:
+        description: Deploys HED configuration metadata
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        ui_options:
+            name: Express Setup - Sample Reports and Dashboards
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/enablement/hed_reports_dashboards
+
+    deploy_hed_app_profile:
+        description: Deploys Advisor Link lightning app and Advisor profile
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        ui_options:
+            name: Express Setup - Lightning App and Advisor Profile
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/enablement/hed_app_profile
+
+    deploy_hed_plus_advisee_profile:
+        description: Deploys Advisee profile for Customer Community Plus licenses
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        ui_options:
+            name: Express Setup - Advisee Profile
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/enablement/hed_advisee_plus_profile
+
+    deploy_hed_login_advisee_profile:
+        description: Deploys Advisee profile for Customer Community Plus Login licenses
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        ui_options:
+            name: Express Setup - Advisee Portal Profile
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/enablement/hed_advisee_login_profile
+
+    deploy_hed_permission_sets:
+        description: Deploys Advisee and Advisor permission sets for HED configuration
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        ui_options:
+            name: Express Setup - Permission Sets
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/enablement/hed_permission_sets
+
+    deploy_advisor_sharing_rules:
+        description: Deploys sharing rules for the HED configuration
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        ui_options:
+            name: Express Setup - Advisor Sharing Metadata
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/enablement/hed_advisor_sharing_rules
+
+    create_advisee_portal:
+        description: Create Advisee Portal using API call
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.CreateCommunity
+        ui_options:
+            name: Express Setup - Sample Advisee Portal
+        options:
+            name: "Advisor Link Portal"
+            template: "Customer Service"
+            timeout: 480
+
+    deploy_hed_portal_blob:
+        description: Deploys community metadata.
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        ui_options:
+            name: Express Setup - Advisee Portal Unpackaged Metadata
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/enablement/hed_portal_blob
+
+    deploy_advisee_sharing_rules:
+        description: Deploys sharing rules for the HED configuration
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        ui_options:
+            name: Express Setup - Advisee Portal Sharing Metadata
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/enablement/hed_advisee_sharing_rules
+
+    deploy_hed_data_1:
+        description: POSTs HED json files to the Composite REST API endpoint.
+        group: 'SAL: HED Config'
+        class_path: tasks.composite.CompositeApi
+        ui_options:
+            name: Express Setup - Basic Sample Data
+        options:
+            data_files: # Order matters
+                - "datasets/enablement/hed/accounts.json"
+                - "datasets/enablement/hed/contacts.json" # Admin Account auto generated from EDA
+                - "datasets/enablement/hed/users.json"
+                - "datasets/enablement/hed/case_team_templates_roles.json"
+                - "datasets/enablement/hed/advising_cases.json"
+                - "datasets/enablement/hed/success_plan_templates.json"
+                - "datasets/enablement/hed/topics.json"
+                - "datasets/enablement/hed/queuing_cases.json"
+                - "datasets/enablement/hed/courses_1.json"
+                - "datasets/enablement/hed/courses_2.json"
+                - "datasets/enablement/hed/courses_3.json"
+                - "datasets/enablement/hed/affiliations.json"
+                - "datasets/enablement/hed/program_enrollments.json"
+                - "datasets/enablement/hed/facilities.json"
+
+    insert_hed_terms:
+        description: Insert terms
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        ui_options:
+            name: Express Setup - Sample Data for Terms
+        options:
+            path: scripts/enablement/term_data.cls
+            apex: insertTerms();
+
+    insert_hed_course_offerings:
+        description: Insert course offerings
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        ui_options:
+            name: Express Setup - Sample Data for Course Offerings
+        options:
+            path: scripts/enablement/course_offerings.cls
+            apex: insertCourseOfferings();
+
+    deploy_hed_data_2:
+        description: POSTs HED json files to the Composite REST API endpoint.
+        group: "SAL: HED Config"
+        class_path: tasks.composite.CompositeApi
+        ui_options:
+            name: Express Setup - Sample Data for Course Connections and Course Offering Schedules
+        options:
+            data_files: # Order matters
+                - "datasets/enablement/hed/course_connections.json"
+                - "datasets/enablement/hed/course_offering_schedules.json"
+
+    upload_photo_adam:
+        group: 'SAL: HED Config'
+        class_path: cumulusci.tasks.salesforce.users.photos.UploadProfilePhoto
+        description: Uploads a profile photo for Adam.
+        ui_options:
+            name: Express Setup - Sample Advisor Photo
+        options:
+            photo: datasets/enablement/user_photos/adam.png
+            where: (Alias = 'advisor')
+
+    upload_photo_sophia:
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.salesforce.users.photos.UploadProfilePhoto
+        description: Uploads a profile photo for Sophia.
+        ui_options:
+            name: Express Setup - Sample Advisee Photo
+        options:
+            photo: datasets/enablement/user_photos/sophia_student.png
+            where: Alias = 'sophia' AND IsActive = true
+
+    insert_hed_availability:
+        description: Insert basic availability
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        ui_options:
+            name: Express Setup - Sample Data for Advising Availability
+        options:
+            path: scripts/enablement/event_availability_series.cls
+            apex: insertEvents();
+
+plans:
+
+    install:
+        slug: install
+        title: Base Plan
+        tier: primary
+        preflight_message: This will install Salesforce Advisor Link into your org.
+        post_install_message: "Thanks for installing Advisor Link. Visit the [Advisor Link topic](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link) on the Power of Us Hub for any questions about Advisor Link."
+        error_message: "If you experience an issue with the installation, please post in the [Power of Us Hub](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link)."
+        checks:
+            - when: "'.my.' not in org_config.instance_url"
+              action: error
+              message: "My Domain must be enabled in your org before installation."
+            - when: "not tasks.check_chatter_enabled()"
+              action: error
+              message: "Chatter must be enabled in your org before installation."
+            - when: "not tasks.check_enhanced_notes_enabled()"
+              action: error
+              message: "Enhanced Notes must be enabled in your org before installation."
+        steps:
+            1:
+                flow: customer_org
+
+    config:
+        slug: config
+        title: Express Setup Configuration Plan
+        tier: secondary
+        preflight_message: This will install metadata configurations into your org.
+        post_install_message: "Thanks for installing Advisor Link. Visit the [Advisor Link topic](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link) on the Power of Us Hub for any questions about Advisor Link."
+        error_message: "If you experience an issue with the installation, please post in the [Power of Us Hub](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link)."
+        checks:
+            - when: "'.my.' not in org_config.instance_url"
+              action: error
+              message: "My Domain must be enabled in your org before installation."
+            - when: "not tasks.check_chatter_enabled()"
+              action: error
+              message: "Chatter must be enabled in your org before installation."
+            - when: "not tasks.check_enhanced_notes_enabled()"
+              action: error
+              message: "Enhanced Notes must be enabled in your org before installation."
+        steps:
+            1:
+                flow: hed_config
+                ui_options:
+                    deploy_hed_config:
+                        is_required: False
+                    deploy_hed_reports_dashboards:
+                        is_required: False
+                    deploy_hed_app_profile:
+                        is_required: False
+                    deploy_hed_plus_advisee_profile:
+                        is_required: False
+                    deploy_hed_login_advisee_profile:
+                        is_required: False
+                    deploy_hed_permission_sets:
+                        is_required: False
+                    deploy_advisor_sharing_rules:
+                        is_required: False
+                options:
+                    deploy_hed_config:
+                        unmanaged: False
+                    deploy_hed_reports_dashboards:
+                        unmanaged: False
+                    deploy_hed_app_profile:
+                        unmanaged: False
+                    deploy_hed_plus_advisee_profile:
+                        unmanaged: False
+                    deploy_hed_login_advisee_profile:
+                        unmanaged: False
+                    deploy_hed_permission_sets:
+                        unmanaged: False
+                    deploy_advisor_sharing_rules:
+                        unmanaged: False
+
+    portal:
+        slug: portal
+        title: Express Setup Sample Portal Plan
+        tier: additional
+        preflight_message: This will install a sample advisee portal into your org.
+        post_install_message: "Thanks for installing Advisor Link. Visit the [Advisor Link topic](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link) on the Power of Us Hub for any questions about Advisor Link."
+        error_message: "If you experience an issue with the installation, please post in the [Power of Us Hub](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link)."
+        checks:
+            - when: "'.my.' not in org_config.instance_url"
+              action: error
+              message: "My Domain must be enabled in your org before installation."
+            - when: "not tasks.check_chatter_enabled()"
+              action: error
+              message: "Chatter must be enabled in your org before installation."
+            - when: "not tasks.check_enhanced_notes_enabled()"
+              action: error
+              message: "Enhanced Notes must be enabled in your org before installation."
+            - when: "not tasks.check_enable_networks_enabled()"
+              action: error
+              message: "Communities must be enabled in your org before installation."
+        steps:
+            1:
+                flow: hed_portal_setup_blob
+                options:
+                    deploy_advisee_sharing_rules:
+                        unmanaged: False
+                ui_options:
+                    deploy_advisee_sharing_rules:
+                        is_required: False
+
+    data:
+        slug: data
+        title: Express Setup Sample Data Plan
+        tier: additional
+        preflight_message: This will install sample data into your org.
+        post_install_message: "Thanks for installing Advisor Link. Visit the [Advisor Link topic](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link) on the Power of Us Hub for any questions about Advisor Link."
+        error_message: "If you experience an issue with the installation, please post in the [Power of Us Hub](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link)."
+        checks:
+            - when: "'.my.' not in org_config.instance_url"
+              action: error
+              message: "My Domain must be enabled in your org before installation."
+            - when: "not tasks.check_chatter_enabled()"
+              action: error
+              message: "Chatter must be enabled in your org before installation."
+            - when: "not tasks.check_enhanced_notes_enabled()"
+              action: error
+              message: "Enhanced Notes must be enabled in your org before installation."
+        steps:
+            1:
+                flow: hed_data
+                ui_options:
+                    deploy_hed_data_1:
+                        is_required: False
+                    insert_hed_terms:
+                        is_required: False
+                    insert_hed_course_offerings:
+                        is_required: False
+                    deploy_hed_data_2:
+                        is_required: False
+                    upload_photo_adam:
+                        is_required: False
+                    upload_photo_sophia:
+                        is_required: False
+                    insert_hed_availability:
+                        is_required: False
+                options:
+                    deploy_hed_data_1:
+                        managed: True
+                    deploy_hed_data_2:
+                        managed: True
+

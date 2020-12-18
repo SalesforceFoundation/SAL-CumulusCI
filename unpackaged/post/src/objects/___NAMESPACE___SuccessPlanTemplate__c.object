@@ -8,14 +8,14 @@
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
     </actionOverrides>
-    <compactLayoutAssignment>SalSuccessPlanTemplateCompactLayout</compactLayoutAssignment>
+    <compactLayoutAssignment>SuccessPlanTemplateCompactLayout</compactLayoutAssignment>
     <compactLayouts>
-        <fullName>SalSuccessPlanTemplateCompactLayout</fullName>
+        <fullName>SuccessPlanTemplateCompactLayout</fullName>
         <fields>Name</fields>
         <fields>%%%NAMESPACE%%%Active__c</fields>
         <fields>%%%NAMESPACE%%%UsageCount__c</fields>
         <fields>%%%NAMESPACE%%%TasksActive__c</fields>
-        <label>Sal Success Plan Template Compact Layout</label>
+        <label>Success Plan Template Compact Layout</label>
     </compactLayouts>
     <label>Success Plan Template</label>
     <listViews>

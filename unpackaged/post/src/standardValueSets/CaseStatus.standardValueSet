@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>Queued</fullName>
+        <default>true</default>
+        <label>Queued</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Ready</fullName>
+        <default>false</default>
+        <label>Ready</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Abandoned</fullName>
+        <default>false</default>
+        <label>Abandoned</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Referred</fullName>
+        <default>false</default>
+        <label>Referred</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Fulfilled</fullName>
+        <default>false</default>
+        <label>Fulfilled</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>New</fullName>
+        <default>false</default>
+        <label>New</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Working</fullName>
+        <default>false</default>
+        <label>Working</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed</fullName>
+        <default>false</default>
+        <label>Closed</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Active Enrolled</fullName>
+        <default>false</default>
+        <label>Active Enrolled</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Active Unenrolled</fullName>
+        <default>false</default>
+        <label>Active Unenrolled</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>On Leave</fullName>
+        <default>false</default>
+        <label>On Leave</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>On Vacation</fullName>
+        <default>false</default>
+        <label>On Vacation</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>On Co-op</fullName>
+        <default>false</default>
+        <label>On Co-op</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>On Hold</fullName>
+        <default>false</default>
+        <label>On Hold</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Inactive</fullName>
+        <default>false</default>
+        <label>Inactive</label>
+        <closed>false</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Withdrawn</fullName>
+        <default>false</default>
+        <label>Withdrawn</label>
+        <closed>true</closed>
+    </standardValue>
+    <standardValue>
+        <fullName>Graduated</fullName>
+        <default>false</default>
+        <label>Graduated</label>
+        <closed>true</closed>
+    </standardValue>
+</StandardValueSet>

@@ -311,16 +311,18 @@
             </values>
         </picklistValues>
     </recordTypes>
+    <compactLayoutAssignment>AlertsCompactLayout</compactLayoutAssignment>
     <compactLayouts>
-        <fullName>SalAlertsCompactLayout</fullName>
-        <fields>Name</fields>
-        <fields>%%%NAMESPACE%%%Reason__c</fields>
+        <fullName>AlertsCompactLayout</fullName>
         <fields>%%%NAMESPACE%%%Advisee__c</fields>
-        <fields>OwnerId</fields>
-        <fields>%%%NAMESPACE%%%Status__c</fields>
+        <fields>Name</fields>
+        <fields>RecordTypeId</fields>
+        <fields>%%%NAMESPACE%%%Reason__c</fields>
         <fields>%%%NAMESPACE%%%RelatedTo__c</fields>
+        <fields>%%%NAMESPACE%%%Status__c</fields>
         <fields>%%%NAMESPACE%%%Priority__c</fields>
+        <fields>OwnerId</fields>
         <fields>CreatedById</fields>
-        <label>Advisor Link Alerts Compact Layout</label>
+        <label>Alerts Compact Layout</label>
     </compactLayouts>
 </CustomObject>

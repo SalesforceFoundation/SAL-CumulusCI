@@ -7,6 +7,7 @@ from pathlib import Path
 
 from cumulusci.cli.ui import CliTable
 from cumulusci.core.exceptions import SalesforceException
+from cumulusci.core.utils import process_bool_arg
 from cumulusci.tasks.salesforce import BaseSalesforceApiTask
 from cumulusci.utils import inject_namespace
 
@@ -65,7 +66,7 @@ class CompositeApi(BaseSalesforceApiTask):
             "composite",
             body,
             namespace=self.project_config.project__package__namespace,
-            managed=self.options.get("managed", False),
+            managed=process_bool_arg( self.options.get("managed", False) ),
             namespaced_org=self.options.get("namespaced", self.org_config.namespaced),
         )
 

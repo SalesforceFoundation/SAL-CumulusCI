@@ -102,13 +102,17 @@
             </values>
         </picklistValues>
     </recordTypes>
+    <compactLayoutAssignment>SuccessPlansCompactLayout</compactLayoutAssignment>
     <compactLayouts>
-        <fullName>SalSuccessPlansCompactLayout</fullName>
-        <fields>Name</fields>
-        <fields>OwnerId</fields>
+        <fullName>SuccessPlansCompactLayout</fullName>
         <fields>%%%NAMESPACE%%%Advisee__c</fields>
+        <fields>RecordTypeId</fields>
+        <fields>Name</fields>
+        <fields>%%%NAMESPACE%%%Status__c</fields>
         <fields>%%%NAMESPACE%%%IsPublished__c</fields>
         <fields>%%%NAMESPACE%%%NumberOfOpenTasks__c</fields>
-        <label>SAL Success Plans Compact Layout</label>
+        <fields>%%%NAMESPACE%%%NumberOfOverdueTasks__c</fields>
+        <fields>OwnerId</fields>
+        <label>Success Plans Compact Layout</label>
     </compactLayouts>
 </CustomObject>

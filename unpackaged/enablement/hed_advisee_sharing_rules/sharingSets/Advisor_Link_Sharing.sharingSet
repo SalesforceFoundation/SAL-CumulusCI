@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessMappings>
+        <accessLevel>Read</accessLevel>
+        <object>Case</object>
+        <objectField>Contact</objectField>
+        <userField>Contact</userField>
+    </accessMappings>
+    <accessMappings>
+        <accessLevel>Read</accessLevel>
+        <object>hed__Course_Enrollment__c</object>
+        <objectField>hed__Contact__c</objectField>
+        <userField>Contact</userField>
+    </accessMappings>
+    <description>Provides students with access to see Cases and Course Connections they&apos;re associated with.</description>
+    <name>Advisor Link Sharing</name>
+    <profiles>Advisor Link Advisee</profiles>
+    <profiles>Advisor Link Advisee Login</profiles>
+</SharingSet>
