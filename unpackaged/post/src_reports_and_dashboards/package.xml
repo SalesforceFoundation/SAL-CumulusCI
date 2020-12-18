@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>SAL_Sample_Dashboards</members>
+        <members>SAL_Sample_Dashboards/onnNyhFKlXVaIfJNfbbHqTfLvKwVtd1</members>
+        <name>Dashboard</name>
+    </types>
+    <types>
+        <members>SAL_Sample_Alert_Reports</members>
+        <members>SAL_Sample_Alert_Reports/My_Advisee_Case_Load</members>
+        <members>SAL_Sample_Alert_Reports/My_Resolved_Alerts_by_Advisee</members>
+        <members>SAL_Sample_Alert_Reports/My_Unresolved_Alerts_Created_Last_7_Days</members>
+        <members>SAL_Sample_Alert_Reports/My_Unresolved_Alerts_by_Advisee</members>
+        <members>SAL_Sample_Alert_Reports/My_Unresolved_Alerts_by_Created_Date</members>
+        <members>SAL_Sample_Alert_Reports/Unresolved_Alerts_By_Owner</members>
+        <members>SAL_Sample_Alert_Reports/Unresolved_Alerts_for_My_Advisees</members>
+        <name>Report</name>
+    </types>
+    <types>
+        <members>Cases_with_Alerts</members>
+        <name>ReportType</name>
+    </types>
+    <version>42.0</version>
+</Package>

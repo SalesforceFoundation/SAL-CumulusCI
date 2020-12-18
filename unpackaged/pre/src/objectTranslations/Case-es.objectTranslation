@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+  <recordTypes>
+    <name>AdviseeRecord</name>
+    <label>Registro de asesorado</label>
+    <description>El tipo de registro utilizado para registros de asesorados. Este caso mantiene todos los datos relacionados con el asesoramiento para un estudiante, como notas, citas de asesoramiento y tareas.</description>
+  </recordTypes>
+  <recordTypes>
+    <name>AdvisingQueue</name>
+    <label>Cola de asesoramiento</label>
+    <description>El tipo de registro utilizado para colas de asesoramiento. Este caso se utiliza para realizar un seguimiento de una solicitud para reunirse con alguien y puede dar como resultado una cita.</description>
+  </recordTypes>
+</CustomObjectTranslation>

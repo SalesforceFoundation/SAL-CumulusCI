@@ -1,0 +1,29 @@
+{
+  "edition": "Partner Developer",
+  "features": ["Communities","FeatureParameterLicensing"],
+  "orgName": "SAL - Dev Workspace",
+  "hasSampleData": "true",
+  "settings": {
+    "chatterSettings": {
+      "enableChatter": true
+    },
+    "communitiesSettings": {
+      "enableNetworksEnabled": true
+    },
+    "enhancedNotesSettings": {
+      "enableEnhancedNotes": true
+    },
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "mobileSettings": {
+      "enableS1EncryptedStoragePref2": false
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true
+    },
+    "securitySettings": {
+        "enableAdminLoginAsAnyUser":true
+    }
+  }
+}

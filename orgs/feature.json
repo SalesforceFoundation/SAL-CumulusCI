@@ -1,0 +1,20 @@
+{
+  "edition": "Partner Developer",
+  "features": ["Communities","FeatureParameterLicensing"],
+  "orgName": "SAL - Feature Test Org",
+  "hasSampleData": "true",
+  "settings": {
+    "chatterSettings": {
+      "enableChatter": true
+    },
+    "communitiesSettings": {
+      "enableNetworksEnabled": true
+    },
+    "enhancedNotesSettings": {
+      "enableEnhancedNotes": true
+    },
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    }
+  }
+}

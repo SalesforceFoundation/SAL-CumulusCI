@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Case</members>
+        <members>Event</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Case-ca</members>
+        <members>Case-en_GB</members>
+        <members>Case-es</members>
+        <members>Case-fr</members>
+        <members>Event-ca</members>
+        <members>Event-en_GB</members>
+        <members>Event-es</members>
+        <members>Event-fr</members>
+        <name>CustomObjectTranslation</name>
+    </types>
+    <version>46.0</version>
+</Package>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>WaitingRoom__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The waiting room location associated with the Queue record.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The waiting room location associated with the Queue record.</inlineHelpText>
+        <label>Waiting Room</label>
+        <referenceTo>hed__Facility__c</referenceTo>
+        <relationshipLabel>Queue Waiting Room Resources</relationshipLabel>
+        <relationshipName>QueueWaitingRoomResources</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+</CustomObject>

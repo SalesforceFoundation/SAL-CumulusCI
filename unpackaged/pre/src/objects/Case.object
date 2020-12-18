@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <businessProcesses>
+        <description>The support process for Advisee Record Cases used in Salesforce Advisor Link.</description>
+        <fullName>Advisee Record</fullName>
+        <isActive>true</isActive>
+        <values>
+            <fullName>New</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <businessProcesses>
+        <description>The support process for Advising Queue Cases, including its Status values.</description>
+        <fullName>Advising Queue</fullName>
+        <isActive>true</isActive>
+        <values>
+            <fullName>New</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <enableFeeds>true</enableFeeds>
+    <recordTypes>
+        <description>The record type used for advisee records. This Case holds holds all advising-related data for a student, such as notes, advising appointments, and Tasks.</description>
+        <fullName>AdviseeRecord</fullName>
+        <active>true</active>
+        <businessProcess>Advisee Record</businessProcess>
+        <label>Advisee Record</label>
+    </recordTypes>
+    <recordTypes>
+        <description>The record type used for advising queues. This Case is used to track a request to meet with someone and can result in an Appointment.</description>
+        <fullName>AdvisingQueue</fullName>
+        <active>true</active>
+        <businessProcess>Advising Queue</businessProcess>
+        <label>Advising Queue</label>
+    </recordTypes>
+</CustomObject>
