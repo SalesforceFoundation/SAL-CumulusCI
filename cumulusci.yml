@@ -40,7 +40,8 @@ flows:
                     update_dependencies:
                         dependencies:
                             - github: https://github.com/SalesforceFoundation/EDA
-                            - github: https://github.com/SalesforceFoundation/Pathways
+                            - namespace: sfpw
+                              version: 1.8
                     custom_settings_base:
                         apex: insertSettings('AdviseeRecord','Student_ID__c'); insertHedSettings();
 
