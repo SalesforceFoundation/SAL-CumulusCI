@@ -1,4 +1,4 @@
-minimum_cumulusci_version: 3.25.0
+minimum_cumulusci_version: 3.28.0
 project:
     name: SAL
     package:
@@ -226,10 +226,11 @@ tasks:
     deploy_hed_data_1:
         description: POSTs HED json files to the Composite REST API endpoint.
         group: 'SAL: HED Config'
-        class_path: tasks.composite.CompositeApi
+        class_path: cumulusci.tasks.salesforce.composite.CompositeApi
         ui_options:
             name: Express Setup - Basic Sample Data
         options:
+            randomize_username: True
             data_files: # Order matters
                 - "datasets/enablement/hed/accounts.json"
                 - "datasets/enablement/hed/contacts.json" # Admin Account auto generated from EDA
@@ -269,10 +270,11 @@ tasks:
     deploy_hed_data_2:
         description: POSTs HED json files to the Composite REST API endpoint.
         group: "SAL: HED Config"
-        class_path: tasks.composite.CompositeApi
+        class_path: cumulusci.tasks.salesforce.composite.CompositeApi
         ui_options:
             name: Express Setup - Sample Data for Course Connections and Course Offering Schedules
         options:
+            randomize_username: True
             data_files: # Order matters
                 - "datasets/enablement/hed/course_connections.json"
                 - "datasets/enablement/hed/course_offering_schedules.json"

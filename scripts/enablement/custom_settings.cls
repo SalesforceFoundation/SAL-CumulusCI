@@ -34,6 +34,7 @@ public static void insertSettings(String adviseeRecordTypeString, String student
     settings.put('%%%NAMESPACE%%%StudentIDField__c', studentIdField);
     settings.put('%%%NAMESPACE%%%WalkIn_Event_Type__c', 'Walk-In Appointment');
     settings.put('%%%NAMESPACE%%%WalkInAvailabilityEventType__c', 'Walk-In');
+    settings.put('%%%NAMESPACE%%%GroupAvailabilityEventType__c', 'Group');
 
     upsert settings;
 }

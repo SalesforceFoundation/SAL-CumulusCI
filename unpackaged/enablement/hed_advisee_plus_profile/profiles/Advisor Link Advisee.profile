@@ -1095,7 +1095,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%AttendeeLimit__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%IsDiscoverable__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1181,6 +1191,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>%%%NAMESPACE%%%Availability__c.%%%NAMESPACE%%%AppointmentType__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>%%%NAMESPACE%%%Availability__c.%%%NAMESPACE%%%AttendeeLimit__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

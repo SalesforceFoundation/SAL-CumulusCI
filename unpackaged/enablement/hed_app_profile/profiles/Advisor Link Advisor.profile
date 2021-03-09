@@ -99,6 +99,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>%%%NAMESPACE%%%AppointmentLocationListViewCtrl</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>%%%NAMESPACE%%%AppointmentPredictionController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1630,7 +1634,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%AttendeeLimit__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%IsDiscoverable__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1680,7 +1694,57 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>%%%NAMESPACE%%%AppointmentLocation__c.%%%NAMESPACE%%%Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%AppointmentLocation__c.%%%NAMESPACE%%%AdditionalDetails__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%AppointmentLocation__c.%%%NAMESPACE%%%Building__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%AppointmentLocation__c.%%%NAMESPACE%%%Campus__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%AppointmentLocation__c.%%%NAMESPACE%%%MeetingLink__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%AppointmentLocation__c.%%%NAMESPACE%%%Phone__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%AppointmentLocation__c.%%%NAMESPACE%%%Room__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%AppointmentLocation__c.%%%NAMESPACE%%%SortOrder__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>%%%NAMESPACE%%%AppointmentLocation__c.%%%NAMESPACE%%%Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>%%%NAMESPACE%%%Availability__c.%%%NAMESPACE%%%AppointmentType__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%Availability__c.%%%NAMESPACE%%%AttendeeLimit__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

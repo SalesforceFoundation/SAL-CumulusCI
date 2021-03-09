@@ -475,10 +475,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>%%%NAMESPACE%%%AvailabilityMapper_TEST</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>%%%NAMESPACE%%%AvailabilityService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -3499,7 +3495,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%AttendeeLimit__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%IsDiscoverable__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
