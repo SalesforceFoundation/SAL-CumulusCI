@@ -327,6 +327,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>%%%NAMESPACE%%%AppointmentLocationFormController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>%%%NAMESPACE%%%AppointmentEditService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1111,6 +1115,22 @@
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>
+
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%AttendeeLimit__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%Appointment__c.%%%NAMESPACE%%%IsDiscoverable__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>%%%NAMESPACE%%%Availability__c.%%%NAMESPACE%%%AttendeeLimit__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
 
     <fieldPermissions>
         <editable>true</editable>

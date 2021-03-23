@@ -8,6 +8,7 @@
     <types>
         <members>Case.Advisee_Record</members>
         <members>Case.Advising_Queue</members>
+        <members>hed__Facility__c.hed__HEDA_Facility_Compact_Layout</members>
         <name>CompactLayout</name>
     </types>
     <types>
@@ -30,6 +31,8 @@
         <members>AdvisingQueue</members>
         <members>Advisor_Link_UtilityBar</members>
         <members>Appointment_Record_Page</members>
+        <members>Home_Page_Default</members>
+        <members>Facility_Record_Page</members>
         <members>Topic_Record_Page</members>
         <name>FlexiPage</name>
     </types>

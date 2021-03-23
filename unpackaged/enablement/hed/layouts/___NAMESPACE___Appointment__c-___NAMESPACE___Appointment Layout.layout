@@ -45,6 +45,10 @@
                 <behavior>Readonly</behavior>
                 <field>%%%NAMESPACE%%%Subtopic__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>%%%NAMESPACE%%%AttendeeLimit__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>

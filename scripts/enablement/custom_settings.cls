@@ -54,7 +54,6 @@ public static void insertHedSettings() {
     qSettings.put('%%%NAMESPACE%%%ShowStudentId__c', true);
     qSettings.put('%%%NAMESPACE%%%WaitingRoomDescription__c', 'hed__Description__c');
     qSettings.put('%%%NAMESPACE%%%WaitingRoomDisplayName__c', 'Name');
-    qSettings.put('%%%NAMESPACE%%%WaitingRoomInstructions__c', 'WaitingRoomInstructions__c');
 
     upsert qSettings;
 }

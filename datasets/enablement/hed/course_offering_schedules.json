@@ -3,12 +3,12 @@
     "compositeRequest": [
       {
         "method": "GET",
-        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Facility__c+WHERE+Name+=+'Buckner Hall, Room 345'+OR+Name+=+'Chapman Hall, Room 550B'+OR+Name+=+'Dodge Hall, Room 202'+ORDER+BY+Name+ASC",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Facility__c+WHERE+Name+IN+('Buckner Hall, Room 345', 'Chapman Hall, Room 550B','Dodge Hall, Room 202')+ORDER+BY+Name+ASC",
         "referenceId": "facilities"
       },
       {
         "method": "GET",
-        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Course_Offering__c+WHERE+Name+=+'CHM 1020, Section 9'+OR+Name+=+'ECO 3101, Section 1'+OR+Name+=+'ENC 2305, Section 2'+ORDER+BY+Name+ASC",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Course_Offering__c+WHERE+Name+IN+('CHM 1020, Section 9','ECO 3101, Section 1','ENC 2305, Section 2')+ORDER+BY+Name+ASC",
         "referenceId": "coursesOfferings"
       },
       {

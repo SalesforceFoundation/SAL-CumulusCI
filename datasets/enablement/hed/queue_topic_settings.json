@@ -1,0 +1,78 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+%%%NAMESPACE%%%AdvisingPool__c+WHERE+Name+=+'Campus One-Stop'",
+        "referenceId": "advPool"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+%%%NAMESPACE%%%Topic__c+WHERE+Name+IN+('Academic','Financial Aid','Loan Questions','Loan Repayment','Parking','Registrar','Scheduling')+ORDER+BY+Name",
+        "referenceId": "topics"
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%QueueTopicSetting__c",
+        "referenceId": "queueTopicAcademic",
+        "body": {
+          "%%%NAMESPACE%%%AdvisingPool__c": "@{advPool.records[0].Id}",
+          "%%%NAMESPACE%%%Topic__c": "@{topics.records[0].Id}"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%QueueTopicSetting__c",
+        "referenceId": "queueTopicFinancialAid",
+        "body": {
+          "%%%NAMESPACE%%%AdvisingPool__c": "@{advPool.records[0].Id}",
+          "%%%NAMESPACE%%%Topic__c": "@{topics.records[1].Id}"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%QueueTopicSetting__c",
+        "referenceId": "queueTopicLoanQuestions",
+        "body": {
+          "%%%NAMESPACE%%%AdvisingPool__c": "@{advPool.records[0].Id}",
+          "%%%NAMESPACE%%%Topic__c": "@{topics.records[2].Id}"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%QueueTopicSetting__c",
+        "referenceId": "queueLoanRepayment",
+        "body": {
+          "%%%NAMESPACE%%%AdvisingPool__c": "@{advPool.records[0].Id}",
+          "%%%NAMESPACE%%%Topic__c": "@{topics.records[3].Id}"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%QueueTopicSetting__c",
+        "referenceId": "queueTopicParking",
+        "body": {
+          "%%%NAMESPACE%%%AdvisingPool__c": "@{advPool.records[0].Id}",
+          "%%%NAMESPACE%%%Topic__c": "@{topics.records[4].Id}"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%QueueTopicSetting__c",
+        "referenceId": "queueTopicRegistrar",
+        "body": {
+          "%%%NAMESPACE%%%AdvisingPool__c": "@{advPool.records[0].Id}",
+          "%%%NAMESPACE%%%Topic__c": "@{topics.records[5].Id}"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%QueueTopicSetting__c",
+        "referenceId": "queueTopicScheduling",
+        "body": {
+          "%%%NAMESPACE%%%AdvisingPool__c": "@{advPool.records[0].Id}",
+          "%%%NAMESPACE%%%Topic__c": "@{topics.records[6].Id}"
+        }
+      }
+    ] 
+}

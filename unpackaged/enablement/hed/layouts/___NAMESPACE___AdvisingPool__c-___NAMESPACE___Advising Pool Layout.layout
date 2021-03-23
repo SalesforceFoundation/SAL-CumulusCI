@@ -21,10 +21,6 @@
                 <behavior>Edit</behavior>
                 <field>%%%NAMESPACE%%%Description__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>%%%NAMESPACE%%%PhotoURL__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

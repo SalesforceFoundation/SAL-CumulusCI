@@ -3,17 +3,17 @@
     "compositeRequest": [
       {
         "method": "GET",
-        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'BS Economics'+OR+Name+=+'Chemistry Department'+OR+Name+=+'Economics Department'+OR+Name+=+'English Department'+ORDER+BY+Name+ASC",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+IN+('BS Economics','Chemistry Department','Economics Department','English Department')+ORDER+BY+Name+ASC",
         "referenceId": "accounts"
       },
       {
         "method": "GET",
-        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Contact+WHERE+Email+=+'sofia@connected.edu'+OR+Email+=+'ingrid@connected.edu'+ORDER+BY+Name+ASC",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Contact+WHERE+Email+IN+('sofia@connected.edu','ingrid@connected.edu')+ORDER+BY+Name+ASC",
         "referenceId": "contacts"
       },
       {
         "method": "GET",
-        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Course_Offering__c+WHERE+Name+=+'CHM 1020, Section 9'+OR+Name+=+'ECO 3101, Section 1'+OR+Name+=+'ENC 2305, Section 2'+ORDER+BY+Name+ASC",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Course_Offering__c+WHERE+Name+IN+('CHM 1020, Section 9','ECO 3101, Section 1','ENC 2305, Section 2')+ORDER+BY+Name+ASC",
         "referenceId": "coursesOfferings"
       },
       {

@@ -79,12 +79,29 @@
         <type>Flexipage</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Tab</actionName>
+        <content>%%%NAMESPACED_ORG%%%Home_Page_Default</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
         <content>User_Record_Page</content>
         <formFactor>Large</formFactor>
         <pageOrSobjectType>User</pageOrSobjectType>
         <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+    <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Facility_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>hed__Facility__c</pageOrSobjectType>
     </actionOverrides>
     <tabs>standard-home</tabs>
     <tabs>standard-Contact</tabs>

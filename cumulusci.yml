@@ -309,6 +309,26 @@ tasks:
             path: scripts/enablement/event_availability_series.cls
             apex: insertEvents();
 
+    schedule_hed_apex_last_appt:
+        description: Scheduled Apex job that collects last appointment data
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        ui_options:
+            name: Express Setup - Scheduled Apex Job That Collects Last Appointment Data
+        options:
+            path: scripts/enablement/scheduled_apex_smartlist.cls
+            apex: scheduleCollectLastAppointmentData();
+
+    schedule_hed_apex_task_summary_count:
+        description: Scheduled Apex job that recalculates Success Plan Task summary counts
+        group: "SAL: HED Config"
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        ui_options:
+            name: Express Setup - Scheduled Apex Job That Recalculates Success Plan Task Summary Counts
+        options:
+            path: scripts/enablement/scheduled_apex_smartlist.cls
+            apex: scheduleRecalculateTaskSummaryCounts();
+
 plans:
 
     install:
@@ -448,9 +468,17 @@ plans:
                         is_required: False
                     insert_hed_availability:
                         is_required: False
+                    schedule_hed_apex_last_appt:
+                        is_required: False
+                    schedule_hed_apex_task_summary_count:
+                        is_required: False
                 options:
                     deploy_hed_data_1:
                         managed: True
                     deploy_hed_data_2:
+                        managed: True
+                    schedule_hed_apex_last_appt:
+                        managed: True
+                    schedule_hed_apex_task_summary_count:
                         managed: True
 
