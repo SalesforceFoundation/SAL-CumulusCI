@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <businessProcesses>
+        <fullName>Advisee Record</fullName>
+        <description>The support process for Advisee Record Cases used in Salesforce Advisor Link.</description>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Active Enrolled</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Graduated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inactive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>On Hold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>On Leave</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Withdrawn</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <businessProcesses>
+        <fullName>Advising Queue</fullName>
+        <description>The support process for Advising Queue Cases, including its Status values.</description>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Abandoned</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fulfilled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Queued</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Ready</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Referred</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <compactLayouts>
+        <fullName>Advisee_Record</fullName>
+        <fields>Subject</fields>
+        <fields>Status</fields>
+        <fields>LastModifiedById</fields>
+        <label>Advisee Record</label>
+    </compactLayouts>
+    <compactLayouts>
+        <fullName>Advising_Queue</fullName>
+        <fields>ContactId</fields>
+        <fields>CaseNumber</fields>
+        <fields>SuppliedName</fields>
+        <fields>%%%NAMESPACE%%%Proxy__c</fields>
+        <fields>Proxy_Name__c</fields>
+        <fields>Proxy_Email__c</fields>
+        <fields>%%%NAMESPACE%%%Topic__c</fields>
+        <fields>OwnerId</fields>
+        <fields>CreatedDate</fields>
+        <label>Advising Queue</label>
+    </compactLayouts>
+    <fields>
+        <fullName>Proxy_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Proxy Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Proxy_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Proxy Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <listViews>
+        <fullName>My_Advisees</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Team</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.AdviseeRecord</value>
+        </filters>
+        <filters>
+            <field>CASES.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>My Advisees</label>
+    </listViews>
+    <listViews>
+        <fullName>One_Stop_Queue_Case</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>%%%NAMESPACE%%%AdvisingPool__c</field>
+            <operation>equals</operation>
+            <value>Campus One-Stop</value>
+        </filters>
+        <label>One-Stop Queue</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <recordTypes>
+        <description>The record type used for advisee records. This Case holds holds all advising-related data for a student, such as notes, advising appointments, and Tasks.</description>
+        <fullName>AdviseeRecord</fullName>
+        <active>true</active>
+        <businessProcess>Advisee Record</businessProcess>
+        <compactLayoutAssignment>Advisee_Record</compactLayoutAssignment>
+        <label>Advisee Record</label>
+    </recordTypes>
+    <recordTypes>
+        <description>The record type used for advising queues. This Case is used to track a request to meet with someone and can result in an Appointment.</description>
+        <fullName>AdvisingQueue</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>Advising_Queue</compactLayoutAssignment>
+        <businessProcess>Advising Queue</businessProcess>
+        <label>Advising Queue</label>
+    </recordTypes>
+</CustomObject>

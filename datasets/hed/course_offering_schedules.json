@@ -1,0 +1,69 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Facility__c+WHERE+Name+IN+('Buckner Hall, Room 345', 'Chapman Hall, Room 550B','Dodge Hall, Room 202')+ORDER+BY+Name+ASC",
+        "referenceId": "facilities"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Course_Offering__c+WHERE+Name+IN+('CHM 1020, Section 9','ECO 3101, Section 1','ENC 2305, Section 2')+ORDER+BY+Name+ASC",
+        "referenceId": "coursesOfferings"
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course_Offering_Schedule__c",
+        "referenceId": "courseOfferingSchedule1",
+        "body": {
+          "hed__Course_Offering__c": "@{coursesOfferings.records[1].Id}",
+          "hed__End_Time__c": "17:30:00.000Z",
+          "hed__Facility__c": "@{facilities.records[0].Id}",
+          "hed__Friday__c": false,
+          "hed__Monday__c": true,
+          "hed__Saturday__c": false,
+          "hed__Start_Time__c": "15:30:00.000Z",
+          "hed__Sunday__c": false,
+          "hed__Thursday__c": false,
+          "hed__Tuesday__c": true,
+          "hed__Wednesday__c": false
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course_Offering_Schedule__c",
+        "referenceId": "courseOfferingSchedule2",
+        "body": {
+          "hed__Course_Offering__c": "@{coursesOfferings.records[2].Id}",
+          "hed__End_Time__c": "13:30:00.000Z",
+          "hed__Facility__c": "@{facilities.records[2].Id}",
+          "hed__Friday__c": false,
+          "hed__Monday__c": true,
+          "hed__Saturday__c": false,
+          "hed__Start_Time__c": "12:30:00.000Z",
+          "hed__Sunday__c": false,
+          "hed__Thursday__c": true,
+          "hed__Tuesday__c": false,
+          "hed__Wednesday__c": false
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course_Offering_Schedule__c",
+        "referenceId": "courseOfferingSchedule3",
+        "body": {
+          "hed__Course_Offering__c": "@{coursesOfferings.records[0].Id}",
+          "hed__End_Time__c": "10:30:00.000Z",
+          "hed__Facility__c": "@{facilities.records[1].Id}",
+          "hed__Friday__c": true,
+          "hed__Monday__c": false,
+          "hed__Saturday__c": false,
+          "hed__Start_Time__c": "09:00:00.000Z",
+          "hed__Sunday__c": false,
+          "hed__Thursday__c": false,
+          "hed__Tuesday__c": false,
+          "hed__Wednesday__c": true
+        }
+      }
+    ] 
+}

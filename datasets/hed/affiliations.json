@@ -1,0 +1,30 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Contact+WHERE+Email+=+'sofia@connected.edu'",
+        "referenceId": "sophia"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'Economics Department'",
+        "referenceId": "economicsDepartment"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+hed__Affiliation__c+WHERE+hed__Account__c+=+'@{economicsDepartment.records[0].Id}'+AND+hed__Contact__c+=+'@{sophia.records[0].Id}'",
+        "referenceId": "economicsAffiliation"
+      },
+      {
+        "method": "PATCH",
+        "url": "/services/data/v46.0/sobjects/hed__Affiliation__c/@{economicsAffiliation.records[0].Id}",
+        "referenceId": "sophiaProgAffl",
+        "body": {
+          "hed__Status__c": "Current",
+          "hed__Role__c": "Student",
+          "hed__StartDate__c": "2020-09-04T06:00:00.000Z"
+        }
+      }
+    ] 
+}

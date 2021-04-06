@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Default Lightning Platform page for post-authentication errors</description>
+    <label>Exception</label>
+    <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>108</minorNumber>
+        <namespace>hed</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>2</majorNumber>
+        <minorNumber>46</minorNumber>
+        <namespace>sfal</namespace>
+    </packageVersions>
+</ApexPage>

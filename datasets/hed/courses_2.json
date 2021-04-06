@@ -1,0 +1,198 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'Physics Department'",
+        "referenceId": "physicsDepartment"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'Environmental and Earth Sciences'",
+        "referenceId": "environmentalEarthDepartment"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'Music Department'",
+        "referenceId": "musicDepartment"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'Chemistry Department'",
+        "referenceId": "chemistryDepartment"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'Philosophy Department'",
+        "referenceId": "philosophyDepartment"
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course21",
+        "body": {
+          "Name": "Physics with Calculus 2",
+          "hed__Account__c": "@{physicsDepartment.records[0].Id}",
+          "hed__Course_ID__c": "PHY 2049",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "The second of a two-semester sequence of physics for scientists and engineers. Content includes Coulomb's law, electric fields and potentials, capacitance, currents and circuits, Ampere's law, Faraday's law, inductance, Maxwell's equations, electromagnetic waves, ray optics, interference and diffraction."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course22",
+        "body": {
+          "Name": "Introduction to Principles of Physics",
+          "hed__Account__c": "@{physicsDepartment.records[0].Id}",
+          "hed__Course_ID__c": "PHY 2020",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "Fundamental principles of physics in mechanics, electricity and modern physics as applied to conservation laws. An in-depth analysis of selected topics with lecture demonstration, films and other teaching aids."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course23",
+        "body": {
+          "Name": "Physics with Calculus 1",
+          "hed__Account__c": "@{physicsDepartment.records[0].Id}",
+          "hed__Course_ID__c": "PHY 2048",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "The first of a two-semester sequence of physics for scientists and engineers. The course covers Newtonian mechanics and includes motion, vectors, Newton's laws, work and conservation of energy, systems of particles, collisions, equilibrium, oscillations and waves."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course24",
+        "body": {
+          "Name": "Physics 1",
+          "hed__Account__c": "@{physicsDepartment.records[0].Id}",
+          "hed__Course_ID__c": "PHY 2053",
+          "hed__Credit_Hours__c": 4,
+          "hed__Extended_Description__c": "First semester of introductory physics de-emphasizing calculus. Structure and properties of matter; kinematics, dynamics and statics; momentum and energy; rotation, elasticity; vibration; fluids; temperature and expansion, heat transfer, thermal behavior of gases; wave motion and sound."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course25",
+        "body": {
+          "Name": "Physics 2",
+          "hed__Account__c": "@{physicsDepartment.records[0].Id}",
+          "hed__Course_ID__c": "PHY 2054",
+          "hed__Credit_Hours__c": 4,
+          "hed__Extended_Description__c": "Second semester of introductory physics de-emphasizing calculus. Electric charge, fields and circuits; electromagnetism, applied electricity; geometrical optics, wave optics, applied optics; electrons and photons; atoms and nuclei."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course26",
+        "body": {
+          "Name": "Introduction to Earth Science",
+          "hed__Account__c": "@{environmentalEarthDepartment.records[0].Id}",
+          "hed__Course_ID__c": "ESC 1000",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "Integrated application of the scientific method to the earth sciences, including geologic materials, resources and processes; surface, groundwater and climate; environmental problems; and related topics. Emphasizes Florida examples."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course27",
+        "body": {
+          "Name": "Introduction to Environmental Science",
+          "hed__Account__c": "@{environmentalEarthDepartment.records[0].Id}",
+          "hed__Course_ID__c": "EVR 2001",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "Delivered from a systems perspective, an interdisciplinary approach explores contemporary environments that are comprised of both human and non-human elements. Explores physical, chemical, and biological processes to understand pressing environmental challenges and cultural values, attitudes, and norms expressed by individuals and populations around the globe."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course28",
+        "body": {
+          "Name": "Experiencing Music",
+          "hed__Account__c": "@{musicDepartment.records[0].Id}",
+          "hed__Course_ID__c": "MUL 2010",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "Examines how we experience music and how it teaches us about ourselves and our world. Illuminates how music both shapes and is shaped by social, political, national, and cultural forces. Music from around the world demonstrates a variety of musical experiences within historical and contemporary cultural settings."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course29",
+        "body": {
+          "Name": "Honors General Chemistry 2",
+          "hed__Account__c": "@{chemistryDepartment.records[0].Id}",
+          "hed__Course_ID__c": "CHM 2051",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "Second semester of the CHM 2045/CHM 2045L and CHM 2051/CHM 2046L sequence. Open to students with superior performance in CHM 2045 or its equivalent. Acids and bases, additional aspects of chemical equilibria, thermodynamics, electrochemistry, complex ions, descriptive chemistry and instructor-chosen topics."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course30",
+        "body": {
+          "Name": "General Chemistry 1",
+          "hed__Account__c": "@{chemistryDepartment.records[0].Id}",
+          "hed__Course_ID__c": "CHM 2045",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "The first semester of the CHM 2045/CHM 2045L and CHM 2046/CHM 2046L sequence. Stoichiometry, atomic and molecular structure, the states of matter, reaction rates and equilibria. A minimum grade of C is required to progress to CHM 2046."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course31",
+        "body": {
+          "Name": "Chemistry for the Liberal Arts",
+          "hed__Account__c": "@{chemistryDepartment.records[0].Id}",
+          "hed__Course_ID__c": "CHM 1020",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "Provides non-science majors with a basic understanding of the substances and chemical transformations central to our lives. Introduces chemical concepts and principles help the student better understand the role and impact of modern chemistry in society."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course32",
+        "body": {
+          "Name": "General Chemistry 2",
+          "hed__Account__c": "@{chemistryDepartment.records[0].Id}",
+          "hed__Course_ID__c": "CHM 2046",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "The second semester of the CHM 2045/CHM 2045L and CHM 2046/CHM 2046L sequence. Students who completed CHM 2045 or equivalent at another institution should consult a chemistry advisor before registering for this course. Acids and bases, additional aspects of chemical equilibria, thermodynamics, electrochemistry, complex ions and descriptive chemistry."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course33",
+        "body": {
+          "Name": "Chemistry for Engineers 2",
+          "hed__Account__c": "@{chemistryDepartment.records[0].Id}",
+          "hed__Course_ID__c": "CHM 2096",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "The second course in a two-semester sequence. Topics include chemical equilibria, acid-base and solubility equilibria, entropy, free energy, electrochemical devices, solution dynamics and descriptive inorganic and organic chemistry. All topics are taught in an engineering case-study context."
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Course__c",
+        "referenceId": "course34",
+        "body": {
+          "Name": "Introduction to Philosophy",
+          "hed__Account__c": "@{philosophyDepartment.records[0].Id}",
+          "hed__Course_ID__c": "PHI 2010",
+          "hed__Credit_Hours__c": 3,
+          "hed__Extended_Description__c": "Variable topics introduction to philosophy through study of traditional questions about the existence of God, the nature of the mind, the definition of good, freedom of the will, and criteria of truth and knowledge."
+        }
+      }
+    ] 
+}

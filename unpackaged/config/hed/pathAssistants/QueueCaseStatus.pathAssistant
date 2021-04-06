@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Case</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>SAL Queue Case Status</masterLabel>
+    <pathAssistantSteps>
+        <picklistValueName>Queued</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <picklistValueName>Ready</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <picklistValueName>Abandoned</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <picklistValueName>Referred</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <picklistValueName>Fulfilled</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>AdvisingQueue</recordTypeName>
+</PathAssistant>

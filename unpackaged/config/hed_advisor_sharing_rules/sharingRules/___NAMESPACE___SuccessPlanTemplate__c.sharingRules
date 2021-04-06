@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Share_Success_Plan_Templates_with_Advisors</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Share all Success Plan Templates with Advisor Role</description>
+        <label>Share Success Plans with Advisors</label>
+        <sharedTo>
+            <role>Advisor</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers/>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

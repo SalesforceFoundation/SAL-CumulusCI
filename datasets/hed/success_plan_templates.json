@@ -1,0 +1,186 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+DeveloperName+=+'Academic'+AND+SobjectType+=+'%%%NAMESPACE%%%SuccessPlanTemplate__c'",
+      "referenceId": "academicRT"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplate__c",
+      "referenceId": "abroadTemplate",
+      "body": {
+        "Name": "Study Abroad",
+        "%%%NAMESPACE%%%Comments__c": "Apply this plan a year prior to the planned semester abroad.",
+        "%%%NAMESPACE%%%Active__c": true,
+        "RecordTypeId": "@{academicRT.records[0].Id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplate__c",
+      "referenceId": "ppTemplate",
+      "body": {
+        "Name": "Persistence Plan",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Comments__c": "This plan is automatically applied to students when their GPA drops below a 2.0",
+        "RecordTypeId": "@{academicRT.records[0].Id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask1",
+      "body": {
+        "Name": "Research your curriculum",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{abroadTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 20,
+        "%%%NAMESPACE%%%Type__c": "Research",
+        "%%%NAMESPACE%%%Comments__c": "Confirm that the courses you wish to take are offered at the universities you are considering and that they will transfer seamlessly."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask2",
+      "body": {
+        "Name": "Complete emergency contact form",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "High",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{abroadTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 200,
+        "%%%NAMESPACE%%%Type__c": "Action Item",
+        "%%%NAMESPACE%%%Comments__c": "To ensure we know how to reach you while abroad, submit your emergency contact details online. This is mandatory before departing on your program."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask3",
+      "body": {
+        "Name": "Consider research opportunities",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Low",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{abroadTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 60,
+        "%%%NAMESPACE%%%Type__c": "Research",
+        "%%%NAMESPACE%%%Comments__c": "Lessons can go beyond just classes - speak to your professors about research opportunities at your host institution."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask4",
+      "body": {
+        "Name": "Complete your study abroad packet",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "High",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{abroadTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 90,
+        "%%%NAMESPACE%%%Type__c": "Form",
+        "%%%NAMESPACE%%%Comments__c": "Remember to get parental approval, if required."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask5",
+      "body": {
+        "Name": "Select your program",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{abroadTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 45,
+        "%%%NAMESPACE%%%Type__c": "To Do",
+        "%%%NAMESPACE%%%Comments__c": "Make your program selection based on your study abroad advisor's guidance and course requirements."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask6",
+      "body": {
+        "Name": "Meet with a study abroad advisor",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{abroadTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 10,
+        "%%%NAMESPACE%%%Type__c": "Meeting",
+        "%%%NAMESPACE%%%Comments__c": "Start on the right path by meeting with a study abroad advisor to discuss the program options and eligibility requirements."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask7",
+      "body": {
+        "Name": "Attend orientation",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "High",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{abroadTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 150,
+        "%%%NAMESPACE%%%Type__c": "Event",
+        "%%%NAMESPACE%%%Comments__c": "Prior to departure, attend an orientation seminar to ensure you have the best possible experience while away."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "ppTemplateTask1",
+      "body": {
+        "Name": "See instructors for office hours",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "High",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{ppTemplate.id}",
+        "%%%NAMESPACE%%%Comments__c": "For courses that you need some additional assistance with, the first stop should be directly to your instructors.",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 5,
+        "%%%NAMESPACE%%%Type__c": "Action item"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "ppTemplateTask2",
+      "body": {
+        "Name": "Make an appointment with your primary advisor",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "High",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{ppTemplate.id}",
+        "%%%NAMESPACE%%%Comments__c": "Use the Advisor Link Portal to schedule an appointment to discuss your grades with your primary advisor.",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 10,
+        "%%%NAMESPACE%%%Type__c": "To Do"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "ppTemplateTask3",
+      "body": {
+        "Name": "Visit the tutoring center",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{ppTemplate.id}",
+        "%%%NAMESPACE%%%Comments__c": "The tutoring center is a great resource to get extra support. ",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 15,
+        "%%%NAMESPACE%%%Type__c": "Meeting"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "ppTemplateTask4",
+      "body": {
+        "Name": "Log into LMS for future assignments",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{ppTemplate.id}",
+        "%%%NAMESPACE%%%Comments__c": "Plan ahead and be ready for assignments and exams - the LMS is your place for all coursework you need to stay on top of.",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 20,
+        "%%%NAMESPACE%%%Type__c": "Action Item"
+      }
+    }
+  ]
+}

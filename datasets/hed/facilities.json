@@ -1,0 +1,92 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'English Department'",
+        "referenceId": "englishDepartment"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'Chemistry Department'",
+        "referenceId": "chemistryDepartment"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Account+WHERE+Name+=+'Economics Department'",
+        "referenceId": "economicsDepartment"
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Facility__c",
+        "referenceId": "dodgeHall",
+        "body": {
+          "Name": "Dodge Hall",
+          "hed__Account__c": "@{englishDepartment.records[0].Id}",
+          "hed__Capacity__c": null,
+          "hed__Facility_Type__c": "Building",
+          "hed__Parent_Facility__c": null
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Facility__c",
+        "referenceId": "chapmanHall",
+        "body": {
+          "Name": "Chapman Hall",
+          "hed__Account__c": "@{chemistryDepartment.records[0].Id}",
+          "hed__Capacity__c": null,
+          "hed__Facility_Type__c": "Building",
+          "hed__Parent_Facility__c": null
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Facility__c",
+        "referenceId": "bucknerHall",
+        "body": {
+          "Name": "Buckner Hall",
+          "hed__Account__c": "@{economicsDepartment.records[0].Id}",
+          "hed__Capacity__c": null,
+          "hed__Facility_Type__c": "Lecture Hall",
+          "hed__Parent_Facility__c": null
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Facility__c",
+        "referenceId": "dodgeHall202",
+        "body": {
+          "Name": "Dodge Hall, Room 202",
+          "hed__Account__c": "@{englishDepartment.records[0].Id}",
+          "hed__Capacity__c": 30,
+          "hed__Facility_Type__c": "Classroom",
+          "hed__Parent_Facility__c": "@{dodgeHall.id}"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Facility__c",
+        "referenceId": "chapmanHall550B",
+        "body": {
+          "Name": "Chapman Hall, Room 550B",
+          "hed__Account__c": "@{chemistryDepartment.records[0].Id}",
+          "hed__Capacity__c": 10,
+          "hed__Facility_Type__c": "Classroom",
+          "hed__Parent_Facility__c": "@{chapmanHall.id}"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Facility__c",
+        "referenceId": "bucknerHall345",
+        "body": {
+          "Name": "Buckner Hall, Room 345",
+          "hed__Account__c": "@{economicsDepartment.records[0].Id}",
+          "hed__Capacity__c": 20,
+          "hed__Facility_Type__c": "Classroom",
+          "hed__Parent_Facility__c": "@{bucknerHall.id}"
+        }
+      }
+    ] 
+}

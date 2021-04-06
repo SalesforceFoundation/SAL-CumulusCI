@@ -1,0 +1,27 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+%%%NAMESPACE%%%AdvisingPool__c+WHERE+Name+=+'Campus One-Stop'",
+        "referenceId": "advPool"
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/hed__Facility__c",
+        "referenceId": "oneStopFacility",
+        "body": {
+          "Name": "Campus One-Stop"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%QueueWaitingRoomResource__c",
+        "referenceId": "queueWaitingRoomResource",
+        "body": {
+          "%%%NAMESPACE%%%AdvisingPool__c": "@{advPool.records[0].Id}",
+          "WaitingRoom__c": "@{oneStopFacility.id}"
+        }
+      }
+    ] 
+}
