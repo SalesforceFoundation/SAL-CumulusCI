@@ -119,7 +119,7 @@ tasks:
             name: Advisor Link - Custom Settings
             is_required: False
         options:
-            path: scripts/enablement/custom_settings.cls
+            path: scripts/public/custom_settings.cls
             apex: insertSettings('SupportRecord', '');
 
     deploy_hed_config:
@@ -130,7 +130,7 @@ tasks:
             name: Express Setup - Additional Unpackaged Metadata
         options:
             namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/enablement/hed
+            path: unpackaged/config/hed
 
     deploy_hed_reports_dashboards:
         description: Deploys HED configuration metadata
@@ -140,7 +140,7 @@ tasks:
             name: Express Setup - Sample Reports and Dashboards
         options:
             namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/enablement/hed_reports_dashboards
+            path: unpackaged/config/hed_reports_dashboards
 
     deploy_hed_app_profile:
         description: Deploys Advisor Link lightning app and Advisor profile
@@ -150,7 +150,7 @@ tasks:
             name: Express Setup - Lightning App and Advisor Profile
         options:
             namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/enablement/hed_app_profile
+            path: unpackaged/config/hed_app_profile
 
     deploy_hed_plus_advisee_profile:
         description: Deploys Advisee profile for Customer Community Plus licenses
@@ -160,7 +160,7 @@ tasks:
             name: Express Setup - Advisee Profile
         options:
             namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/enablement/hed_advisee_plus_profile
+            path: unpackaged/config/hed_advisee_plus_profile
 
     deploy_hed_login_advisee_profile:
         description: Deploys Advisee profile for Customer Community Plus Login licenses
@@ -170,7 +170,7 @@ tasks:
             name: Express Setup - Advisee Portal Profile
         options:
             namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/enablement/hed_advisee_login_profile
+            path: unpackaged/config/hed_advisee_login_profile
 
     deploy_hed_permission_sets:
         description: Deploys Advisee and Advisor permission sets for HED configuration
@@ -180,7 +180,7 @@ tasks:
             name: Express Setup - Permission Sets
         options:
             namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/enablement/hed_permission_sets
+            path: unpackaged/config/hed_permission_sets
 
     deploy_advisor_sharing_rules:
         description: Deploys sharing rules for the HED configuration
@@ -190,7 +190,7 @@ tasks:
             name: Express Setup - Advisor Sharing Metadata
         options:
             namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/enablement/hed_advisor_sharing_rules
+            path: unpackaged/config/hed_advisor_sharing_rules
 
     create_advisee_portal:
         description: Create Advisee Portal using API call
@@ -211,7 +211,7 @@ tasks:
             name: Express Setup - Advisee Portal Unpackaged Metadata
         options:
             namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/enablement/hed_portal_blob
+            path: unpackaged/config/hed_portal_blob
 
     deploy_advisee_sharing_rules:
         description: Deploys sharing rules for the HED configuration
@@ -221,7 +221,7 @@ tasks:
             name: Express Setup - Advisee Portal Sharing Metadata
         options:
             namespace_inject: $project_config.project__package__namespace
-            path: unpackaged/enablement/hed_advisee_sharing_rules
+            path: unpackaged/config/hed_advisee_sharing_rules
 
     deploy_hed_data_1:
         description: POSTs HED json files to the Composite REST API endpoint.
@@ -232,20 +232,20 @@ tasks:
         options:
             randomize_username: True
             data_files: # Order matters
-                - "datasets/enablement/hed/accounts.json"
-                - "datasets/enablement/hed/contacts.json" # Admin Account auto generated from EDA
-                - "datasets/enablement/hed/users.json"
-                - "datasets/enablement/hed/case_team_templates_roles.json"
-                - "datasets/enablement/hed/advising_cases.json"
-                - "datasets/enablement/hed/success_plan_templates.json"
-                - "datasets/enablement/hed/topics.json"
-                - "datasets/enablement/hed/queuing_cases.json"
-                - "datasets/enablement/hed/courses_1.json"
-                - "datasets/enablement/hed/courses_2.json"
-                - "datasets/enablement/hed/courses_3.json"
-                - "datasets/enablement/hed/affiliations.json"
-                - "datasets/enablement/hed/program_enrollments.json"
-                - "datasets/enablement/hed/facilities.json"
+                - "datasets/hed/accounts.json"
+                - "datasets/hed/contacts.json" # Admin Account auto generated from EDA
+                - "datasets/hed/users.json"
+                - "datasets/hed/case_team_templates_roles.json"
+                - "datasets/hed/advising_cases.json"
+                - "datasets/hed/success_plan_templates.json"
+                - "datasets/hed/topics.json"
+                - "datasets/hed/queuing_cases.json"
+                - "datasets/hed/courses_1.json"
+                - "datasets/hed/courses_2.json"
+                - "datasets/hed/courses_3.json"
+                - "datasets/hed/affiliations.json"
+                - "datasets/hed/program_enrollments.json"
+                - "datasets/hed/facilities.json"
 
     insert_hed_terms:
         description: Insert terms
@@ -254,7 +254,7 @@ tasks:
         ui_options:
             name: Express Setup - Sample Data for Terms
         options:
-            path: scripts/enablement/term_data.cls
+            path: scripts/public/term_data.cls
             apex: insertTerms();
 
     insert_hed_course_offerings:
@@ -264,7 +264,7 @@ tasks:
         ui_options:
             name: Express Setup - Sample Data for Course Offerings
         options:
-            path: scripts/enablement/course_offerings.cls
+            path: scripts/public/course_offerings.cls
             apex: insertCourseOfferings();
 
     deploy_hed_data_2:
@@ -276,8 +276,8 @@ tasks:
         options:
             randomize_username: True
             data_files: # Order matters
-                - "datasets/enablement/hed/course_connections.json"
-                - "datasets/enablement/hed/course_offering_schedules.json"
+                - "datasets/hed/course_connections.json"
+                - "datasets/hed/course_offering_schedules.json"
 
     upload_photo_adam:
         group: 'SAL: HED Config'
@@ -286,7 +286,7 @@ tasks:
         ui_options:
             name: Express Setup - Sample Advisor Photo
         options:
-            photo: datasets/enablement/user_photos/adam.png
+            photo: datasets/user_photos/adam.png
             where: (Alias = 'advisor')
 
     upload_photo_sophia:
@@ -296,7 +296,7 @@ tasks:
         ui_options:
             name: Express Setup - Sample Advisee Photo
         options:
-            photo: datasets/enablement/user_photos/sophia_student.png
+            photo: datasets/user_photos/sophia_student.png
             where: Alias = 'sophia' AND IsActive = true
 
     insert_hed_availability:
@@ -306,7 +306,7 @@ tasks:
         ui_options:
             name: Express Setup - Sample Data for Advising Availability
         options:
-            path: scripts/enablement/event_availability_series.cls
+            path: scripts/public/event_availability_series.cls
             apex: insertEvents();
 
     schedule_hed_apex_last_appt:
@@ -476,6 +476,8 @@ plans:
                     deploy_hed_data_1:
                         managed: True
                     deploy_hed_data_2:
+                        managed: True
+                    insert_hed_availability:
                         managed: True
                     schedule_hed_apex_last_appt:
                         managed: True
