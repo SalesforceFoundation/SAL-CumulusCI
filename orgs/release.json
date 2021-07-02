@@ -1,6 +1,6 @@
 {
   "edition": "Partner Enterprise",
-  "features": ["Communities","FeatureParameterLicensing", "LightningServiceConsole"],
+  "features": ["Communities","FeatureParameterLicensing", "LightningServiceConsole","ADVISORLINKFEATURE"],
   "orgName": "SAL - Release Test Org",
   "hasSampleData": "true",
   "settings": {
@@ -8,7 +8,8 @@
       "enableChatter": true
     },
     "communitiesSettings": {
-      "enableNetworksEnabled": true
+      "enableNetworksEnabled": true,
+      "enableOotbProfExtUserOpsEnable": true
     },
     "enhancedNotesSettings": {
       "enableEnhancedNotes": true

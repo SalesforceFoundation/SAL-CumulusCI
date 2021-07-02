@@ -311,6 +311,18 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>%%%NAMESPACE%%%AppointmentSchedulerController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%AppointmentSchedulerLookupResult</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%AppointmentSchedulerViewModel</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>%%%NAMESPACE%%%AppointmentCreatePromptController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -344,14 +356,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>%%%NAMESPACE%%%AppointmentMapper</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>%%%NAMESPACE%%%AppointmentMapperCustom</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>%%%NAMESPACE%%%AppointmentMapperCustom_TEST</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -844,6 +848,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>%%%NAMESPACE%%%Recurrence_TEST</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%ReleaseGateController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>

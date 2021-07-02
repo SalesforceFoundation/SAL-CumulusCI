@@ -1,6 +1,6 @@
 {
   "edition": "Partner Developer",
-  "features": ["Communities","FeatureParameterLicensing"],
+  "features": ["Communities","FeatureParameterLicensing","ADVISORLINKFEATURE"],
   "instance": "CS46",
   "orgName": "SAL - Prerelease Dev Workspace",
   "hasSampleData": "true",
@@ -9,7 +9,8 @@
       "enableChatter": true
     },
     "communitiesSettings": {
-      "enableNetworksEnabled": true
+      "enableNetworksEnabled": true,
+      "enableOotbProfExtUserOpsEnable": true
     },
     "enhancedNotesSettings": {
       "enableEnhancedNotes": true

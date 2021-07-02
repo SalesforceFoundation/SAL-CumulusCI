@@ -75,6 +75,18 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>%%%NAMESPACE%%%AppointmentSchedulerController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%AppointmentSchedulerLookupResult</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%AppointmentSchedulerViewModel</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>%%%NAMESPACE%%%ApplySuccessPlan</apexClass>
         <enabled>true</enabled>
     </classAccesses>

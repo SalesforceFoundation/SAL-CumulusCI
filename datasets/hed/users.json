@@ -48,14 +48,6 @@
         "Title": "Primary Academic Advisor",
         "TimeZoneSidKey": "America/Los_Angeles",
         "UserRoleId": "@{roles.records[0].Id}",
-        "RECEIVESINFOEMAILS": true,
-        "RECEIVESADMININFOEMAILS": true,
-        "USERPERMISSIONSSFCONTENTUSER": false,
-        "USERPERMISSIONSSUPPORTUSER": true,
-        "USERPREFERENCESCONTENTNOEMAIL": true,
-        "USERPREFERENCESCONTENTEMAILASANDWHEN": true,
-        "USERPREFERENCESSHOWTITLETOGUESTUSERS": true,
-        "DEFAULTGROUPNOTIFICATIONFREQUENCY": "N",
         "Username": "advisor@connected.edu",
         "CommunityNickname": "advisor"
       }

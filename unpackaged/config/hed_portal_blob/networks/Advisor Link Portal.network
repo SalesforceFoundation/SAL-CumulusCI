@@ -28,9 +28,7 @@
     <gatherCustomerSentimentData>false</gatherCustomerSentimentData>
     <networkMemberGroups>
         <profile>admin</profile>
-        <profile>advisor link advisee login</profile>
         <profile>advisor link advisor</profile>
-        <profile>advisor link advisee</profile>
     </networkMemberGroups>
     <networkPageOverrides>
         <changePasswordPageOverrideSetting>Standard</changePasswordPageOverrideSetting>

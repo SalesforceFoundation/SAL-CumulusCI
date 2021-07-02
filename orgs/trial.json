@@ -6,7 +6,8 @@
       "enableChatter": true
     },
     "communitiesSettings": {
-      "enableNetworksEnabled": true
+      "enableNetworksEnabled": true,
+      "enableOotbProfExtUserOpsEnable": true
     },
     "enhancedNotesSettings": {
       "enableEnhancedNotes": true

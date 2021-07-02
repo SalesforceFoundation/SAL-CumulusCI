@@ -60,6 +60,11 @@ public static void insertHedSettings() {
 
 //set the configuration for K-12 Architecture Kit
 public static void insertK12KitSettings() {
+    %%%NAMESPACE%%%Sal_Settings__c settings = %%%NAMESPACE%%%Sal_Settings__c.getOrgDefaults();
+    settings.put('%%%NAMESPACE%%%AdviseeSnapshotHeadlineFields__c', 1);
+    settings.put('%%%NAMESPACE%%%AdviseeSnapshotUseFieldSet__c', true);
+    upsert settings;
+
     initializeK12KitSettings();
     enableCourseConnections();
 }

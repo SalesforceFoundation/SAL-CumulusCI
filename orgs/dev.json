@@ -1,6 +1,6 @@
 {
   "edition": "Partner Developer",
-  "features": ["Communities","FeatureParameterLicensing"],
+  "features": ["Communities","FeatureParameterLicensing","ADVISORLINKFEATURE"],
   "orgName": "SAL - Dev Workspace",
   "hasSampleData": "true",
   "settings": {
@@ -8,7 +8,8 @@
       "enableChatter": true
     },
     "communitiesSettings": {
-      "enableNetworksEnabled": true
+      "enableNetworksEnabled": true,
+      "enableOotbProfExtUserOpsEnable": true
     },
     "enhancedNotesSettings": {
       "enableEnhancedNotes": true
