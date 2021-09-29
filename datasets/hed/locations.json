@@ -1,0 +1,86 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+User+WHERE+Name+=+'Adam Advisor'",
+        "referenceId": "users"
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%AppointmentLocation__c",
+        "referenceId": "adamInPerson",
+        "body": {
+          "Name": "My Office",
+          "OwnerId": "@{users.records[0].Id}",
+          "%%%NAMESPACE%%%Type__c": "In Person",
+          "%%%NAMESPACE%%%Building__c": "Advising Office",
+          "%%%NAMESPACE%%%Campus__c": "Main Campus",
+          "%%%NAMESPACE%%%Room__c": "123",
+          "%%%NAMESPACE%%%AdditionalDetails__c": "Please remember student ID to enter building"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%AppointmentLocation__c",
+        "referenceId": "adamPhone",
+        "body": {
+          "Name": "My Office Line",
+          "OwnerId": "@{users.records[0].Id}",
+          "%%%NAMESPACE%%%Phone__c": "123-123-1234",
+          "%%%NAMESPACE%%%Type__c": "Phone",
+          "%%%NAMESPACE%%%AdditionalDetails__c": "Please call at time of meeting"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%AppointmentLocation__c",
+        "referenceId": "adamVirtual",
+        "body": {
+          "Name": "Web Meeting",
+          "OwnerId": "@{users.records[0].Id}",
+          "%%%NAMESPACE%%%Type__c": "Virtual",
+          "%%%NAMESPACE%%%AdditionalDetails__c": "Join through link at time of meeting",
+          "%%%NAMESPACE%%%MeetingLink__c": "http://www.salesforce.org"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%AppointmentLocation__c",
+        "referenceId": "adminInPerson",
+        "body": {
+          "Name": "My Office",
+          "OwnerId": "%%%USERID%%%",
+          "%%%NAMESPACE%%%Type__c": "In Person",
+          "%%%NAMESPACE%%%Building__c": "Student Center",
+          "%%%NAMESPACE%%%Campus__c": "South Campus",
+          "%%%NAMESPACE%%%Room__c": "123",
+          "%%%NAMESPACE%%%AdditionalDetails__c": "Please remember student ID to enter building"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%AppointmentLocation__c",
+        "referenceId": "adminPhone",
+        "body": {
+          "Name": "My Office Line",
+          "OwnerId": "%%%USERID%%%",
+          "%%%NAMESPACE%%%Phone__c": "123-123-1234",
+          "%%%NAMESPACE%%%Type__c": "Phone",
+          "%%%NAMESPACE%%%AdditionalDetails__c": "Please call at time of meeting"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%AppointmentLocation__c",
+        "referenceId": "adminVirtual",
+        "body": {
+          "Name": "Web Meeting",
+          "OwnerId": "%%%USERID%%%",
+          "%%%NAMESPACE%%%Type__c": "Virtual",
+          "%%%NAMESPACE%%%AdditionalDetails__c": "Join through link at time of meeting",
+          "%%%NAMESPACE%%%MeetingLink__c": "http://www.salesforce.org"
+        }
+      }
+    ]
+  }

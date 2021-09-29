@@ -1,7 +1,7 @@
 {
   "edition": "Partner Developer",
   "features": ["Communities","FeatureParameterLicensing","ADVISORLINKFEATURE"],
-  "instance": "CS46",
+  "instance": "CS49",
   "orgName": "SAL - Prerelease Dev Workspace",
   "hasSampleData": "true",
   "settings": {
