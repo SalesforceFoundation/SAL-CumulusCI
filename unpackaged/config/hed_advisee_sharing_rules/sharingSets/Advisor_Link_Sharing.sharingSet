@@ -13,7 +13,7 @@
         <userField>Contact</userField>
     </accessMappings>
     <description>Provides students with access to see Cases and Course Connections they&apos;re associated with.</description>
-    <name>Advisor Link Sharing</name>
-    <profiles>Advisor Link Advisee</profiles>
-    <profiles>Advisor Link Advisee Login</profiles>
+    <name>Student Success Hub Sharing</name>
+    <profiles>SSH Sample Student Profile</profiles>
+    <profiles>SSH Sample Student Login Profile</profiles>
 </SharingSet>

@@ -1,0 +1,91 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+DeveloperName+=+'Attendance'+AND+SobjectType+=+'%%%NAMESPACE%%%SuccessPlanTemplate__c'",
+      "referenceId": "attendanceRT"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplate__c",
+      "referenceId": "attendTemplate",
+      "body": {
+        "Name": "Attendance Support",
+        "%%%NAMESPACE%%%Comments__c": "Intervention plan to support students who are at risk of chronic absenteeism.",
+        "%%%NAMESPACE%%%Active__c": true,
+        "RecordTypeId": "@{attendanceRT.records[0].Id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask1",
+      "body": {
+        "Name": "Review weekly attendance reports",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{attendTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 2,
+        "%%%NAMESPACE%%%Type__c": "To Do",
+        "%%%NAMESPACE%%%Comments__c": "Monitor absences in weekly reporting to ensure student is staying on track."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask2",
+      "body": {
+        "Name": "Meet with family & identify barriers",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "High",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{attendTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 5,
+        "%%%NAMESPACE%%%Type__c": "Meeting",
+        "%%%NAMESPACE%%%Comments__c": "Determine underlying barriers to attendance, such as health concerns or transportation needs."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask3",
+      "body": {
+        "Name": "Coordinate wraparound support services",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "High",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{attendTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 7,
+        "%%%NAMESPACE%%%Type__c": "To Do",
+        "%%%NAMESPACE%%%Comments__c": "Review community providers and refer families to appropriate support services."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask4",
+      "body": {
+        "Name": "Determine academic tutoring needs",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{attendTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 10,
+        "%%%NAMESPACE%%%Type__c": "Action Item",
+        "%%%NAMESPACE%%%Comments__c": "Ensure the student has the necessary support to make up assignments and get their grades back on track."
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%SuccessPlanTemplateTask__c",
+      "referenceId": "templateTask5",
+      "body": {
+        "Name": "Schedule regular family check-ins",
+        "%%%NAMESPACE%%%Active__c": true,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{attendTemplate.id}",
+        "%%%NAMESPACE%%%RelativeDueDate__c": 14,
+        "%%%NAMESPACE%%%Type__c": "Meeting",
+        "%%%NAMESPACE%%%Comments__c": "Maintan regular contact with the family to ensure they are supported and receiving necessary support."
+      }
+    }
+  ]
+}

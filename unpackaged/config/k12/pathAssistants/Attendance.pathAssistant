@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>%%%NAMESPACE%%%Alert__c</entityName>
+    <fieldName>%%%NAMESPACE%%%Status__c</fieldName>
+    <masterLabel>Attendance [sample]</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>%%%NAMESPACE%%%Advisee__c</fieldNames>
+        <fieldNames>OwnerId</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Priority__c</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Status__c</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Reason__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: medium; font-family: -webkit-standard;&quot;&gt;Please review recent interactions on the student’s case record and notify parents if needed.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Acknowledged: In Progress</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>%%%NAMESPACE%%%Advisee__c</fieldNames>
+        <fieldNames>OwnerId</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Priority__c</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Status__c</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Reason__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: medium; font-family: -webkit-standard;&quot;&gt;Please reassign the owner at this stage, if necessary. Don’t forget to add any important details in the Comments.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Acknowledged: Redirected</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>%%%NAMESPACE%%%Advisee__c</fieldNames>
+        <fieldNames>OwnerId</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Priority__c</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Status__c</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Reason__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: medium; font-family: -webkit-standard;&quot;&gt;Thank you for resolving this attendance alert and supporting this student. &lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Closed: Action Taken</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>%%%NAMESPACE%%%Advisee__c</fieldNames>
+        <fieldNames>OwnerId</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Priority__c</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Status__c</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Reason__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: medium; font-family: -webkit-standard;&quot;&gt;Thank you for closing out this alert. Please leave a note in the Comments as to why this required no further action.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>Closed: No Action Needed</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>%%%NAMESPACE%%%Advisee__c</fieldNames>
+        <fieldNames>OwnerId</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Priority__c</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Status__c</fieldNames>
+        <fieldNames>%%%NAMESPACE%%%Reason__c</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: medium; font-family: -webkit-standard;&quot;&gt;As a first step, please review this student’s overall attendance.&lt;/span&gt;&lt;/p&gt;</info>
+        <picklistValueName>New</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>Attendance</recordTypeName>
+</PathAssistant>

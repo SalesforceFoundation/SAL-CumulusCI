@@ -89,7 +89,7 @@
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Advising Pool</masterLabel>
+    <masterLabel>Support Pool</masterLabel>
     <sobjectType>%%%NAMESPACE%%%AdvisingPool__c</sobjectType>
     <template>
         <name>flexipage:recordHomeTemplateDesktop</name>

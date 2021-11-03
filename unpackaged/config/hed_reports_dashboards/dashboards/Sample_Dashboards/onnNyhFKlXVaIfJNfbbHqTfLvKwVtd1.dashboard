@@ -18,7 +18,7 @@
                 </chartSummary>
                 <componentType>Metric</componentType>
                 <displayUnits>Integer</displayUnits>
-                <header>My Advisee Case Load</header>
+                <header>My Student Caseload</header>
                 <indicatorBreakpoint1>100.0</indicatorBreakpoint1>
                 <indicatorBreakpoint2>200.0</indicatorBreakpoint2>
                 <indicatorHighColor>#004080</indicatorHighColor>
@@ -40,7 +40,7 @@
                 </chartSummary>
                 <componentType>Metric</componentType>
                 <displayUnits>Integer</displayUnits>
-                <header>My Advisees&apos; Unresolved Alerts</header>
+                <header>My Students&apos; Unresolved Alerts</header>
                 <indicatorBreakpoint1>30.0</indicatorBreakpoint1>
                 <indicatorBreakpoint2>60.0</indicatorBreakpoint2>
                 <indicatorHighColor>#B70000</indicatorHighColor>
@@ -282,7 +282,7 @@
                 <enableHover>false</enableHover>
                 <expandOthers>true</expandOthers>
                 <groupingColumn>Case.%%%NAMESPACE%%%Alerts__r$RecordType</groupingColumn>
-                <header>My Advisees&apos; Unresolved Alerts</header>
+                <header>My Students&apos; Unresolved Alerts</header>
                 <legendPosition>Right</legendPosition>
                 <report>Sample_Alert_Reports/Unresolved_Alerts_for_My_Advisees</report>
                 <showPercentage>false</showPercentage>
@@ -341,7 +341,7 @@
                 <enableHover>false</enableHover>
                 <expandOthers>true</expandOthers>
                 <groupingColumn>Case.%%%NAMESPACE%%%Alerts__r$%%%NAMESPACE%%%Priority__c</groupingColumn>
-                <header>My Advisees&apos; Unresolved Alerts</header>
+                <header>My Students&apos; Unresolved Alerts</header>
                 <legendPosition>Right</legendPosition>
                 <report>Sample_Alert_Reports/Unresolved_Alerts_for_My_Advisees</report>
                 <showPercentage>false</showPercentage>
@@ -401,7 +401,7 @@
                 <expandOthers>false</expandOthers>
                 <groupingColumn>Case.%%%NAMESPACE%%%Alerts__r$RecordType</groupingColumn>
                 <groupingColumn>Case.%%%NAMESPACE%%%Alerts__r$%%%NAMESPACE%%%Priority__c</groupingColumn>
-                <header>My Advisees&apos; Unresolved Alerts</header>
+                <header>My Students&apos; Unresolved Alerts</header>
                 <legendPosition>Right</legendPosition>
                 <report>Sample_Alert_Reports/Unresolved_Alerts_for_My_Advisees</report>
                 <showPercentage>false</showPercentage>
@@ -429,7 +429,7 @@
                 <drillToDetailEnabled>false</drillToDetailEnabled>
                 <enableHover>false</enableHover>
                 <expandOthers>false</expandOthers>
-                <footer>Maximum 25 advisees</footer>
+                <footer>Maximum 25 students</footer>
                 <groupingColumn>%%%NAMESPACE%%%Alert__c.%%%NAMESPACE%%%Advisee__c</groupingColumn>
                 <groupingColumn>%%%NAMESPACE%%%Alert__c.%%%NAMESPACE%%%Priority__c</groupingColumn>
                 <header>My Unresolved Alerts</header>
@@ -439,7 +439,7 @@
                 <showPercentage>false</showPercentage>
                 <showValues>false</showValues>
                 <sortBy>RowValueDescending</sortBy>
-                <title>Advisees with Most Alerts, By Priority</title>
+                <title>Students with Most Alerts, by Priority</title>
                 <useReportChart>false</useReportChart>
             </dashboardComponent>
             <rowIndex>22</rowIndex>
@@ -460,17 +460,17 @@
                 <drillToDetailEnabled>false</drillToDetailEnabled>
                 <enableHover>false</enableHover>
                 <expandOthers>false</expandOthers>
-                <footer>Maximum 25 advisees</footer>
+                <footer>Maximum 25 students</footer>
                 <groupingColumn>Case$Contact</groupingColumn>
                 <groupingColumn>Case.%%%NAMESPACE%%%Alerts__r$%%%NAMESPACE%%%Priority__c</groupingColumn>
-                <header>My Advisees&apos; Unresolved Alerts</header>
+                <header>My Students&apos; Unresolved Alerts</header>
                 <legendPosition>Right</legendPosition>
                 <maxValuesDisplayed>25</maxValuesDisplayed>
                 <report>Sample_Alert_Reports/Unresolved_Alerts_for_My_Advisees</report>
                 <showPercentage>false</showPercentage>
                 <showValues>false</showValues>
                 <sortBy>RowValueDescending</sortBy>
-                <title>Advisees with Most Alerts, By Priority</title>
+                <title>Students with Most Alerts, by Priority</title>
                 <useReportChart>false</useReportChart>
             </dashboardComponent>
             <rowIndex>22</rowIndex>
@@ -480,7 +480,7 @@
         <rowHeight>80</rowHeight>
     </dashboardGridLayout>
     <dashboardType>LoggedInUser</dashboardType>
-    <description>Keep tabs on the Alerts assigned to you and your advisees.</description>
+    <description>Keep up with the Alerts assigned to you and your students.</description>
     <isGridLayout>true</isGridLayout>
     <textColor>#000000</textColor>
     <title>Alerts Dashboard</title>

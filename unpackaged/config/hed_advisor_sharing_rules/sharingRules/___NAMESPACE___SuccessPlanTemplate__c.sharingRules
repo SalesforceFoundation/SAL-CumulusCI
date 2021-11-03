@@ -3,8 +3,8 @@
     <sharingOwnerRules>
         <fullName>Share_Success_Plan_Templates_with_Advisors</fullName>
         <accessLevel>Read</accessLevel>
-        <description>Share all Success Plan Templates with Advisor Role</description>
-        <label>Share Success Plans with Advisors</label>
+        <description>Share all Success Plan Templates with Advisor role.</description>
+        <label>Share Success Plan Templates with Advisors</label>
         <sharedTo>
             <role>Advisor</role>
         </sharedTo>

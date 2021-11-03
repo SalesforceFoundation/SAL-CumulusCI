@@ -3,7 +3,7 @@
     <active>true</active>
     <entityName>Case</entityName>
     <fieldName>Status</fieldName>
-    <masterLabel>SAL Queue Case Status</masterLabel>
+    <masterLabel>SSH Queue Case Status</masterLabel>
     <pathAssistantSteps>
         <picklistValueName>Queued</picklistValueName>
     </pathAssistantSteps>

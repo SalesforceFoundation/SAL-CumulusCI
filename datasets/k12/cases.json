@@ -1,0 +1,51 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+User+WHERE+Alias+IN+('admin','couns')+ORDER+BY+Alias",
+        "referenceId": "users"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+DeveloperName+IN+('StudentRecord')+ORDER+BY+Name",
+        "referenceId": "caseRecordTypes"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+CaseTeamTemplate+WHERE+Name+=+'Student+Success+Team'",
+        "referenceId": "caseTeamTemplate"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+CaseTeamRole+WHERE+Name+=+'Counselor'",
+        "referenceId": "caseTeamRoles"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id,+AccountId+FROM+Contact+WHERE+Email+=+'elijah@valleyhigh.edu'",
+        "referenceId": "student"
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/Case",
+        "referenceId": "case",
+        "body": {
+          "ContactId": "@{student.records[0].Id}",
+          "AccountId": "@{student.records[0].AccountId}",
+          "Subject": "Elijah Espozito Student Record",
+          "Status": "Active Enrolled",
+          "RecordTypeId": "@{caseRecordTypes.records[0].Id}"
+        }
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/CaseTeamTemplateRecord",
+        "referenceId": "caseTeamTemplateRecord",
+        "body": {
+          "ParentId": "@{case.id}",
+          "TeamTemplateId": "@{caseTeamTemplate.records[0].Id}"
+        }
+      }
+    ]
+  }

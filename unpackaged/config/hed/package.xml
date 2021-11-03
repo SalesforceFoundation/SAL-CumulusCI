@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>Case.Advisee Record</members>
-        <members>Case.Advising Queue</members>
+        <members>Case.Student Record</members>
+        <members>Case.Support Queue</members>
         <name>BusinessProcess</name>
     </types>
     <types>
@@ -43,56 +43,56 @@
         <name>Flow</name>
     </types>
     <types>
-        <members>%%%NAMESPACE%%%AdvisingPool__c-%%%NAMESPACE%%%Advising Pool Layout</members>
-        <members>%%%NAMESPACE%%%AdvisingPool__c-Advising Pool Layout - Advisee</members>
+        <members>%%%NAMESPACE%%%AdvisingPool__c-%%%NAMESPACE%%%Support Pool Layout</members>
+        <members>%%%NAMESPACE%%%AdvisingPool__c-Support Pool Layout - Student</members>
         <members>%%%NAMESPACE%%%Alert__c-%%%NAMESPACE%%%Alert Layout</members>
         <members>%%%NAMESPACE%%%AppointmentAttendee__c-%%%NAMESPACE%%%Appointment Attendee Layout</members>
-        <members>%%%NAMESPACE%%%AppointmentAttendee__c-Appointment Attendee Layout - Advisee</members>
+        <members>%%%NAMESPACE%%%AppointmentAttendee__c-Appointment Attendee Layout - Student</members>
         <members>%%%NAMESPACE%%%Appointment__c-%%%NAMESPACE%%%Appointment Layout</members>
-        <members>%%%NAMESPACE%%%Appointment__c-Appointment Layout - Advisee</members>
+        <members>%%%NAMESPACE%%%Appointment__c-Appointment Layout - Student</members>
         <members>%%%NAMESPACE%%%QueueTopicSetting__c-%%%NAMESPACE%%%Queue Topic Setting Layout</members>
         <members>%%%NAMESPACE%%%QueueWaitingRoomResource__c-%%%NAMESPACE%%%Queue Waiting Room Resource Layout</members>
         <members>%%%NAMESPACE%%%RoleTopicSetting__c-%%%NAMESPACE%%%Role Topic Layout</members>
-        <members>%%%NAMESPACE%%%RoleTopicSetting__c-Role Topic Layout - Advisee</members>
+        <members>%%%NAMESPACE%%%RoleTopicSetting__c-Role Topic Layout - Student</members>
         <members>%%%NAMESPACE%%%SuccessPlanTemplateTask__c-%%%NAMESPACE%%%Success Plan Template Task Layout</members>
         <members>%%%NAMESPACE%%%SuccessPlanTemplate__c-%%%NAMESPACE%%%Success Plan Template Layout</members>
         <members>%%%NAMESPACE%%%SuccessPlan__c-%%%NAMESPACE%%%Success Plan Layout</members>
-        <members>%%%NAMESPACE%%%SuccessPlan__c-Success Plan Layout - Advisee</members>
+        <members>%%%NAMESPACE%%%SuccessPlan__c-Success Plan Layout - Student</members>
         <members>%%%NAMESPACE%%%Topic__c-%%%NAMESPACE%%%Topic Layout</members>
-        <members>%%%NAMESPACE%%%Topic__c-Topic Layout - Advisee</members>
+        <members>%%%NAMESPACE%%%Topic__c-Topic Layout - Student</members>
         <members>%%%NAMESPACE%%%UserTopicSetting__c-%%%NAMESPACE%%%User Topic Setting Layout</members>
-        <members>%%%NAMESPACE%%%UserTopicSetting__c-User Topic Setting Layout - Advisee</members>
-        <members>Account-Account Layout - Advisee</members>
+        <members>%%%NAMESPACE%%%UserTopicSetting__c-User Topic Setting Layout - Student</members>
+        <members>Account-Account Layout - Student</members>
         <members>Account-Administrative Account Layout</members>
-        <members>Case-Advisee Record Case Layout</members>
-        <members>Case-Advising Queue Case Layout</members>
+        <members>Case-Student Record Case Layout</members>
+        <members>Case-Support Queue Case Layout</members>
         <members>Case-Case Layout</members>
-        <members>Case-Case Layout - Advisee</members>
-        <members>Contact-Advising Contact Layout</members>
-        <members>Contact-Contact Layout - Advisee</members>
-        <members>Event-Advising Event Layout</members>
-        <members>Event-Advising Time Layout</members>
-        <members>Event-Event Layout - Advisee</members>
-        <members>Task-Task Layout - Advisee</members>
-        <members>User-User Layout - Advisee</members>
+        <members>Case-Case Layout - Student</members>
+        <members>Contact-Support Contact Layout</members>
+        <members>Contact-Contact Layout - Student</members>
+        <members>Event-Support Event Layout</members>
+        <members>Event-Support Time Layout</members>
+        <members>Event-Event Layout - Student</members>
+        <members>Task-Task Layout - Student</members>
+        <members>User-User Layout - Student</members>
         <members>hed__Affiliation__c-Affiliation Layout</members>
         <members>hed__Course_Enrollment__c-Course Connection Layout</members>
-        <members>hed__Course_Enrollment__c-Course Connection Layout - Advisee</members>
+        <members>hed__Course_Enrollment__c-Course Connection Layout - Student</members>
         <members>hed__Course_Offering_Schedule__c-Course Offering Schedule Layout</members>
-        <members>hed__Course_Offering_Schedule__c-Course Offering Schedule Layout - Advisee</members>
+        <members>hed__Course_Offering_Schedule__c-Course Offering Schedule Layout - Student</members>
         <members>hed__Course_Offering__c-Course Offering Layout</members>
-        <members>hed__Course_Offering__c-Course Offering Layout - Advisee</members>
+        <members>hed__Course_Offering__c-Course Offering Layout - Student</members>
         <members>hed__Course__c-Course Layout</members>
-        <members>hed__Course__c-Course Layout - Advisee</members>
+        <members>hed__Course__c-Course Layout - Student</members>
         <members>hed__Facility__c-Facility Layout</members>
-        <members>hed__Facility__c-Facility Layout - Advisee</members>
+        <members>hed__Facility__c-Facility Layout - Student</members>
         <members>hed__Plan_Requirement__c-Plan Requirement Layout</members>
         <members>hed__Program_Enrollment__c-Program Enrollment Layout</members>
-        <members>hed__Program_Enrollment__c-Program Enrollment Layout - Advisee</members>
+        <members>hed__Program_Enrollment__c-Program Enrollment Layout - Student</members>
         <members>hed__Program_Plan__c-Program Plan Layout</members>
         <members>hed__Relationship__c-Relationship Layout</members>
         <members>hed__Term__c-Term Layout</members>
-        <members>hed__Term__c-Term Layout - Advisee</members>
+        <members>hed__Term__c-Term Layout - Student</members>
         <name>Layout</name>
     </types>
     <types>

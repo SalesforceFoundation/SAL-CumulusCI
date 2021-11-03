@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Queued</masterLabel>
+        <translation>En cua</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Ready</masterLabel>
+        <translation>Llest</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Abandoned</masterLabel>
+        <translation>Abandonat</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Referred</masterLabel>
+        <translation>Derivat</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Fulfilled</masterLabel>
+        <translation>Completat</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>New</masterLabel>
+        <translation>Nou</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Working</masterLabel>
+        <translation>Treballant</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Closed</masterLabel>
+        <translation>Tancat</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Active Enrolled</masterLabel>
+        <translation>Actiu inscrit</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Active Unenrolled</masterLabel>
+        <translation>Actiu no inscrit</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>On Leave</masterLabel>
+        <translation>De baixa</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>On Vacation</masterLabel>
+        <translation>De vacances</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>On Co-op</masterLabel>
+        <translation>De cooperativa</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>On Hold</masterLabel>
+        <translation>En espera</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Inactive</masterLabel>
+        <translation>Inactiu</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Withdrawn</masterLabel>
+        <translation>Retirat</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Graduated</masterLabel>
+        <translation>Graduat</translation>
+    </valueTranslation>
+</StandardValueSetTranslation>

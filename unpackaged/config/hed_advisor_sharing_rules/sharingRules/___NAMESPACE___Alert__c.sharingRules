@@ -3,7 +3,7 @@
     <sharingOwnerRules>
         <fullName>Share_Alerts_with_Advisors</fullName>
         <accessLevel>Edit</accessLevel>
-        <description>Share all Alerts with advisor role.</description>
+        <description>Share all Alerts with Advisor role.</description>
         <label>Share Alerts with Advisors</label>
         <sharedTo>
             <role>Advisor</role>

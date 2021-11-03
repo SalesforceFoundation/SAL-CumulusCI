@@ -1,0 +1,45 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Profile+WHERE+Name+IN+('Support+Staff+Profile')+ORDER+BY+Name",
+      "referenceId": "profiles"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+UserRole+WHERE+DeveloperName+IN+('Counselor')+ORDER+BY+DeveloperName",
+      "referenceId": "counselorRole"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/User",
+      "referenceId": "devi",
+      "body": {
+        "FirstName": "Devi",
+        "LastName": "Gill",
+        "Alias": "couns",
+        "City": "San Francisco",
+        "CommunityNickname": "counsel",
+        "Country": "USA",
+        "DefaultGroupNotificationFrequency": "N",
+        "Email": "devi@valleyhigh.edu",
+        "EmailEncodingKey": "ISO-8859-1",
+        "LanguageLocaleKey": "en_US",
+        "LocaleSidKey": "en_US",
+        "PostalCode": "94105",
+        "ProfileId": "@{profiles.records[0].Id}",
+        "ReceivesAdminInfoEmails": true,
+        "ReceivesInfoEmails": true,
+        "State": "CA",
+        "Street": "1 Market Street",
+        "TimeZoneSidKey": "America/Los_Angeles",
+        "Username": "devi@valleyhighconnected.edu",
+        "UserRoleId": "@{counselorRole.records[0].Id}",
+        "UserPermissionsSFContentUser": false,
+        "UserPermissionsSupportUser": true,
+        "UserPreferencesShowTitleToGuestUsers": true
+      }
+    }
+  ]
+}

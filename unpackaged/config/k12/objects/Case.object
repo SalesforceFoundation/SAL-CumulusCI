@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <businessProcesses>
+        <fullName>Student Record</fullName>
+        <description>The support process for Student Record Cases used in Student Success Hub.</description>
+        <isActive>true</isActive>
+        <values>
+            <fullName>Active Enrolled</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>On Leave</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>On Hold</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Inactive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Withdrawn</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Graduated</fullName>
+            <default>false</default>
+        </values>
+    </businessProcesses>
+    <compactLayouts>
+        <fullName>Student_Record</fullName>
+        <fields>Subject</fields>
+        <fields>Status</fields>
+        <fields>LastModifiedById</fields>
+        <label>Student Record</label>
+    </compactLayouts>
+    <fieldSets>
+        <fullName>%%%NAMESPACE%%%CaseAdviseeSnapshotDetails</fullName>
+        <description>The fields that show on the Student Snapshot on the Student Record Case page.</description>
+        <displayedFields>
+            <field>AccountId</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Status</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Contact.Email</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Student Snapshot Details</label>
+    </fieldSets>
+    <listViews>
+        <fullName>MyStudents</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Team</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.StudentRecord</value>
+        </filters>
+        <filters>
+            <field>CASES.CLOSED</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>My Students</label>
+    </listViews>
+    <recordTypes>
+        <description>The record type used for student records. This Case holds all support-related data for a student, such as Alerts, Success Plans and Notes.</description>
+        <fullName>StudentRecord</fullName>
+        <active>true</active>
+        <businessProcess>Student Record</businessProcess>
+        <compactLayoutAssignment>Student_Record</compactLayoutAssignment>
+        <label>Student Record</label>
+    </recordTypes>
+</CustomObject>

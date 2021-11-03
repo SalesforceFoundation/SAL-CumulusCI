@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Share_Success_Plans_with_Counselors</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Share all Success Plans with Counselor Role</description>
+        <label>Share Success Plans with Counselors</label>
+        <sharedTo>
+            <role>Counselor</role>
+        </sharedTo>
+        <sharedFrom>
+            <allInternalUsers/>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

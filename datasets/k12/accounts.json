@@ -1,0 +1,50 @@
+
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+SobjectType+=+'Account' AND DeveloperName = 'Educational_Institution'",
+      "referenceId": "schoolRt"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/Account",
+      "referenceId": "district",
+      "body": {
+        "Name": "Valley School District",
+        "RecordTypeId": "@{schoolRt.records[0].Id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/Account",
+      "referenceId": "vhs",
+      "body": {
+        "Name": "Valley High School",
+        "RecordTypeId": "@{schoolRt.records[0].Id}",
+        "ParentId": "@{district.id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/Account",
+      "referenceId": "vms",
+      "body": {
+        "Name": "Valley Middle School",
+        "RecordTypeId": "@{schoolRt.records[0].Id}",
+        "ParentId": "@{district.id}"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/Account",
+      "referenceId": "ves",
+      "body": {
+        "Name": "Valley Elementary School",
+        "RecordTypeId": "@{schoolRt.records[0].Id}",
+        "ParentId": "@{district.id}"
+      }
+    }
+  ]
+}

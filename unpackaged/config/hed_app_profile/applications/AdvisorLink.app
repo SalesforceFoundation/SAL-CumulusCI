@@ -3,9 +3,9 @@
     <brand>
         <headerColor>#0070D2</headerColor>
     </brand>
-    <description>Salesforce.org Advisor Link</description>
+    <description>Student Success Hub</description>
     <formFactors>Large</formFactors>
-    <label>Advisor Link</label>
+    <label>Student Success Hub</label>
     <navType>Console</navType>
     <profileActionOverrides>
         <actionName>View</actionName>
@@ -14,7 +14,7 @@
         <pageOrSobjectType>Case</pageOrSobjectType>
         <recordType>Case.%%%NAMESPACED_ORG%%%AdviseeRecord</recordType>
         <type>Flexipage</type>
-        <profile>Advisor Link Advisor</profile>
+        <profile>SSH Sample Higher Ed Staff Profile</profile>
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>
@@ -32,7 +32,7 @@
         <pageOrSobjectType>Case</pageOrSobjectType>
         <recordType>Case.%%%NAMESPACED_ORG%%%AdvisingQueue</recordType>
         <type>Flexipage</type>
-        <profile>Advisor Link Advisor</profile>
+        <profile>SSH Sample Higher Ed Staff Profile</profile>
     </profileActionOverrides>
     <profileActionOverrides>
         <actionName>View</actionName>

@@ -37,7 +37,7 @@
         <name>utilityItems</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Advisor Link UtilityBar</masterLabel>
+    <masterLabel>Student Success Hub Utility Bar</masterLabel>
     <template>
         <name>one:utilityBarTemplateDesktop</name>
     </template>

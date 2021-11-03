@@ -3,7 +3,7 @@
     <sharingOwnerRules>
         <fullName>Share_Success_Plans_with_Advisors</fullName>
         <accessLevel>Read</accessLevel>
-        <description>Share all Success Plans with Advisor Role</description>
+        <description>Share all Success Plans with Advisor role.</description>
         <label>Share Success Plans with Advisors</label>
         <sharedTo>
             <role>Advisor</role>

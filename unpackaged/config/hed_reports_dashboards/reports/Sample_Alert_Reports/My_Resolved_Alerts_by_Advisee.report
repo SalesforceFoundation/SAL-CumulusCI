@@ -24,7 +24,7 @@
     <columns>
         <field>CUST_CREATED_DATE</field>
     </columns>
-    <description>Resolved Alerts that I own, closed in the last 14 days, grouped by advisee.</description>
+    <description>Resolved Alerts that I own, closed in the last 14 days, grouped by student.</description>
     <filter>
         <criteriaItems>
             <column>FK_CASE_OPEN</column>
@@ -61,7 +61,7 @@
         <field>%%%NAMESPACE%%%Alert__c.%%%NAMESPACE%%%Priority__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>My Resolved Alerts by Advisee</name>
+    <name>My Resolved Alerts, by Student</name>
     <params>
         <name>co</name>
         <value>1</value>

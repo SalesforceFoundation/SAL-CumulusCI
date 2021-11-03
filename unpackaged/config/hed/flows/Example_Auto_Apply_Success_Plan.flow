@@ -127,7 +127,7 @@
             <label>Previously Met - Prev</label>
         </rules>
     </decisions>
-    <description>[Example] Automatically apply a Success Plan when an advisee&apos;s GPA drops below 2.0</description>
+    <description>[Example] Automatically apply a Success Plan when a student&apos;s GPA drops below 2.0.</description>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>

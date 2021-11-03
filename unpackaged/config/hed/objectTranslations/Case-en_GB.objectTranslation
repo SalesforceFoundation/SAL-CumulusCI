@@ -2,8 +2,8 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
   <recordTypes>
     <name>AdviseeRecord</name>
-    <label>Advisee Record</label>
-    <description>The record type used for advisee records. This Case holds holds all advising-related data for a student, such as notes, advising appointments, and Tasks.</description>
+    <label>Student Record</label>
+    <description>The record type used for student records. This Case holds all support-related data for a student, including notes, appointments, and Tasks.</description>
   </recordTypes>
   <recordTypes>
     <name>AdvisingQueue</name>

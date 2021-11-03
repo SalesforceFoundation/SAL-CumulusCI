@@ -47,7 +47,7 @@
             <processMetadataValues>
                 <name>leftHandSideLabel</name>
                 <value>
-                    <stringValue>Advisee Contact</stringValue>
+                    <stringValue>Student Contact</stringValue>
                 </value>
             </processMetadataValues>
             <processMetadataValues>
@@ -407,7 +407,7 @@
             <label>Previously Met - Prev</label>
         </rules>
     </decisions>
-    <description>[Example] Create an academic Alert when an advisee&apos;s GPA drops below 2.0</description>
+    <description>[Example] Create an academic Alert when a student&apos;s GPA drops below 2.0.</description>
     <formulas>
         <processMetadataValues>
             <name>originalFormula</name>

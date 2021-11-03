@@ -85,7 +85,7 @@
         <name>leftsidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Advising Alert</masterLabel>
+    <masterLabel>Support Alert</masterLabel>
     <sobjectType>%%%NAMESPACE%%%Alert__c</sobjectType>
     <template>
         <name>flexipage:recordHomeThreeColHeaderTemplateDesktop</name>

@@ -1083,14 +1083,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>%%%NAMESPACE%%%TopicMapperCustom</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>%%%NAMESPACE%%%TopicMapperCustom_TEST</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>%%%NAMESPACE%%%TopicMapperFactory</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1120,6 +1112,38 @@
     </classAccesses>
     <classAccesses>
         <apexClass>%%%NAMESPACE%%%adviseeAppts_CTRL_TEST</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%CasesFromAlertsController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+     <classAccesses>
+        <apexClass>%%%NAMESPACE%%%CasesFromAlertsController_TEST</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%CasesFromAlertsService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%CasesFromAlertsService_TEST</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%CasesFromAlertsMapperFactory</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%CasesFromAlertsMapperWinter22</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%CasesFromAlertsMapper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>%%%NAMESPACE%%%CasesFromAlertsMapper_TEST</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>
@@ -1564,6 +1588,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case.%%%NAMESPACE%%%Topic__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.%%%NAMESPACE%%%Alert__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3737,22 +3766,22 @@
         <layout>Case-Case Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Case-Advisee Record Case Layout</layout>
+        <layout>Case-Student Record Case Layout</layout>
         <recordType>Case.AdviseeRecord</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Case-Advising Queue Case Layout</layout>
+        <layout>Case-Support Queue Case Layout</layout>
         <recordType>Case.AdvisingQueue</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Advising Contact Layout</layout>
+        <layout>Contact-Support Contact Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Event-Advising Event Layout</layout>
+        <layout>Event-Support Event Layout</layout>
         <recordType>Event.AdvisingEvent</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Event-Advising Time Layout</layout>
+        <layout>Event-Support Time Layout</layout>
         <recordType>Event.AdvisingTime</recordType>
     </layoutAssignments>
     <layoutAssignments>
@@ -3808,7 +3837,7 @@
         <layout>hed__Term__c-Term Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>%%%NAMESPACE%%%AdvisingPool__c-%%%NAMESPACE%%%Advising Pool Layout</layout>
+        <layout>%%%NAMESPACE%%%AdvisingPool__c-%%%NAMESPACE%%%Support Pool Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>%%%NAMESPACE%%%Alert__c-%%%NAMESPACE%%%Alert Layout</layout>
@@ -4202,6 +4231,14 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>%%%NAMESPACE%%%SendEmailMassAction</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>%%%NAMESPACE%%%CreateCaseFromAlertMassAction</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>%%%NAMESPACE%%%ApplySuccessPlanTemplateMassActionAlerts</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <recordTypeVisibilities>

@@ -73,7 +73,6 @@
         <name>CustomMetadata</name>
     </types>
     <types>
-        <members>%%%NAMESPACE%%%SAL_Settings</members>
         <members>%%%NAMESPACE%%%SuccessPlanTemplate__c</members>
         <name>CustomTab</name>
     </types>

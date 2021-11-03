@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSetTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <valueTranslation>
+        <masterLabel>Call</masterLabel>
+        <translation>Llamada</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Meeting</masterLabel>
+        <translation>Reunión</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Other</masterLabel>
+        <translation>Otro</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Email</masterLabel>
+        <translation>Correo electrónico</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Action Item</masterLabel>
+        <translation>Elemento de acción</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Event</masterLabel>
+        <translation>Evento</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Form</masterLabel>
+        <translation>Formulario</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Research</masterLabel>
+        <translation>Investigación</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>To Do</masterLabel>
+        <translation>Por hacer</translation>
+    </valueTranslation>
+    <valueTranslation>
+        <masterLabel>Visit</masterLabel>
+        <translation>Visita</translation>
+    </valueTranslation>
+</StandardValueSetTranslation>

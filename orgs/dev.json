@@ -2,7 +2,6 @@
   "edition": "Partner Developer",
   "features": ["Communities","FeatureParameterLicensing","ADVISORLINKFEATURE"],
   "orgName": "SAL - Dev Workspace",
-  "release": "Preview",
   "hasSampleData": "true",
   "settings": {
     "chatterSettings": {

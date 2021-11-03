@@ -4,7 +4,7 @@
 
     {
       "method": "GET",
-      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Profile+WHERE+Name+IN+('Advisor+Link+Advisee','Advisor+Link+Advisor','System+Administrator')+ORDER+BY+Name",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+Profile+WHERE+Name+IN+('SSH+Sample+Student+Profile','SSH+Sample+Higher+Ed+Staff+Profile','System+Administrator')+ORDER+BY+Name",
       "referenceId": "profiles"
     },
     {
@@ -42,7 +42,7 @@
         "MobilePhone": "(650) 555-1212",
         "Phone": "(650) 555-1212",
         "PostalCode": "94105",
-        "ProfileId": "@{profiles.records[1].Id}",
+        "ProfileId": "@{profiles.records[0].Id}",
         "State": "CA",
         "Street": "1 Market Street",
         "Title": "Primary Academic Advisor",
@@ -70,7 +70,7 @@
         "MobilePhone": "(650) 555-1212",
         "Phone": "(650) 555-1212",
         "PostalCode": "94105",
-        "ProfileId": "@{profiles.records[0].Id}",
+        "ProfileId": "@{profiles.records[1].Id}",
         "State": "CA",
         "Street": "1 Market Street",
         "TimeZoneSidKey": "America/Los_Angeles",

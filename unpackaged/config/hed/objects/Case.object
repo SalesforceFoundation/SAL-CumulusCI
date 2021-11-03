@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <businessProcesses>
-        <fullName>Advisee Record</fullName>
-        <description>The support process for Advisee Record Cases used in Salesforce Advisor Link.</description>
+        <fullName>Student Record</fullName>
+        <description>The support process for Student Record Cases used in Student Success Hub.</description>
         <isActive>true</isActive>
         <values>
             <fullName>Active Enrolled</fullName>
@@ -34,8 +34,8 @@
         </values>
     </businessProcesses>
     <businessProcesses>
-        <fullName>Advising Queue</fullName>
-        <description>The support process for Advising Queue Cases, including its Status values.</description>
+        <fullName>Support Queue</fullName>
+        <description>The support process for Support Queue Cases, including its Status values.</description>
         <isActive>true</isActive>
         <values>
             <fullName>Abandoned</fullName>
@@ -67,7 +67,7 @@
         <fields>Subject</fields>
         <fields>Status</fields>
         <fields>LastModifiedById</fields>
-        <label>Advisee Record</label>
+        <label>Student Record</label>
     </compactLayouts>
     <compactLayouts>
         <fullName>Advising_Queue</fullName>
@@ -80,7 +80,7 @@
         <fields>%%%NAMESPACE%%%Topic__c</fields>
         <fields>OwnerId</fields>
         <fields>CreatedDate</fields>
-        <label>Advising Queue</label>
+        <label>Support Queue</label>
     </compactLayouts>
     <fields>
         <fullName>Proxy_Email__c</fullName>
@@ -124,7 +124,7 @@
             <operation>equals</operation>
             <value>0</value>
         </filters>
-        <label>My Advisees</label>
+        <label>My Students</label>
     </listViews>
     <listViews>
         <fullName>One_Stop_Queue_Case</fullName>
@@ -147,19 +147,19 @@
         </sharedTo>
     </listViews>
     <recordTypes>
-        <description>The record type used for advisee records. This Case holds holds all advising-related data for a student, such as notes, advising appointments, and Tasks.</description>
+        <description>The record type used for student records. This Case holds all support-related data for a student, such as notes, appointments, and Tasks.</description>
         <fullName>AdviseeRecord</fullName>
         <active>true</active>
-        <businessProcess>Advisee Record</businessProcess>
+        <businessProcess>Student Record</businessProcess>
         <compactLayoutAssignment>Advisee_Record</compactLayoutAssignment>
-        <label>Advisee Record</label>
+        <label>Student Record</label>
     </recordTypes>
     <recordTypes>
-        <description>The record type used for advising queues. This Case is used to track a request to meet with someone and can result in an Appointment.</description>
+        <description>The record type used for support queues. This Case is used to track a request to meet with someone and can result in an Appointment.</description>
         <fullName>AdvisingQueue</fullName>
         <active>true</active>
         <compactLayoutAssignment>Advising_Queue</compactLayoutAssignment>
-        <businessProcess>Advising Queue</businessProcess>
-        <label>Advising Queue</label>
+        <businessProcess>Support Queue</businessProcess>
+        <label>Support Queue</label>
     </recordTypes>
 </CustomObject>

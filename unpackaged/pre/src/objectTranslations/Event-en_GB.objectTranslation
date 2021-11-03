@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
   <recordTypes>
-    <name>AdvisingEvent</name>
-    <label>Advising Event</label>
-  </recordTypes>
-  <recordTypes>
-    <name>AdvisingTime</name>
-    <label>Advising Time</label>
+    <name>Standard</name>
+    <label>Standard</label>
   </recordTypes>
 </CustomObjectTranslation>

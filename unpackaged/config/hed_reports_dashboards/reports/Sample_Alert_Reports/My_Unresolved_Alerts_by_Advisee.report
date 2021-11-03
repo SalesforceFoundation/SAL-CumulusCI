@@ -24,7 +24,7 @@
     <columns>
         <field>CUST_CREATED_DATE</field>
     </columns>
-    <description>Unresolved Alerts that I own, grouped by advisee.</description>
+    <description>Unresolved Alerts that I own, grouped by student.</description>
     <filter>
         <criteriaItems>
             <column>FK_CASE_OPEN</column>
@@ -55,7 +55,7 @@
         <field>%%%NAMESPACE%%%Alert__c.%%%NAMESPACE%%%Priority__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>My Unresolved Alerts by Advisee</name>
+    <name>My Unresolved Alerts, by Student</name>
     <params>
         <name>co</name>
         <value>1</value>

@@ -47,7 +47,7 @@
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Advisor Link Home Page</masterLabel>
+    <masterLabel>Student Success Hub Home Page</masterLabel>
     <parentFlexiPage>home__desktopDefault</parentFlexiPage>
     <template>
         <name>home:desktopTemplate</name>

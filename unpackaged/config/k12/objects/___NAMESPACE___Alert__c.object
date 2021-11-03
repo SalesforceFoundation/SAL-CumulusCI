@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <compactLayoutAssignment>AlertsCompactLayout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>AlertsCompactLayout</fullName>
+        <fields>%%%NAMESPACE%%%Advisee__c</fields>
+        <fields>Name</fields>
+        <fields>RecordTypeId</fields>
+        <fields>%%%NAMESPACE%%%Reason__c</fields>
+        <fields>%%%NAMESPACE%%%RelatedTo__c</fields>
+        <fields>%%%NAMESPACE%%%Status__c</fields>
+        <fields>%%%NAMESPACE%%%Priority__c</fields>
+        <fields>OwnerId</fields>
+        <fields>CreatedById</fields>
+        <label>Alerts Compact Layout</label>
+    </compactLayouts>
+    <fields>
+        <fullName>%%%NAMESPACE%%%Reason__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Reason for the Alert.</description>
+        <externalId>false</externalId>
+        <label>Reason</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Grade Concern</fullName>
+                    <default>false</default>
+                    <label>Grade Concern</label>
+                </value>
+                <value>
+                    <fullName>Failure Concern</fullName>
+                    <default>false</default>
+                    <label>Failure Concern</label>
+                </value>
+                <value>
+                    <fullName>Missing/Late Assignment</fullName>
+                    <default>false</default>
+                    <label>Missing/Late Assignment</label>
+                </value>
+                <value>
+                    <fullName>Attendance Concern</fullName>
+                    <default>false</default>
+                    <label>Attendance Concern</label>
+                </value>
+                <value>
+                    <fullName>Participation Concern</fullName>
+                    <default>false</default>
+                    <label>Participation Concern</label>
+                </value>
+                <value>
+                    <fullName>Preparedness Concern</fullName>
+                    <default>false</default>
+                    <label>Preparedness Concern</label>
+                </value>
+                <value>
+                    <fullName>Academic Integrity</fullName>
+                    <default>false</default>
+                    <label>Academic Integrity</label>
+                </value>
+                <value>
+                    <fullName>Recognition</fullName>
+                    <default>false</default>
+                    <label>Recognition</label>
+                </value>
+                <value>
+                    <fullName>Missing/Late Application</fullName>
+                    <default>false</default>
+                    <label>Missing/Late Application</label>
+                </value>
+                <value>
+                    <fullName>Qualification Not Met</fullName>
+                    <default>false</default>
+                    <label>Qualification Not Met</label>
+                </value>
+                <value>
+                    <fullName>General Health</fullName>
+                    <default>false</default>
+                    <label>General Health</label>
+                </value>
+                <value>
+                    <fullName>Room Change</fullName>
+                    <default>false</default>
+                    <label>Room Change</label>
+                </value>
+                <value>
+                    <fullName>Other (Describe in Comments)</fullName>
+                    <default>false</default>
+                    <label>Other (Describe in Comments)</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <listViews>
+        <fullName>My_Open_Alerts</fullName>
+        <columns>%%%NAMESPACE%%%Advisee__c</columns>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>%%%NAMESPACE%%%Priority__c</columns>
+        <columns>%%%NAMESPACE%%%Reason__c</columns>
+        <columns>%%%NAMESPACE%%%Status__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>%%%NAMESPACE%%%Status__c</field>
+            <operation>equals</operation>
+            <value>New,Acknowledged: In Progress,Acknowledged: Redirected</value>
+        </filters>
+        <label>My Open Alerts</label>
+    </listViews>
+    <recordTypes>
+        <fullName>Academic</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>AlertsCompactLayout</compactLayoutAssignment>
+        <label>Academic</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Attendance</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>AlertsCompactLayout</compactLayoutAssignment>
+        <description>The record type used for Attendance Alerts</description>
+        <label>Attendance</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Behavior</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>AlertsCompactLayout</compactLayoutAssignment>
+        <description>The record type used for Behavior Alerts</description>
+        <label>Behavior</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Career</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>AlertsCompactLayout</compactLayoutAssignment>
+        <label>Career</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Financial_Aid</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>AlertsCompactLayout</compactLayoutAssignment>
+        <label>Financial Aid</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Health</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>AlertsCompactLayout</compactLayoutAssignment>
+        <label>Health</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Housing</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>AlertsCompactLayout</compactLayoutAssignment>
+        <label>Housing</label>
+    </recordTypes>
+</CustomObject>

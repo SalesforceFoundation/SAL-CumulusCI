@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customTabs>
+        <name>___NAMESPACE___SAL_Settings</name>
+        <label>Configuración de SSH</label>
+    </customTabs>
+    <quickActions>
+        <name>Create_Academic_Alert</name>
+        <label>Crear alerta académica</label>
+    </quickActions>
+</Translations>

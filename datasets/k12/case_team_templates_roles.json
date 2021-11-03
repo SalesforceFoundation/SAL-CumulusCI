@@ -1,0 +1,62 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+User+WHERE+Alias+=+'couns'",
+      "referenceId": "counselorUser"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/composite/sobjects",
+      "referenceId": "caseTeamRoles",
+      "body": {
+        "allOrNone": true,
+        "records": [
+          {
+            "attributes": { "type": "CaseTeamRole" },
+            "Name": "Counselor",
+            "AccessLevel": "Edit",
+            "PreferencesVisibleInCSP": true
+          },
+          {
+            "attributes": { "type": "CaseTeamRole" },
+            "Name": "Social Worker",
+            "AccessLevel": "Edit",
+            "PreferencesVisibleInCSP": true
+          },
+          {
+            "attributes": { "type": "CaseTeamRole" },
+            "Name": "Teacher",
+            "AccessLevel": "Edit",
+            "PreferencesVisibleInCSP": true
+          },
+          {
+            "attributes": { "type": "CaseTeamRole" },
+            "Name": "Principal",
+            "AccessLevel": "Edit",
+            "PreferencesVisibleInCSP": true
+          }
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/CaseTeamTemplate",
+      "referenceId": "caseTeamTemplate",
+      "body": {
+        "Name": "Student Success Team"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/CaseTeamTemplateMember",
+      "referenceId": "templateMemberCouns",
+      "body": {
+        "MemberId": "@{counselorUser.records[0].Id}",
+        "TeamTemplateId": "@{caseTeamTemplate.id}",
+        "TeamRoleId": "@{caseTeamRoles[0].id}"
+      }
+    }
+  ]
+}

@@ -3,7 +3,7 @@
     "compositeRequest": [
       {
         "method": "GET",
-        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+DeveloperName+IN+('AdviseeRecord','AdvisingQueue')+ORDER+BY+Name",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+DeveloperName+IN+('AdviseeRecord','AdvisingQueue')+ORDER+BY+DeveloperName",
         "referenceId": "caseRecordTypes"
       },
       {
@@ -28,7 +28,7 @@
         "body": {
           "Name": "Career Services Center",
           "%%%NAMESPACE%%%CaseTeamName__c": "Career Services Team",
-          "%%%NAMESPACE%%%Description__c": "We provide career advising expertise to students and alumni regarding the job-search process, interviewing, resume, and letter writing, and all other facets of career planning. Come meet with us today!"
+          "%%%NAMESPACE%%%Description__c": "We provide support and advice to students and alumni regarding the job-search process, interviewing, resume- and letter-writing, and all other facets of career planning. Come meet with us today!"
         }
       },
       {

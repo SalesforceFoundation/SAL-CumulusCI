@@ -16,7 +16,7 @@ public static void insertEvents() {
         RecordType advisingRecordType = [
             SELECT Id
             FROM RecordType
-            WHERE Name = 'Advising Time'
+            WHERE DeveloperName = 'AdvisingTime'
         ];
 
         List<%%%NAMESPACE%%%Topic__c> topics = [

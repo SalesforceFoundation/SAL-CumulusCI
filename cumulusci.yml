@@ -2,7 +2,7 @@ minimum_cumulusci_version: 3.28.0
 project:
     name: SAL
     package:
-        name: SAL
+        name: SSH
         namespace: sfal
         api_version: 50.0
         install_class: InstallScript
@@ -16,7 +16,7 @@ project:
 flows:
 
     install_base:
-        description: Installs managed Advisor Link with Configuration and Data
+        description: Managed Install of Student Success Hub with Configuration and Data
         group: 'SAL: Base'
         steps:
             1:
@@ -46,7 +46,7 @@ flows:
                         apex: insertSettings('AdviseeRecord','Student_ID__c'); insertHedSettings();
 
     hed_config:
-        description: Deploy metadata configuration for HED configuration of Advisor Link
+        description: Deploy metadata configuration for HED
         group: 'SAL: HED'
         steps:
             1:
@@ -71,18 +71,20 @@ flows:
                 task: deploy_advisor_sharing_rules
 
     hed_portal_setup_blob:
-        description: This flow is designed to be exposed via MetaDeploy. Create and deploy an Advisee Portal to am MANAGED environment using the binary SiteDotCom Metadata.
+        description: This flow is designed to be exposed via MetaDeploy. Create and deploy a Student Portal to am MANAGED environment using the binary SiteDotCom Metadata.
         group: 'SAL: HED'
         steps:
             1:
-                task: create_advisee_portal
+                task: deploy_hed_portal_org_settings
             2:
-                task: deploy_hed_portal_blob
+                task: create_advisee_portal
             3:
+                task: deploy_hed_portal_blob
+            4:
                 task: deploy_advisee_sharing_rules
 
     hed_data:
-        description: Upload demo data for Advisor Link.
+        description: Upload demo data for Student Success Hub for Higher Education.
         group: 'SAL: HED'
         steps:
             1:
@@ -99,6 +101,10 @@ flows:
                 task: upload_photo_sophia
             7:
                 task: insert_hed_availability
+            8:
+                task: schedule_hed_apex_last_appt
+            9:
+                task: schedule_hed_apex_task_summary_count
 
 tasks:
 
@@ -116,7 +122,7 @@ tasks:
         group: "SAL: Base Config"
         class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
         ui_options:
-            name: Advisor Link - Custom Settings
+            name: Student Success Hub - Custom Settings
             is_required: False
         options:
             path: scripts/public/custom_settings.cls
@@ -143,37 +149,37 @@ tasks:
             path: unpackaged/config/hed_reports_dashboards
 
     deploy_hed_app_profile:
-        description: Deploys Advisor Link lightning app and Advisor profile
+        description: Deploys Student Success Hub lightning app and Support Staff profile
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.salesforce.Deploy
         ui_options:
-            name: Express Setup - Lightning App and Advisor Profile
+            name: Express Setup - Lightning App and Support Staff Profile
         options:
             namespace_inject: $project_config.project__package__namespace
             path: unpackaged/config/hed_app_profile
 
     deploy_hed_plus_advisee_profile:
-        description: Deploys Advisee profile for Customer Community Plus licenses
+        description: Deploys Student profile for Customer Community Plus licenses
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.salesforce.Deploy
         ui_options:
-            name: Express Setup - Advisee Profile
+            name: Express Setup - Student Profile
         options:
             namespace_inject: $project_config.project__package__namespace
             path: unpackaged/config/hed_advisee_plus_profile
 
     deploy_hed_login_advisee_profile:
-        description: Deploys Advisee profile for Customer Community Plus Login licenses
+        description: Deploys Student profile for Customer Community Plus Login licenses
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.salesforce.Deploy
         ui_options:
-            name: Express Setup - Advisee Portal Profile
+            name: Express Setup - Student Portal Profile
         options:
             namespace_inject: $project_config.project__package__namespace
             path: unpackaged/config/hed_advisee_login_profile
 
     deploy_hed_permission_sets:
-        description: Deploys Advisee and Advisor permission sets for HED configuration
+        description: Deploys Student and Support Staff permission sets for HED configuration
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.salesforce.Deploy
         ui_options:
@@ -187,19 +193,19 @@ tasks:
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.salesforce.Deploy
         ui_options:
-            name: Express Setup - Advisor Sharing Metadata
+            name: Express Setup - Support Staff Sharing Metadata
         options:
             namespace_inject: $project_config.project__package__namespace
             path: unpackaged/config/hed_advisor_sharing_rules
 
     create_advisee_portal:
-        description: Create Advisee Portal using API call
+        description: Create Student Portal using API call
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.salesforce.CreateCommunity
         ui_options:
-            name: Express Setup - Sample Advisee Portal
+            name: Express Setup - Sample Student Portal
         options:
-            name: "Advisor Link Portal"
+            name: "Student Success Hub Portal"
             template: "Customer Service"
             timeout: 480
 
@@ -208,7 +214,7 @@ tasks:
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.salesforce.Deploy
         ui_options:
-            name: Express Setup - Advisee Portal Unpackaged Metadata
+            name: Express Setup - Student Portal Unpackaged Metadata
         options:
             namespace_inject: $project_config.project__package__namespace
             path: unpackaged/config/hed_portal_blob
@@ -218,7 +224,7 @@ tasks:
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.salesforce.Deploy
         ui_options:
-            name: Express Setup - Advisee Portal Sharing Metadata
+            name: Express Setup - Student Portal Sharing Metadata
         options:
             namespace_inject: $project_config.project__package__namespace
             path: unpackaged/config/hed_advisee_sharing_rules
@@ -279,12 +285,61 @@ tasks:
                 - "datasets/hed/course_connections.json"
                 - "datasets/hed/course_offering_schedules.json"
 
+    deploy_k12_config:
+        description: Deploys HED configuration metadata
+        group: "SAL: K12 Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/k12
+
+    deploy_k12_app_profile:
+        description: Deploys HED configuration metadata
+        group: "SAL: K12 Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/k12_app_profile
+
+    deploy_k12_permission_sets:
+        description: Deploys permission sets for K12 configuration
+        group: "SAL: K12 Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/k12_permission_sets
+
+    deploy_k12_sharing_rules:
+        description: Deploys sharing rules for the K12 configuration
+        group: "SAL: K12 Config"
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/k12_sharing_rules
+
+    deploy_k12_data:
+        description: POSTs k12 json files to the Composite REST API endpoint.
+        group: 'SAL: K12 Config'
+        class_path: cumulusci.tasks.salesforce.composite.CompositeApi
+        ui_options:
+            name: Student Success Hub - Sample Data
+        options:
+            randomize_username: True
+            data_files:
+                - "datasets/k12/accounts.json"
+                - "datasets/k12/contacts.json" # Household Account auto generated from EDA
+                - "datasets/k12/users.json"
+                - "datasets/k12/case_team_templates_roles.json"
+                - "datasets/k12/cases.json"
+                - "datasets/k12/alerts.json"
+                - "datasets/k12/success_plan_templates.json"
+
     upload_photo_adam:
         group: 'SAL: HED Config'
         class_path: cumulusci.tasks.salesforce.users.photos.UploadProfilePhoto
         description: Uploads a profile photo for Adam.
         ui_options:
-            name: Express Setup - Sample Advisor Photo
+            name: Express Setup - Sample Support Staff Member Photo
         options:
             photo: datasets/user_photos/adam.png
             where: (Alias = 'advisor')
@@ -294,17 +349,17 @@ tasks:
         class_path: cumulusci.tasks.salesforce.users.photos.UploadProfilePhoto
         description: Uploads a profile photo for Sophia.
         ui_options:
-            name: Express Setup - Sample Advisee Photo
+            name: Express Setup - Sample Student Photo
         options:
             photo: datasets/user_photos/sophia_student.png
             where: Alias = 'sophia' AND IsActive = true
 
     insert_hed_availability:
-        description: Insert basic availability
+        description: Insert basic Support Staff availability
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
         ui_options:
-            name: Express Setup - Sample Data for Advising Availability
+            name:  Express Setup - Sample Data for Support Availability
         options:
             path: scripts/public/event_availability_series.cls
             apex: insertEvents();
@@ -314,7 +369,7 @@ tasks:
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
         ui_options:
-            name: Express Setup - Scheduled Apex Job That Collects Last Appointment Data
+            name: Express Setup - Students Not Served Apex Job
         options:
             path: scripts/enablement/scheduled_apex_smartlist.cls
             apex: scheduleCollectLastAppointmentData();
@@ -324,7 +379,7 @@ tasks:
         group: "SAL: HED Config"
         class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
         ui_options:
-            name: Express Setup - Scheduled Apex Job That Recalculates Success Plan Task Summary Counts
+            name: Express Setup - Recalculate Success Plan Tasks Apex Job
         options:
             path: scripts/enablement/scheduled_apex_smartlist.cls
             apex: scheduleRecalculateTaskSummaryCounts();
@@ -335,9 +390,9 @@ plans:
         slug: install
         title: Base Plan
         tier: primary
-        preflight_message: This will install Salesforce Advisor Link into your org.
-        post_install_message: "Thanks for installing Advisor Link. Visit the [Advisor Link topic](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link) on the Power of Us Hub for any questions about Advisor Link."
-        error_message: "If you experience an issue with the installation, please post in the [Power of Us Hub](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link)."
+        preflight_message: "This installs Student Success Hub for Higher Education into your org."
+        post_install_message: "Thanks for installing Student Success Hub for Higher Education. Visit the [Student Success Hub topic](https://trailhead.salesforce.com/trailblazer-community/topics/studentsuccesshub) in the Trailblazer Community for any questions about Student Success Hub."
+        error_message: "If you experience an issue with the installation, please post in the [Trailblazer Community](https://trailhead.salesforce.com/trailblazer-community/topics/studentsuccesshub)."
         checks:
             - when: "'.my.' not in org_config.instance_url"
               action: error
@@ -356,9 +411,9 @@ plans:
         slug: config
         title: Express Setup Configuration Plan
         tier: secondary
-        preflight_message: This will install metadata configurations into your org.
-        post_install_message: "Thanks for installing Advisor Link. Visit the [Advisor Link topic](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link) on the Power of Us Hub for any questions about Advisor Link."
-        error_message: "If you experience an issue with the installation, please post in the [Power of Us Hub](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link)."
+        preflight_message: "This installs metadata configurations that help get new Student Success Hub higher ed orgs up and running.\nFor more information about installation, see the [Student Success Hub documentation](https://powerofus.force.com/s/article/SSH-Documentation).\nIMPORTANT: Do not install any plan directly in a production organization. Instead, install in a new, free sandbox environment, or a developer organization first. Express Setup is designed for new installations in new orgs, not for installations or updates to existing orgs. If you need support, open a case through the partner community."
+        post_install_message: "Thanks for installing Student Success Hub for Higher Education. Visit the [Student Success Hub topic](https://trailhead.salesforce.com/trailblazer-community/topics/studentsuccesshub) in the Trailblazer Community for any questions about Student Success Hub."
+        error_message: "If you experience an issue with the installation, please post in the [Trailblazer Community](https://trailhead.salesforce.com/trailblazer-community/topics/studentsuccesshub)."
         checks:
             - when: "'.my.' not in org_config.instance_url"
               action: error
@@ -407,9 +462,9 @@ plans:
         slug: portal
         title: Express Setup Sample Portal Plan
         tier: additional
-        preflight_message: This will install a sample advisee portal into your org.
-        post_install_message: "Thanks for installing Advisor Link. Visit the [Advisor Link topic](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link) on the Power of Us Hub for any questions about Advisor Link."
-        error_message: "If you experience an issue with the installation, please post in the [Power of Us Hub](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link)."
+        preflight_message: "This installs a sample student portal for a Student Success Hub higher ed org.\nFor more information about installation, see the [Student Success Hub documentation](https://powerofus.force.com/s/article/SSH-Documentation).\nIMPORTANT: Do not install any plan directly in a production organization. Instead, install in a new, free sandbox environment, or a developer organization first. Express Setup is designed for new installations in new orgs, not for installations or updates to existing orgs. If you need support, open a case through the partner community."
+        post_install_message: "Thanks for installing Student Success Hub for Higher Education. Visit the [Student Success Hub topic](https://trailhead.salesforce.com/trailblazer-community/topics/studentsuccesshub) in the Trailblazer Community for any questions about Student Success Hub."
+        error_message: "If you experience an issue with the installation, please post in the [Trailblazer Community](https://trailhead.salesforce.com/trailblazer-community/topics/studentsuccesshub)."
         checks:
             - when: "'.my.' not in org_config.instance_url"
               action: error
@@ -437,9 +492,9 @@ plans:
         slug: data
         title: Express Setup Sample Data Plan
         tier: additional
-        preflight_message: This will install sample data into your org.
-        post_install_message: "Thanks for installing Advisor Link. Visit the [Advisor Link topic](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link) on the Power of Us Hub for any questions about Advisor Link."
-        error_message: "If you experience an issue with the installation, please post in the [Power of Us Hub](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link)."
+        preflight_message: "This installs sample data for Student Success Hub higher ed orgs.\nFor more information about installation, see the [Student Success Hub documentation](https://powerofus.force.com/s/article/SSH-Documentation).\nIMPORTANT: Do not install any plan directly in a production organization. Instead, install in a new, free sandbox environment, or a developer organization first. Express Setup is designed for new installations in new orgs, not for installations or updates to existing orgs. If you need support, open a case through the partner community."
+        post_install_message: "Thanks for installing Student Success Hub for Higher Education. Visit the [Student Success Hub topic](https://trailhead.salesforce.com/trailblazer-community/topics/studentsuccesshub) in the Trailblazer Community for any questions about Student Success Hub."
+        error_message: "If you experience an issue with the installation, please post in the [Trailblazer Community](https://trailhead.salesforce.com/trailblazer-community/topics/studentsuccesshub)."
         checks:
             - when: "'.my.' not in org_config.instance_url"
               action: error

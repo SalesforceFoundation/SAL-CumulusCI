@@ -1,0 +1,45 @@
+{
+  "allOrNone": true,
+  "compositeRequest": [
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id,+ContactId+FROM+Case+WHERE+Contact.Email='elijah@valleyhigh.edu'+AND+RecordType.DeveloperName+=+'StudentRecord'",
+      "referenceId": "studentCase"
+    },
+    {
+      "method": "GET",
+      "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+SobjectType+=+'%%%NAMESPACE%%%Alert__c'+AND+DeveloperName+IN+('Attendance','Health')+ORDER+BY+Name",
+      "referenceId": "alertRecordTypes"
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%Alert__c",
+      "referenceId": "alertAttend",
+      "body": {
+        "RecordTypeId": "@{alertRecordTypes.records[0].Id}",
+        "%%%NAMESPACE%%%AdviseeRecord__c": "@{studentCase.records[0].Id}",
+        "%%%NAMESPACE%%%Advisee__c": "@{studentCase.records[0].ContactId}",
+        "%%%NAMESPACE%%%Comments__c": "Automatically created based on attendance history",
+        "%%%NAMESPACE%%%IsClosed__c": false,
+        "%%%NAMESPACE%%%Priority__c": "Normal",
+        "%%%NAMESPACE%%%Reason__c": "Attendance Concern",
+        "%%%NAMESPACE%%%Status__c": "New"
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/services/data/v46.0/sobjects/%%%NAMESPACE%%%Alert__c",
+      "referenceId": "alertHealth",
+      "body": {
+        "RecordTypeId": "@{alertRecordTypes.records[1].Id}",
+        "%%%NAMESPACE%%%AdviseeRecord__c": "@{studentCase.records[0].Id}",
+        "%%%NAMESPACE%%%Advisee__c": "@{studentCase.records[0].ContactId}",
+        "%%%NAMESPACE%%%Comments__c": "Concerns about vision, Elijah needs a referral to a vision clinic for a free exam",
+        "%%%NAMESPACE%%%IsClosed__c": false,
+        "%%%NAMESPACE%%%Priority__c": "Urgent",
+        "%%%NAMESPACE%%%Reason__c": "General Health",
+        "%%%NAMESPACE%%%Status__c": "New"
+      }
+    }
+  ]
+}

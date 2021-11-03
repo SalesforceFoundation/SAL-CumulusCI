@@ -1,0 +1,37 @@
+{
+    "allOrNone": true,
+    "compositeRequest": [
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+SobjectType+=+'Account' AND DeveloperName = 'HH_Account'",
+        "referenceId": "hhRt"
+      },
+      {
+        "method": "GET",
+        "url": "/services/data/v46.0/query/?q=SELECT+Id+FROM+RecordType+WHERE+SobjectType+=+'Contact' AND DeveloperName = 'Student'",
+        "referenceId": "studentRt"
+      },
+      {
+        "method": "POST",
+        "url": "/services/data/v46.0/sobjects/Contact",
+        "referenceId": "elijah",
+        "body": {
+          "RecordTypeId": "@{studentRt.records[0].Id}",
+          "FirstName": "Elijah",
+          "LastName": "Espozito",
+          "MailingStreet": "1 Market Street",
+          "MailingCity": "San Francisco",
+          "MailingState": "CA",
+          "MailingPostalCode": "94105",
+          "MailingCountry": "USA",
+          "Email": "elijah@valleyhigh.edu",
+          "PHONE": "(650) 555-1212",
+          "MOBILEPHONE": "(650) 555-1212",
+          "BIRTHDATE": "2006-05-15",
+          "HED__FERPA__C": true,
+          "HED__PREFERREDPHONE__C": "Mobile Phone",
+          "HED__RACE__C": "Hispanic or Latino"
+        }
+      }
+    ]
+}

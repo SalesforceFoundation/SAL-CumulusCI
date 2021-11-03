@@ -3,7 +3,7 @@
     <recordTypes>
         <fullName>AdvisingEvent</fullName>
         <active>true</active>
-        <label>Advising Event</label>
+        <label>Support Event</label>
         <picklistValues>
             <picklist>Subject</picklist>
             <values>
@@ -58,7 +58,7 @@
     <recordTypes>
         <fullName>AdvisingTime</fullName>
         <active>true</active>
-        <label>Advising Time</label>
+        <label>Support Time</label>
         <picklistValues>
             <picklist>Subject</picklist>
             <values>

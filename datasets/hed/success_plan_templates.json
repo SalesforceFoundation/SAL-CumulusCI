@@ -149,7 +149,7 @@
         "%%%NAMESPACE%%%Active__c": true,
         "%%%NAMESPACE%%%Priority__c": "High",
         "%%%NAMESPACE%%%SuccessPlanTemplate__c": "@{ppTemplate.id}",
-        "%%%NAMESPACE%%%Comments__c": "Use the Advisor Link Portal to schedule an appointment to discuss your grades with your primary advisor.",
+        "%%%NAMESPACE%%%Comments__c": "Use the Student Success Hub Portal to schedule an appointment to discuss your grades with your primary advisor.",
         "%%%NAMESPACE%%%RelativeDueDate__c": 10,
         "%%%NAMESPACE%%%Type__c": "To Do"
       }

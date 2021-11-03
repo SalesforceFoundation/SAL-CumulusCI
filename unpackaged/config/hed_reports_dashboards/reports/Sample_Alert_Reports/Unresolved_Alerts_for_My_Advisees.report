@@ -27,7 +27,7 @@
     <columns>
         <field>Case.%%%NAMESPACE%%%Alerts__r$CreatedBy</field>
     </columns>
-    <description>Unresolved Alerts for my advisees, grouped by advisee.</description>
+    <description>Unresolved Alerts for my students, grouped by student.</description>
     <filter>
         <criteriaItems>
             <column>Case$IsClosed</column>
@@ -58,7 +58,7 @@
         <field>Case.%%%NAMESPACE%%%Alerts__r$%%%NAMESPACE%%%Priority__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Unresolved Alerts for My Advisees</name>
+    <name>Unresolved Alerts for My Students</name>
     <params>
         <name>co</name>
         <value>1</value>
