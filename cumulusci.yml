@@ -75,12 +75,10 @@ flows:
         group: 'SAL: HED'
         steps:
             1:
-                task: deploy_hed_portal_org_settings
-            2:
                 task: create_advisee_portal
-            3:
+            2:
                 task: deploy_hed_portal_blob
-            4:
+            3:
                 task: deploy_advisee_sharing_rules
 
     hed_data:
@@ -371,7 +369,7 @@ tasks:
         ui_options:
             name: Express Setup - Students Not Served Apex Job
         options:
-            path: scripts/enablement/scheduled_apex_smartlist.cls
+            path: scripts/public/scheduled_apex_smartlist.cls
             apex: scheduleCollectLastAppointmentData();
 
     schedule_hed_apex_task_summary_count:
@@ -381,7 +379,7 @@ tasks:
         ui_options:
             name: Express Setup - Recalculate Success Plan Tasks Apex Job
         options:
-            path: scripts/enablement/scheduled_apex_smartlist.cls
+            path: scripts/public/scheduled_apex_smartlist.cls
             apex: scheduleRecalculateTaskSummaryCounts();
 
 plans:
