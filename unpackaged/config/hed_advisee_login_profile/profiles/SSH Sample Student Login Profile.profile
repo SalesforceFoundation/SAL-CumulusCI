@@ -115,10 +115,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>%%%NAMESPACE%%%BookingWizardController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>%%%NAMESPACE%%%CommunitySuccessTeamController</apexClass>
         <enabled>true</enabled>
     </classAccesses>

@@ -26,6 +26,9 @@
     },
     "securitySettings": {
         "enableAdminLoginAsAnyUser":true
+    },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
     }
   }
 }

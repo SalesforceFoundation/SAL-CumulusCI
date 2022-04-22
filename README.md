@@ -2,7 +2,7 @@
 
 This read-only repository contains CumulusCI automation and unmanaged metadata components used in the Advisor Link MetaDeploy installer.
 
-Visit the [Advisor Link topic](https://powerofus.force.com/s/topic/0TO80000000VXyzGAG/salesforce-advisor-link) on the Power of Us Hub for any questions about this repository.
+Visit the [Advisor Link topic](https://trailhead.salesforce.com/trailblazer-community/groups/0F94S000000kHhtSAE?tab=discussion&sort=LAST_MODIFIED_DATE_DESC) on the Power of Us Hub for any questions about this repository.
 
 ## Base Plan
 

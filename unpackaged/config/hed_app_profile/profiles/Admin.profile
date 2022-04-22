@@ -491,14 +491,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>%%%NAMESPACE%%%BookingWizardController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>%%%NAMESPACE%%%BookingWizardController_TEST</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>%%%NAMESPACE%%%BookingWizardDayViewModel</apexClass>
         <enabled>true</enabled>
     </classAccesses>

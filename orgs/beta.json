@@ -14,8 +14,17 @@
     "enhancedNotesSettings": {
       "enableEnhancedNotes": true
     },
+    "experienceBundleSettings": {
+      "enableExperienceBundleMetadata": true
+    },
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true
+    },
+    "securitySettings": {
+      "enableAdminLoginAsAnyUser":true
     }
   }
 }
